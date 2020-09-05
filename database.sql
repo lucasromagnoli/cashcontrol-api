@@ -1,36 +1,33 @@
 # Primeira versão do banco 0.1
 CREATE DATABASE cashcontrol;
 
-CREATE TABLE IF NOT EXISTS categorias
+CREATE TABLE IF NOT EXISTS category
 (
-    id_categoria int                         NOT NULL AUTO_INCREMENT,
-    nome         varchar(100)                NOT NULL,
-    descricao    varchar(240),
-    tipo         enum ('R', 'D') DEFAULT 'D' NOT NULL,
-    CONSTRAINT categoria_pk PRIMARY KEY (id_categoria)
+    id_category int                         NOT NULL AUTO_INCREMENT,
+    name        varchar(100)                NOT NULL,
+    description varchar(240),
+    type        enum ('R', 'D') DEFAULT 'D' NOT NULL,
+    CONSTRAINT category_pk PRIMARY KEY (id_category)
 );
 
-
-CREATE TABLE IF NOT EXISTS subcategorias
+CREATE TABLE IF NOT EXISTS subcategory
 (
-    id_subcategoria int          NOT NULL AUTO_INCREMENT,
-    id_categoria    int,
-    nome            varchar(100) NOT NULL,
-    descricao       varchar(240),
-    CONSTRAINT subcategoria_pk PRIMARY KEY (id_subcategoria),
-    CONSTRAINT categoria_subcategoria_fk
-        FOREIGN KEY (id_categoria) REFERENCES categorias (id_categoria)
+    id_subcategory int          NOT NULL AUTO_INCREMENT,
+    id_category    int,
+    name           varchar(100) NOT NULL,
+    description    varchar(240),
+    CONSTRAINT subcategory_pk PRIMARY KEY (id_subcategory),
+    CONSTRAINT category_subcategory_fk
+        FOREIGN KEY (id_category) REFERENCES category (id_category)
 );
 
-
-CREATE TABLE movimentacoes
+CREATE TABLE movimentation
 (
-    id_movimentacao int                     NOT NULL,
-    valor           decimal(19, 2) unsigned NOT NULL,
-    DATA            date                    NOT NULL,
-    id_subcategoria int                     NOT NULL,
-    CONSTRAINT movimentacoes_pk PRIMARY KEY (id_movimentacao),
-    CONSTRAINT movimentacao_subcategoria_fk
-        FOREIGN KEY (id_subcategoria) REFERENCES subcategorias (id_subcategoria)
+    id_movimentation int                     NOT NULL,
+    value            decimal(19, 2) unsigned NOT NULL,
+    date             date                    NOT NULL,
+    id_subcategory   int                     NOT NULL,
+    CONSTRAINT movimentation_pk PRIMARY KEY (id_movimentation),
+    CONSTRAINT movimentation_subcategory_fk
+        FOREIGN KEY (id_subcategory) REFERENCES subcategory (id_subcategory)
 );
-
