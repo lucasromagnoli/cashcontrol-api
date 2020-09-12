@@ -1,9 +1,11 @@
 package br.com.lucasromagnoli.cashcontrol.category;
 
+import br.com.lucasromagnoli.cashcontrol.subcategory.Subcategory;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,5 +28,8 @@ public class Category {
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private CategoryType type;
+    
+    @OneToMany(mappedBy = "category")
+    private List<Subcategory> subcategoryList;
 
 }

@@ -1,0 +1,1 @@
+--Este sql é executado automaticamente pelo hibernate ao subir pela primeira vez
