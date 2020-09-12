@@ -8,15 +8,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication(scanBasePackages = "br.com.lucasromagnoli.cashcontrol")
 @EntityScan(basePackageClasses = {
         Category.class,
         Subcategory.class,
         Movimentation.class
 })
 @EnableJpaRepositories("br.com.lucasromagnoli.cashcontrol")
+@SpringBootApplication(scanBasePackages = "br.com.lucasromagnoli.cashcontrol")
 public class CashControlAplication {
+    
     public static void main(String[] args) {
         SpringApplication.run(CashControlAplication.class, args);
     }
+    
 }

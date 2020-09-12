@@ -23,7 +23,7 @@ public class Subcategory {
     @Column(name = "description")
     private String description;
     
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private Category category;
     

@@ -29,7 +29,7 @@ public class Category {
     @Enumerated(EnumType.STRING)
     private CategoryType type;
     
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Subcategory> subcategoryList;
 
 }
