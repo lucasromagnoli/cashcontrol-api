@@ -42,3 +42,9 @@ context.xml
 *.idea
 *.iml
 *.lst
+
+#Excel and Ods file
+*.ods
+*.ods#
+*.xls#
+*.xlsx#
