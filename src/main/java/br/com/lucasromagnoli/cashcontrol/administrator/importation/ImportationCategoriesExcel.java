@@ -2,7 +2,7 @@ package br.com.lucasromagnoli.cashcontrol.administrator.importation;
 
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlSupport;
 import br.com.lucasromagnoli.cashcontrol.category.Category;
-import br.com.lucasromagnoli.cashcontrol.category.CategoryType;
+import br.com.lucasromagnoli.cashcontrol.movimentation.MovimentationTypeEnum;
 import br.com.lucasromagnoli.cashcontrol.subcategory.Subcategory;
 import org.apache.logging.log4j.util.Strings;
 import org.apache.poi.ss.usermodel.*;
@@ -66,7 +66,7 @@ public class ImportationCategoriesExcel {
                             category.setDescription(nodeDescription);
                             category.setSubcategoryList(new LinkedList<>());
                             category.setType(worksheetName.equalsIgnoreCase(DESPESAS_WORKSHEET_NAME)
-                                    ? CategoryType.D : CategoryType.R);
+                                    ? MovimentationTypeEnum.EXPENSE : MovimentationTypeEnum.INCOME);
                             categories.put(worksheetName + cell.getColumnIndex(), category);
                             logger.info(String.format("Inserindo a categoria %s", nodeName));
                             continue;

@@ -1,5 +1,6 @@
 package br.com.lucasromagnoli.cashcontrol.category;
 
+import br.com.lucasromagnoli.cashcontrol.movimentation.MovimentationTypeEnum;
 import br.com.lucasromagnoli.cashcontrol.subcategory.Subcategory;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -7,8 +8,8 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
 @Data
+@Entity
 @Table(name = "category")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Category {
@@ -27,7 +28,7 @@ public class Category {
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
-    private CategoryType type;
+    private MovimentationTypeEnum type;
     
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Subcategory> subcategoryList;
