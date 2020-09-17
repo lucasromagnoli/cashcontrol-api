@@ -19,7 +19,7 @@
             <input type="text" th:field="*{description}"/>
         </label>
         <select name="type" th:field="*{type}">
-            <option th:each="type : ${T(br.com.lucasromagnoli.cashcontrol.category.CategoryType).values()}"
+            <option th:each="type : ${T(br.com.lucasromagnoli.cashcontrol.movimentation.MovimentationTypeEnum).values()}"
                     th:value="${type}" th:text="${type.label}"></option>
         </select>
         <button type="submit">Cadastrar</button>
