@@ -1,5 +1,9 @@
 package br.com.lucasromagnoli.cashcontrol.movimentation;
 
-public class MovimentationDTO {
+import lombok.Data;
 
+@Data
+public class MovimentationDTO {
+    private String value;
+    private String description;
 }
