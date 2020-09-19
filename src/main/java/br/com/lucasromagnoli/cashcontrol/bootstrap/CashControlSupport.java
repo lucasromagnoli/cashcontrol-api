@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Configuration
-@PropertySource("classpath:cashcontrol-configurations.properties")
+@PropertySource(value = "classpath:cashcontrol-validations.properties", encoding = "UTF-8")
+@PropertySource(value = "classpath:cashcontrol-configurations.properties", encoding = "UTF-8")
 public class CashControlSupport {
     
     @Autowired
