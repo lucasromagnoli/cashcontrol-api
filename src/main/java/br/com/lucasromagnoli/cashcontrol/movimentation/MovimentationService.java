@@ -22,7 +22,6 @@ public class MovimentationService {
     @Transactional
     public Movimentation save(Movimentation movimentation) {
         movimentationBusinessValidator.validateSave(movimentation);
-        movimentation.setOrigin(originService.findById(movimentation.getOrigin().getId()));
         return movimentationRepository.save(movimentation);
     }
     @Transactional(readOnly = true)

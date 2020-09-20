@@ -15,11 +15,16 @@ public class OriginService {
     public Origin save(Origin origin) {
         return originRepository.save(origin);
     }
+    
     public Origin findById(int id) {
         return originRepository.findById(id).orElseThrow(ObjectNotFoundValidationException::new);
     }
 
     public List<Origin> findAll() {
         return originRepository.findAll();
+    }
+    
+    public boolean existsById(int id) { 
+        return originRepository.existsById(id);
     }
 }

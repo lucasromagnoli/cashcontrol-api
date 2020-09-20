@@ -4,6 +4,7 @@ package br.com.lucasromagnoli.cashcontrol.movimentation;
 import br.com.lucasromagnoli.cashcontrol.expense.Expense;
 import br.com.lucasromagnoli.cashcontrol.expense.FrequencyTypeEnum;
 import br.com.lucasromagnoli.cashcontrol.origin.Origin;
+import br.com.lucasromagnoli.cashcontrol.subcategory.Subcategory;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -18,7 +19,7 @@ import java.time.LocalDate;
 @Data
 @Table(name = "movimentation")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@JsonPropertyOrder({"id", "value", "description", "date", "type", "frequencyTypeEnum", "expense"})
+@JsonPropertyOrder({"id", "value", "description", "date", "type", "frequencyTypeEnum", "expense", "subcategory"})
 public class Movimentation {
     
     @Id
@@ -51,4 +52,8 @@ public class Movimentation {
     @Column(name = "date")
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate date;
+    
+    @ManyToOne()
+    @JoinColumn(name = "subcategory_id")
+    private Subcategory subcategory;
 }

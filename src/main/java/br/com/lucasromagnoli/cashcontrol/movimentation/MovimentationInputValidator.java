@@ -7,6 +7,7 @@ import br.com.lucasromagnoli.cashcontrol.expense.Installment;
 import br.com.lucasromagnoli.cashcontrol.expense.PaymentTypeEnum;
 import br.com.lucasromagnoli.cashcontrol.origin.Origin;
 import br.com.lucasromagnoli.cashcontrol.rest.commons.ValidationType;
+import br.com.lucasromagnoli.cashcontrol.subcategory.Subcategory;
 import br.com.lucasromagnoli.javaee.useful.support.date.DateSupport;
 import br.com.lucasromagnoli.javaee.useful.support.validation.EnumParseException;
 import br.com.lucasromagnoli.javaee.useful.support.validation.NumberValidationException;
@@ -23,7 +24,8 @@ public class MovimentationInputValidator {
             MovimentationFields.VALUE,
             MovimentationFields.DESCRIPTION,
             MovimentationFields.DATE,
-            MovimentationFields.ORIGIN_ID
+            MovimentationFields.ORIGIN_ID,
+            MovimentationFields.SUBCATEGORY_ID
     };
 
     private static final MovimentationFields[] saveExpenseCommonsRequiredFields = {
@@ -91,6 +93,15 @@ public class MovimentationInputValidator {
                     errors.rejectValue("originId", "cashcontrol.validations.generic.parser");
                 }
 
+                Subcategory subcategory = new Subcategory();
+                movimentation.setSubcategory(subcategory);
+                try {
+                    subcategory.setId(Integer.parseInt(target.getSubcategoryId()));
+                    ValidationSupport.numberIsPositive(subcategory.getId());
+                } catch (NumberFormatException | NumberValidationException e) {
+                    errors.rejectValue("subcategoryId", "cashcontrol.validations.generic.parser");
+                }
+                
             } catch (NumberFormatException | NumberValidationException e) {
                 errors.rejectValue("value", "cashcontrol.validations.generic.parser");
             } catch (StringValidationException e) {
@@ -139,7 +150,6 @@ public class MovimentationInputValidator {
             }
         }
     }
-
 
     private static void validateRequiredFields(Errors errors, MovimentationFields... fields) {
         for (MovimentationFields field : fields) {

@@ -12,7 +12,8 @@ enum MovimentationFields {
     ORIGIN_ID("originId", "cashcontrol.validations.generic.required"),
     QUANTITY("quantity", "cashcontrol.validations.generic.required"),
     AMOUNT("amount", "cashcontrol.validations.generic.required"),
-    PAYMENT("payment", "cashcontrol.validations.generic.required");
+    PAYMENT("payment", "cashcontrol.validations.generic.required"),
+    SUBCATEGORY_ID("subcategoryId", "cashcontrol.validations.generic.required");
 
     private final String field;
     private final String messageCode;

@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Expense {
     
     @Enumerated(EnumType.STRING)
-    @Column(name = "paymentType")
+    @Column(name = "payment_type")
     @JsonProperty(value = "payment")
     private PaymentTypeEnum paymentTypeEnum;
     

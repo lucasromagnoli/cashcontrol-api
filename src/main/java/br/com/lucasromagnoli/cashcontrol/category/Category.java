@@ -2,6 +2,7 @@ package br.com.lucasromagnoli.cashcontrol.category;
 
 import br.com.lucasromagnoli.cashcontrol.movimentation.MovimentationTypeEnum;
 import br.com.lucasromagnoli.cashcontrol.subcategory.Subcategory;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -30,6 +31,7 @@ public class Category {
     @Enumerated(EnumType.STRING)
     private MovimentationTypeEnum type;
     
+    @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Subcategory> subcategoryList;
 

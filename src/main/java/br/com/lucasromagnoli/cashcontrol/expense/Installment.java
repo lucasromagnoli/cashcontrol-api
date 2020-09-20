@@ -1,6 +1,7 @@
 package br.com.lucasromagnoli.cashcontrol.expense;
 
 import br.com.lucasromagnoli.cashcontrol.movimentation.Movimentation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -28,6 +29,7 @@ public class Installment {
     @Column(name = "start")
     private LocalDate start;
     
+    @JsonIgnore
     @OneToMany(mappedBy = "expense.installment")
     private List<Movimentation> movimentations;
 }

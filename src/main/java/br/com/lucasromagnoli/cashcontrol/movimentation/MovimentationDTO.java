@@ -10,7 +10,8 @@ public class MovimentationDTO {
     private String type; //Receita/Despesa
     private String date;
     private String frequency; // null, none, monthly, yearly
-
+    private String subcategoryId;
+    
     //Expense
     private String payment; //Cash, installment ou subscription
 
