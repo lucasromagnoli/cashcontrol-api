@@ -18,14 +18,14 @@ import java.time.LocalDate;
 @Data
 @Table(name = "movimentation")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@JsonPropertyOrder({"id", "value", "description", "date", "type", "frequencyTypeEnum"})
+@JsonPropertyOrder({"id", "value", "description", "date", "type", "frequencyTypeEnum", "expense"})
 public class Movimentation {
     
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+        
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "origin_id")
     private Origin origin;

@@ -9,7 +9,10 @@ enum MovimentationFields {
     TYPE("type", "cashcontrol.validations.generic.required"),
     DATE("date", "cashcontrol.validations.generic.required"),
     FREQUENCY("frequency", "cashcontrol.validations.generic.required"),
-    ORIGIN_ID("originId", "cashcontrol.validations.generic.required");
+    ORIGIN_ID("originId", "cashcontrol.validations.generic.required"),
+    QUANTITY("quantity", "cashcontrol.validations.generic.required"),
+    AMOUNT("amount", "cashcontrol.validations.generic.required"),
+    PAYMENT("payment", "cashcontrol.validations.generic.required");
 
     private final String field;
     private final String messageCode;

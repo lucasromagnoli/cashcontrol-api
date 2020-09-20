@@ -20,15 +20,25 @@ public class MovimentationDTO {
 
     // Origin
     private String originId;
-    private String originName;
 }
 
 /**
+ * Cadastrando Despesa
+ * value - obrigatório
+ * payment - obrigatório
+ * description - opcional
+ * type - obrigatório
+ * date - obrigatório
+ * frequency - opcional
+ * origin_id - obrigatório
+ */
+
+/** 
+ * Cadastrando Receita
  * value - obrigatório
  * description - opcional
  * type - obrigatório
  * date - obrigatório
  * frequency - opcional
  * origin_id - opcional
- * origin_name - opcional
  */
