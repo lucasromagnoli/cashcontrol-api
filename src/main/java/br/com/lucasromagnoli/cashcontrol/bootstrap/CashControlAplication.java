@@ -7,6 +7,7 @@ import br.com.lucasromagnoli.cashcontrol.expense.Expense;
 import br.com.lucasromagnoli.cashcontrol.movimentation.Movimentation;
 import br.com.lucasromagnoli.cashcontrol.origin.Origin;
 import br.com.lucasromagnoli.cashcontrol.subcategory.Subcategory;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -35,10 +36,15 @@ public class CashControlAplication implements CommandLineRunner {
     @Autowired
     CategoryService categoryService;
     
+    @Autowired
+    ObjectMapper objectMapper;
+            
     public static void main(String[] args) {
         SpringApplication.run(CashControlAplication.class, args);
     }
+    
 
+    
     @Override
     public void run(String... args) throws Exception {
         Resource excelFile = new ClassPathResource("/input/input-category-and-subcategory.xls");

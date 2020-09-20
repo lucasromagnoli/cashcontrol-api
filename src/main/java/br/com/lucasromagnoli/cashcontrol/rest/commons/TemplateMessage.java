@@ -1,9 +1,11 @@
 package br.com.lucasromagnoli.cashcontrol.rest.commons;
 
 import br.com.lucasromagnoli.javaee.useful.support.object.ObjectSupport;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+@JsonPropertyOrder({"httpStatus", "messageType", "message", "payload"})
 public class TemplateMessage {
     private MessageTypeEnum messageType;
     private String message;
