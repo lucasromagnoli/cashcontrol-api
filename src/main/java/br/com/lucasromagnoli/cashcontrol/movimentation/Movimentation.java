@@ -4,6 +4,9 @@ package br.com.lucasromagnoli.cashcontrol.movimentation;
 import br.com.lucasromagnoli.cashcontrol.expense.Expense;
 import br.com.lucasromagnoli.cashcontrol.expense.FrequencyTypeEnum;
 import br.com.lucasromagnoli.cashcontrol.origin.Origin;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,6 +18,7 @@ import java.time.LocalDate;
 @Data
 @Table(name = "movimentation")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@JsonPropertyOrder({"id", "value", "description", "date", "type", "frequencyTypeEnum"})
 public class Movimentation {
     
     @Id
@@ -22,7 +26,8 @@ public class Movimentation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "origin_id")
     private Origin origin;
 
     @Column(name = "type")
@@ -40,8 +45,10 @@ public class Movimentation {
 
     @Column(name = "frequency")
     @Enumerated(EnumType.STRING)
+    @JsonProperty(value = "frequency")
     private FrequencyTypeEnum frequencyTypeEnum;
 
     @Column(name = "date")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate date;
 }

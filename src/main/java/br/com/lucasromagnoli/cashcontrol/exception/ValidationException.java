@@ -13,9 +13,9 @@ public class ValidationException extends RuntimeException {
     private final List<FieldError> listFieldError;
     private final ValidationType validationType;
     
-    public ValidationException(Validation validation, ValidationType validationType) {
-        this.validationType = validationType;
+    public ValidationException(Validation validation) {
         this.validation = validation;
+        this.validationType = null;
         this.listFieldError = null;
     }
     

@@ -1,9 +1,11 @@
 package br.com.lucasromagnoli.cashcontrol.origin;
 
+import br.com.lucasromagnoli.cashcontrol.movimentation.Movimentation;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -19,4 +21,6 @@ public class Origin {
     @Column(name = "name")
     private String name;
     
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Movimentation> listMovimentation;
 }

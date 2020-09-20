@@ -1,16 +1,29 @@
 package br.com.lucasromagnoli.cashcontrol.expense;
 
+import br.com.lucasromagnoli.javaee.useful.support.validation.EnumParseException;
 import lombok.Getter;
+
+import java.util.Arrays;
 
 @Getter
 public enum FrequencyTypeEnum {
-    NONE("Nenhuma"),
-    MONTHLY("Mensal"),
-    YEARLY("Anual");
+    NONE(new String[] { "Nenhuma", "N", "NONE" }),
+    MONTHLY(new String[] { "Mensal", "M", "Monthly" }),
+    YEARLY(new String[] { "Anual", "A", "Yearly" });
 
-    private final String label;
+    private final String[] labels;
 
-    FrequencyTypeEnum(String label) {
-        this.label = label;
+    FrequencyTypeEnum(String[] labels) {
+        this.labels = labels;
+    }
+
+    public static FrequencyTypeEnum parse(String typeString) {
+        for (FrequencyTypeEnum type : values()) {
+            if (Arrays.stream(type.labels).anyMatch(t -> t.equalsIgnoreCase(typeString))) {
+                return type;
+            }
+        }
+
+        throw new EnumParseException();
     }
 }
