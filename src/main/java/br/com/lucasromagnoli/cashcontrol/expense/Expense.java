@@ -1,19 +1,23 @@
 package br.com.lucasromagnoli.cashcontrol.expense;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 
 import javax.persistence.*;
 
-@Embeddable
 @Data
+@Embeddable
+@JsonPropertyOrder({"paymentTypeEnum", "installment"})
 public class Expense {
     
-    @Column(name = "paymentType")
     @Enumerated(EnumType.STRING)
+    @Column(name = "payment_type")
+    @JsonProperty(value = "payment")
     private PaymentTypeEnum paymentTypeEnum;
     
-    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "installment_id")
+    @ManyToOne(cascade = CascadeType.ALL)
     private Installment installment;
     
 }

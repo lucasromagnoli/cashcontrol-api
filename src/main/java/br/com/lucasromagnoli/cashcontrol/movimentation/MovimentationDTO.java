@@ -10,7 +10,8 @@ public class MovimentationDTO {
     private String type; //Receita/Despesa
     private String date;
     private String frequency; // null, none, monthly, yearly
-
+    private String subcategoryId;
+    
     //Expense
     private String payment; //Cash, installment ou subscription
 
@@ -20,15 +21,25 @@ public class MovimentationDTO {
 
     // Origin
     private String originId;
-    private String originName;
 }
 
 /**
+ * Cadastrando Despesa
+ * value - obrigatório
+ * payment - obrigatório
+ * description - opcional
+ * type - obrigatório
+ * date - obrigatório
+ * frequency - opcional
+ * origin_id - obrigatório
+ */
+
+/** 
+ * Cadastrando Receita
  * value - obrigatório
  * description - opcional
  * type - obrigatório
  * date - obrigatório
  * frequency - opcional
  * origin_id - opcional
- * origin_name - opcional
  */

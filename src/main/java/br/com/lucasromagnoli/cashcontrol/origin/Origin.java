@@ -1,6 +1,7 @@
 package br.com.lucasromagnoli.cashcontrol.origin;
 
 import br.com.lucasromagnoli.cashcontrol.movimentation.Movimentation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,6 +22,7 @@ public class Origin {
     @Column(name = "name")
     private String name;
     
-    @OneToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "origin")
     private List<Movimentation> listMovimentation;
 }
