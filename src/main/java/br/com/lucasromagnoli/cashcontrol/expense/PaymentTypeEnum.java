@@ -5,7 +5,7 @@ import br.com.lucasromagnoli.javaee.useful.support.validation.EnumParseException
 import java.util.Arrays;
 
 public enum PaymentTypeEnum {
-    CASH_PAYMENT(new String[] { "Cash", "C", "Dinheiro", "D" }),
+    DEBIT_PAYMENT(new String[] { "Debit", "D", "Debito", "Débito" }),
     INSTALLMENT_PAYMENT(new String[]{ "Parcelamento", "P", "Installment", "I" }),
     SUBSCRIPTION_PAYMENT(new String[]{ "Assinatura", "A", "Subscription", "S" });
 

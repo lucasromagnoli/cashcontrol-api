@@ -8,6 +8,7 @@ import java.util.Arrays;
 @Getter
 public enum FrequencyTypeEnum {
     NONE(new String[] { "Nenhuma", "N", "NONE" }),
+    DEBIT(new String[] { "Debito", "D", "Debit", "Débito" }),
     MONTHLY(new String[] { "Mensal", "M", "Monthly" }),
     YEARLY(new String[] { "Anual", "A", "Yearly" });
 

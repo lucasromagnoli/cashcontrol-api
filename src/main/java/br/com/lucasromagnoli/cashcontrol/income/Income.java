@@ -1,8 +1,8 @@
-package br.com.lucasromagnoli.cashcontrol.expense;
+package br.com.lucasromagnoli.cashcontrol.income;
 
+import br.com.lucasromagnoli.cashcontrol.origin.Origin;
 import br.com.lucasromagnoli.cashcontrol.subcategory.Subcategory;
 import br.com.lucasromagnoli.cashcontrol.transaction.Transaction;
-import br.com.lucasromagnoli.cashcontrol.origin.Origin;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,34 +14,29 @@ import java.util.List;
 @Data
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Expense {
+public class Income {
 
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private BigDecimal value;
-
     private LocalDate date;
 
-    @ManyToOne
+    private BigDecimal value;
+
+    @ManyToOne(cascade = {
+            CascadeType.PERSIST
+    })
     private Origin origin;
-
-    private PaymentTypeEnum paymentTypeEnum;
-
-    private FrequencyTypeEnum frequencyTypeEnum;
 
     @ManyToOne
     @JoinColumn(name = "subcategory_id")
     private Subcategory subcategory;
 
-    @OneToOne
-    private Installment installment;
-
-    @OneToOne
-    private Subscription subscription;
-
-    @OneToMany(mappedBy = "expense")
+    @OneToMany(mappedBy = "income", cascade = {
+            CascadeType.PERSIST,
+            CascadeType.REMOVE
+    })
     private List<Transaction> transactions;
 }
