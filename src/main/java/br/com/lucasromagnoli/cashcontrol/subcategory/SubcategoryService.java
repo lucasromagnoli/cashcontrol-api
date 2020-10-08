@@ -1,6 +1,6 @@
 package br.com.lucasromagnoli.cashcontrol.subcategory;
 
-import br.com.lucasromagnoli.cashcontrol.movimentation.MovimentationTypeEnum;
+import br.com.lucasromagnoli.cashcontrol.transaction.TransactionTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +20,8 @@ public class SubcategoryService {
         return subcategoryRepository.findAll();
     }
     
-    public boolean existsByIdAndMovimentationType(int id, MovimentationTypeEnum movimentationTypeEnum) {
-        return subcategoryRepository.existsByIdAndCategoryType(id, movimentationTypeEnum);
+    public boolean existsByIdAndMovimentationType(int id, TransactionTypeEnum transactionTypeEnum) {
+        return subcategoryRepository.existsByIdAndCategoryType(id, transactionTypeEnum);
     }
     
 }

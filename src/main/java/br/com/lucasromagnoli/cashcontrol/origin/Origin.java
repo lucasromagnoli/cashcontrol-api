@@ -1,12 +1,9 @@
 package br.com.lucasromagnoli.cashcontrol.origin;
 
-import br.com.lucasromagnoli.cashcontrol.movimentation.Movimentation;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
@@ -21,8 +18,5 @@ public class Origin {
     
     @Column(name = "name")
     private String name;
-    
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "origin")
-    private List<Movimentation> listMovimentation;
+
 }

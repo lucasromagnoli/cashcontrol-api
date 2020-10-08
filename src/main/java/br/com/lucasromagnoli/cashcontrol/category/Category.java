@@ -1,6 +1,6 @@
 package br.com.lucasromagnoli.cashcontrol.category;
 
-import br.com.lucasromagnoli.cashcontrol.movimentation.MovimentationTypeEnum;
+import br.com.lucasromagnoli.cashcontrol.transaction.TransactionTypeEnum;
 import br.com.lucasromagnoli.cashcontrol.subcategory.Subcategory;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -29,7 +29,7 @@ public class Category {
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
-    private MovimentationTypeEnum type;
+    private TransactionTypeEnum type;
     
     @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)

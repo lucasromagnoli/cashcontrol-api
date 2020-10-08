@@ -1,4 +1,4 @@
-package br.com.lucasromagnoli.cashcontrol.movimentation;
+package br.com.lucasromagnoli.cashcontrol.transaction;
 
 import br.com.lucasromagnoli.javaee.useful.support.validation.EnumParseException;
 import lombok.Getter;
@@ -6,18 +6,18 @@ import lombok.Getter;
 import java.util.Arrays;
 
 @Getter
-public enum MovimentationTypeEnum {
+public enum TransactionTypeEnum {
     INCOME(new String[]{"Receita", "Income", "R", "I"}),
     EXPENSE(new String[]{"Despesa", "Expense", "D", "E"});
 
     private final String[] labels;
 
-    MovimentationTypeEnum(String[] labels) {
+    TransactionTypeEnum(String[] labels) {
         this.labels = labels;
     }
 
-    public static MovimentationTypeEnum parse(String typeString) {
-        for (MovimentationTypeEnum type : values()) {
+    public static TransactionTypeEnum parse(String typeString) {
+        for (TransactionTypeEnum type : values()) {
             if (Arrays.stream(type.labels).anyMatch(t -> t.equalsIgnoreCase(typeString))) {
                 return type;
             }
