@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 interface OriginRepository extends JpaRepository<Origin, Integer> {
-    boolean existsById(Integer id);
+
 }
