@@ -1,9 +1,9 @@
-package br.com.lucasromagnoli.cashcontrol.origin;
+package br.com.lucasromagnoli.cashcontrol.income;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface OriginRepository extends JpaRepository<Origin, Integer> {
+public interface IncomeRepository extends JpaRepository<Income, Integer> {
 
 }

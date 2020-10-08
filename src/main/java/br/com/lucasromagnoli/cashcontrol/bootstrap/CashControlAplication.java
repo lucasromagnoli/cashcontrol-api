@@ -4,7 +4,8 @@ import br.com.lucasromagnoli.cashcontrol.administrator.importation.ImportationCa
 import br.com.lucasromagnoli.cashcontrol.category.Category;
 import br.com.lucasromagnoli.cashcontrol.category.CategoryService;
 import br.com.lucasromagnoli.cashcontrol.expense.Expense;
-import br.com.lucasromagnoli.cashcontrol.movimentation.Movimentation;
+import br.com.lucasromagnoli.cashcontrol.income.Income;
+import br.com.lucasromagnoli.cashcontrol.transaction.Transaction;
 import br.com.lucasromagnoli.cashcontrol.origin.Origin;
 import br.com.lucasromagnoli.cashcontrol.subcategory.Subcategory;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,9 +23,10 @@ import java.util.List;
 @EntityScan(basePackageClasses = {
         Category.class,
         Subcategory.class,
-        Movimentation.class,
+        Transaction.class,
         Origin.class,
-        Expense.class
+        Expense.class,
+        Income.class
 })
 @EnableJpaRepositories("br.com.lucasromagnoli.cashcontrol")
 @SpringBootApplication(scanBasePackages = "br.com.lucasromagnoli.cashcontrol")
