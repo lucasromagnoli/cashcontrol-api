@@ -23,6 +23,11 @@ public class OriginService {
         // TODO: 10/7/20 - Implementar a paginacão
         return originRepository.findAll();
     }
+  
+    @Transactional(readOnly = true)
+    public boolean existsWithId(Integer id) {
+        return originRepository.existsById(id);
+    }
 
     @Transactional(readOnly = false)
     public Origin update(Origin origin) {
@@ -35,5 +40,4 @@ public class OriginService {
         // TODO: 10/7/20 - Inserir as validacões de negócios
         originRepository.delete(origin);
     }
-   
 }
