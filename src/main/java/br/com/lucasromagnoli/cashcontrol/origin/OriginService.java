@@ -24,7 +24,12 @@ public class OriginService {
         return originRepository.findAll();
     }
     
-    public boolean existsById(int id) { 
+    public boolean existsWithId(Integer id) {
         return originRepository.existsById(id);
+    }
+
+    public void delete(Origin originSaved) {
+        // TODO: 10/8/20 - Realizar as validacões de negócios
+        originRepository.delete(originSaved);
     }
 }
