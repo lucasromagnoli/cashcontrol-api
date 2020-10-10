@@ -6,8 +6,7 @@ import br.com.lucasromagnoli.cashcontrol.rest.commons.MessageTypeEnum;
 import br.com.lucasromagnoli.cashcontrol.rest.commons.TemplateMessage;
 import br.com.lucasromagnoli.cashcontrol.rest.commons.TemplateMessageSupport;
 import br.com.lucasromagnoli.cashcontrol.rest.commons.Validation;
-import br.com.lucasromagnoli.javaee.useful.support.object.ObjectSupport;
-import br.com.lucasromagnoli.javaee.useful.support.string.StringSupport;
+import br.com.lucasromagnoli.cashcontrol.support.StringSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
@@ -28,7 +28,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = ValidationException.class)
     protected ResponseEntity<TemplateMessage> handleException(ValidationException exception) {
         Validation payload = exception.getValidation();
-        if (!ObjectSupport.isNull(exception.getListFieldError()) && exception.getListFieldError().size() > 0) {
+        if (!Objects.isNull(exception.getListFieldError()) && exception.getListFieldError().size() > 0) {
             Map<String, String> details = new LinkedHashMap<>();
 
             for (FieldError fieldError : exception.getListFieldError()) {

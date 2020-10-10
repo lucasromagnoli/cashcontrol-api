@@ -1,6 +1,6 @@
 package br.com.lucasromagnoli.cashcontrol.expense;
 
-import br.com.lucasromagnoli.javaee.useful.support.validation.EnumParseException;
+import br.com.lucasromagnoli.cashcontrol.exception.EnumParseException;
 import lombok.Getter;
 
 import java.util.Arrays;

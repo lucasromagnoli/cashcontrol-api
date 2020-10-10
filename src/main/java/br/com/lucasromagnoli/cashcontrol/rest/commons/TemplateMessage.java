@@ -1,9 +1,11 @@
 package br.com.lucasromagnoli.cashcontrol.rest.commons;
 
-import br.com.lucasromagnoli.javaee.useful.support.object.ObjectSupport;
+import br.com.lucasromagnoli.cashcontrol.support.ObjectSupport;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.util.Objects;
 
 @JsonPropertyOrder({"httpStatus", "messageType", "message", "payload"})
 public class TemplateMessage {
@@ -52,8 +54,8 @@ public class TemplateMessage {
     }
 
     public ResponseEntity<TemplateMessage> toResponseEntity() {
-        HttpStatus httpStatus = ObjectSupport.Nvl(this.httpStatus, HttpStatus.OK);
-        if (ObjectSupport.isNull(this.httpStatus)) {
+        HttpStatus httpStatus = ObjectSupport.nvl(this.httpStatus, HttpStatus.OK);
+        if (Objects.isNull(this.httpStatus)) {
             this.httpStatus = httpStatus;
         }
         return ResponseEntity.status(httpStatus).body(this);
