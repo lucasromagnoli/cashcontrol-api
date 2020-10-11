@@ -18,7 +18,7 @@ public class OriginInputValidator {
                     .predicate(PredicatesValidator.stringLengthBetween(3, 50))
                     .operation(ValidatorOperation.CREATE)
                     .validate();
-        } catch (Exception e) {
+        } catch (NoSuchFieldException e) {
             // TODO: 10/11/20 - Inserir logger
             e.printStackTrace();
             throw new CashControlRuntimeException();

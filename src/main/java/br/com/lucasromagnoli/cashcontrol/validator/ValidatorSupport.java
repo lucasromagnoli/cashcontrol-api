@@ -2,7 +2,6 @@ package br.com.lucasromagnoli.cashcontrol.validator;
 
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlStaticContextAcessor;
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlSupport;
-import br.com.lucasromagnoli.cashcontrol.exception.InputValidationException;
 import br.com.lucasromagnoli.cashcontrol.support.ReflectionSupport;
 import org.apache.commons.lang3.StringUtils;
 
@@ -17,8 +16,6 @@ public class ValidatorSupport<T> {
     private String message;
     private Predicate<T> predicate;
     private ValidatorOperation operation;
-
-    private boolean nullSafe;
 
     private ValidatorSupport() {
     }
@@ -48,7 +45,9 @@ public class ValidatorSupport<T> {
         for (Field field : clazz.getDeclaredFields()) {
             if (field.isAnnotationPresent(Required.class)) {
                 if (Objects.isNull(ReflectionSupport.getMethod(field.getName(), target))) {
-                    throw new InputValidationException(field);
+                    throw new InputValidationException(field,
+                            CashControlStaticContextAcessor.getBean(CashControlSupport.class)
+                                    .getPropertie("cashcontrol.validation.input.required.field"));
                 }
             }
         }
@@ -85,19 +84,12 @@ public class ValidatorSupport<T> {
         return this;
     }
 
-    public ValidatorSupport<T> nullSafe() {
-        this.nullSafe = true;
-        return this;
-    }
-
     public void validate() throws NoSuchFieldException {
-        if (!Objects.isNull(operation)) {
-            requiredFields();
-        }
-
         T fieldValue = ReflectionSupport.getMethod(field, target, fieldType);
 
-        if (nullSafe) {
+        if (!Objects.isNull(operation)) {
+            requiredFields();
+        } else {
             if (Objects.isNull(fieldValue)) {
                 throw new InputValidationException(field,
                         CashControlStaticContextAcessor.getBean(CashControlSupport.class)
@@ -114,7 +106,7 @@ public class ValidatorSupport<T> {
                     messageException = annotationMessage;
                 }
             }
-            throw new InputValidationException(messageException);
+            throw new InputValidationException(field, messageException);
         }
     }
 }

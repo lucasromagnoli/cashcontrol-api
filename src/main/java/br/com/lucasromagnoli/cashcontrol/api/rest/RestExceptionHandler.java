@@ -5,7 +5,7 @@ import br.com.lucasromagnoli.cashcontrol.api.templatemessage.TemplateMessage;
 import br.com.lucasromagnoli.cashcontrol.api.templatemessage.TemplateMessageSupport;
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlSupport;
 import br.com.lucasromagnoli.cashcontrol.exception.CashControlRuntimeException;
-import br.com.lucasromagnoli.cashcontrol.exception.ValidationException;
+import br.com.lucasromagnoli.cashcontrol.validator.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .message(cashControlSupport.getPropertie("cashcontrol.validations.exception.default.message"))
                 .messageType(MessageTypeEnum.WARNING)
                 .httpStatus(HttpStatus.BAD_REQUEST)
-                .payload(e.getHumanMessage())
+                .payload(e.getValidationMessage())
                 .build()
                 .toResponseEntity();
     }
