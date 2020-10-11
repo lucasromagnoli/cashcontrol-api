@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Configuration
 @PropertySource(value = "classpath:cashcontrol-validations.properties", encoding = "UTF-8")
 @PropertySource(value = "classpath:cashcontrol-configurations.properties", encoding = "UTF-8")
+@PropertySource(value = "classpath:cashcontrol-messages.properties", encoding = "UTF-8")
 public class CashControlSupport {
     
     @Autowired
@@ -17,5 +18,10 @@ public class CashControlSupport {
     
     public String getPropertie(String key) {
         return environment.getProperty(key);
+    }
+
+    public String getPropertie(String key, Object... params) {
+        String templateMessage = environment.getProperty(key);
+        return String.format(templateMessage, params);
     }
 }

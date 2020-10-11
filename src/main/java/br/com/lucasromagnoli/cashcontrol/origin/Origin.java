@@ -4,6 +4,7 @@ import br.com.lucasromagnoli.cashcontrol.validator.Required;
 import br.com.lucasromagnoli.cashcontrol.validator.ValidatorOperation;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import javax.persistence.*;
 
