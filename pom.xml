@@ -108,12 +108,6 @@
 
     <build><!-- depending on your project -->
         <plugins>
-            <!-- É NECESSÁRIO O PLUGIN DO SPRING BOOT? VERIFICAR -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -127,10 +121,11 @@
                             <artifactId>mapstruct-processor</artifactId>
                             <version>${org.mapstruct.version}</version>
                         </path>
-                        <!-- other annotation processors -->
+
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
+                            <version>1.18.12</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
