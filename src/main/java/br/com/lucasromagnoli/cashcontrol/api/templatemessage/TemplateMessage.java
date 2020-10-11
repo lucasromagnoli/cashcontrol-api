@@ -1,4 +1,4 @@
-package br.com.lucasromagnoli.cashcontrol.rest.commons;
+package br.com.lucasromagnoli.cashcontrol.api.templatemessage;
 
 import br.com.lucasromagnoli.cashcontrol.support.ObjectSupport;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

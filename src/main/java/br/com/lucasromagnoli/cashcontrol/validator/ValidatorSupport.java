@@ -1,6 +1,8 @@
 package br.com.lucasromagnoli.cashcontrol.validator;
 
-import br.com.lucasromagnoli.cashcontrol.exception.ValidationException;
+import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlStaticContextAcessor;
+import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlSupport;
+import br.com.lucasromagnoli.cashcontrol.exception.InputValidationException;
 import br.com.lucasromagnoli.cashcontrol.support.ReflectionSupport;
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,7 +33,9 @@ public class ValidatorSupport<T> {
                 for (ValidatorOperation operation : annotationValue) {
                     if (operation.equals(this.operation) || operation.equals(ValidatorOperation.ALL)) {
                         if (Objects.isNull(ReflectionSupport.getMethod(field.getName(), target))) {
-                            throw new ValidationException(field.getName() + " Campo obrigatório");
+                            throw new InputValidationException(field,
+                                    CashControlStaticContextAcessor.getBean(CashControlSupport.class)
+                                            .getPropertie("cashcontrol.validation.input.required.field"));
                         }
                     }
                 }
@@ -44,7 +48,7 @@ public class ValidatorSupport<T> {
         for (Field field : clazz.getDeclaredFields()) {
             if (field.isAnnotationPresent(Required.class)) {
                 if (Objects.isNull(ReflectionSupport.getMethod(field.getName(), target))) {
-                    throw new ValidationException(field.getName() + " Campo obrigatório");
+                    throw new InputValidationException(field);
                 }
             }
         }
@@ -95,7 +99,9 @@ public class ValidatorSupport<T> {
 
         if (nullSafe) {
             if (Objects.isNull(fieldValue)) {
-                throw new ValidationException(field + " null pointer");
+                throw new InputValidationException(field,
+                        CashControlStaticContextAcessor.getBean(CashControlSupport.class)
+                                .getPropertie("cashcontrol.validation.input.nullsafe"));
             }
         }
 
@@ -108,7 +114,7 @@ public class ValidatorSupport<T> {
                     messageException = annotationMessage;
                 }
             }
-            throw new ValidationException(messageException);
+            throw new InputValidationException(messageException);
         }
     }
 }
