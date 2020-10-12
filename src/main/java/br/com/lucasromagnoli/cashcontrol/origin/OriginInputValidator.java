@@ -9,19 +9,31 @@ public class OriginInputValidator {
     private void originInputValidator() {
     }
 
-    public static void validateSave(Origin origin) {
+    private static void validateCommons(Origin origin, ValidatorOperation validatorOperation) {
         try {
             ValidatorSupport.fieldType(String.class)
                     .target(origin)
                     .field("name")
                     .message("O nome precisa estrar entre 3 a 50 caracteres")
                     .predicate(PredicatesValidator.stringLengthBetween(3, 50))
-                    .operation(ValidatorOperation.CREATE)
+                    .operation(validatorOperation)
                     .validate();
         } catch (NoSuchFieldException e) {
             // TODO: 10/11/20 - Inserir logger
             e.printStackTrace();
             throw new CashControlRuntimeException();
         }
+    }
+
+    public static void validateSave(Origin origin) {
+        validateCommons(origin, ValidatorOperation.CREATE);
+    }
+
+    public static void validateUpdate(Origin origin) {
+        validateCommons(origin, ValidatorOperation.UPDATE);
+    }
+
+    public static void validateDelete(Origin origin) {
+        ValidatorSupport.requiredFields(origin, ValidatorOperation.DELETE);
     }
 }

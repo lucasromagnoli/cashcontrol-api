@@ -21,4 +21,23 @@ public class OriginBusinessValidator {
                             "cashcontrol.validation.business.already.exists.detailed", origin.getName()));
         }
     }
+
+    public void validateUpdate(Origin origin) {
+        validateExists(origin);
+        validateSave(origin);
+    }
+
+    public void validateDelete(Origin origin) {
+        validateExists(origin);
+        // TODO: 10/12/20 - Validar se existe alguma receita/despesa cadastrada com essa origem.
+    }
+
+    private void validateExists(Origin origin) {
+        if (!originService.existsWithId(origin.getId())) {
+            throw new BusinessValidationException("id",
+                    cashControlSupport.getPropertie(
+                            "cashcontrol.validation.business.not.found.object.with.id.detailed",
+                            origin.getId()));
+        }
+    }
 }
