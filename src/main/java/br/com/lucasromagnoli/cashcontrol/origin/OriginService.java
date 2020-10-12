@@ -24,14 +24,12 @@ public class OriginService {
     @Transactional(readOnly = false)
     public Origin save(Origin origin) {
         originBusinessValidator.validateSave(origin);
-        // TODO: 10/12/20 - Capitalizar o nome da origem
         return originRepository.save(origin);
     }
 
     @Transactional(readOnly = false)
     public Origin update(Origin origin) {
         originBusinessValidator.validateUpdate(origin);
-        // TODO: 10/12/20 - Capitalizar o nome da origem
         return originRepository.save(origin);
     }
 
