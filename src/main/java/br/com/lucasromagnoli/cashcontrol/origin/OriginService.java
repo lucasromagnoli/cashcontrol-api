@@ -29,13 +29,13 @@ public class OriginService {
 
     @Transactional(readOnly = false)
     public Origin update(Origin origin) {
-        // TODO: 10/7/20 - Inserir as validacões de negócios
+        originBusinessValidator.validateUpdate(origin);
         return originRepository.save(origin);
     }
 
     @Transactional(readOnly = false)
     public void delete(Origin origin) {
-        // TODO: 10/7/20 - Inserir as validacões de negócios
+        originBusinessValidator.validateDelete(origin);
         originRepository.delete(origin);
     }
 

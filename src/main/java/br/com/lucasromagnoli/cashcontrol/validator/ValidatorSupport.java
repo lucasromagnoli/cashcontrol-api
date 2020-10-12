@@ -20,7 +20,7 @@ public class ValidatorSupport<T> {
     private ValidatorSupport() {
     }
 
-    private void requiredFields() {
+    public static void requiredFields(Object target, ValidatorOperation validatorOperation) {
         Class<?> clazz = target.getClass();
         for (Field field : clazz.getDeclaredFields()) {
             if (field.isAnnotationPresent(Required.class)) {
@@ -28,26 +28,13 @@ public class ValidatorSupport<T> {
                 ValidatorOperation[] annotationValue = annotation.operations();
 
                 for (ValidatorOperation operation : annotationValue) {
-                    if (operation.equals(this.operation) || operation.equals(ValidatorOperation.ALL)) {
+                    if (operation.equals(validatorOperation) || operation.equals(ValidatorOperation.ALL)) {
                         if (Objects.isNull(ReflectionSupport.getMethod(field.getName(), target))) {
                             throw new InputValidationException(field,
                                     CashControlStaticContextAcessor.getBean(CashControlSupport.class)
                                             .getPropertie("cashcontrol.validation.input.required.field"));
                         }
                     }
-                }
-            }
-        }
-    }
-
-    public static <T> void requiredFields(T target) {
-        Class<?> clazz = target.getClass();
-        for (Field field : clazz.getDeclaredFields()) {
-            if (field.isAnnotationPresent(Required.class)) {
-                if (Objects.isNull(ReflectionSupport.getMethod(field.getName(), target))) {
-                    throw new InputValidationException(field,
-                            CashControlStaticContextAcessor.getBean(CashControlSupport.class)
-                                    .getPropertie("cashcontrol.validation.input.required.field"));
                 }
             }
         }
@@ -88,7 +75,7 @@ public class ValidatorSupport<T> {
         T fieldValue = ReflectionSupport.getMethod(field, target, fieldType);
 
         if (!Objects.isNull(operation)) {
-            requiredFields();
+            requiredFields(target, operation);
         } else {
             if (Objects.isNull(fieldValue)) {
                 throw new InputValidationException(field,

@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class OriginDto {
+    public String id;
     public String name;
 }
