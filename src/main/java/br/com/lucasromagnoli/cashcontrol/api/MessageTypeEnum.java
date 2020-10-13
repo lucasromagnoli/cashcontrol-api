@@ -1,4 +1,4 @@
-package br.com.lucasromagnoli.cashcontrol.api.templatemessage;
+package br.com.lucasromagnoli.cashcontrol.api;
 
 public enum MessageTypeEnum {
     SUCCESS,

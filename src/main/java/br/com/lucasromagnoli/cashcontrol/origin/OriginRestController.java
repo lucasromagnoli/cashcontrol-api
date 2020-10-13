@@ -1,10 +1,9 @@
-package br.com.lucasromagnoli.cashcontrol.api.rest.v1;
+package br.com.lucasromagnoli.cashcontrol.origin;
 
-import br.com.lucasromagnoli.cashcontrol.api.templatemessage.MessageTypeEnum;
-import br.com.lucasromagnoli.cashcontrol.api.templatemessage.TemplateMessage;
-import br.com.lucasromagnoli.cashcontrol.api.templatemessage.TemplateMessageSupport;
+import br.com.lucasromagnoli.cashcontrol.api.MessageTypeEnum;
+import br.com.lucasromagnoli.cashcontrol.api.TemplateMessage;
+import br.com.lucasromagnoli.cashcontrol.api.TemplateMessageSupport;
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlSupport;
-import br.com.lucasromagnoli.cashcontrol.origin.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
