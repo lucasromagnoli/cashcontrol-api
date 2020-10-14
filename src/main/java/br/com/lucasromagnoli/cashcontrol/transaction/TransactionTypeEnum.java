@@ -1,6 +1,5 @@
 package br.com.lucasromagnoli.cashcontrol.transaction;
 
-import br.com.lucasromagnoli.cashcontrol.exception.EnumParseException;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -23,7 +22,7 @@ public enum TransactionTypeEnum {
             }
         }
         
-        throw new EnumParseException();
+        return null;
     }
 }
 

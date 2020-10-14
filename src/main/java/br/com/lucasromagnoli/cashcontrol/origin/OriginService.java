@@ -1,6 +1,8 @@
 package br.com.lucasromagnoli.cashcontrol.origin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +19,12 @@ public class OriginService {
 
     @Transactional(readOnly = true)
     public List<Origin> findAll() {
-        // TODO: 10/7/20 - Implementar a paginacão
         return originRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Origin> findAll(Pageable pageable) {
+        return originRepository.findAll(pageable);
     }
 
     @Transactional(readOnly = false)

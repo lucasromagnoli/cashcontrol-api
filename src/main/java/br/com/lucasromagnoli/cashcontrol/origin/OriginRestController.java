@@ -1,15 +1,15 @@
-package br.com.lucasromagnoli.cashcontrol.api.rest.v1;
+package br.com.lucasromagnoli.cashcontrol.origin;
 
-import br.com.lucasromagnoli.cashcontrol.api.templatemessage.MessageTypeEnum;
-import br.com.lucasromagnoli.cashcontrol.api.templatemessage.TemplateMessage;
-import br.com.lucasromagnoli.cashcontrol.api.templatemessage.TemplateMessageSupport;
+import br.com.lucasromagnoli.cashcontrol.api.MessageTypeEnum;
+import br.com.lucasromagnoli.cashcontrol.api.TemplateMessage;
+import br.com.lucasromagnoli.cashcontrol.api.TemplateMessageSupport;
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlSupport;
-import br.com.lucasromagnoli.cashcontrol.origin.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/origin")
@@ -22,9 +22,8 @@ public class OriginRestController {
     private CashControlSupport cashControlSupport;
 
     @GetMapping
-    public ResponseEntity<TemplateMessage> index() {
-        List<Origin> origins = originService.findAll();
-        // TODO: 10/12/20 - Implementar paginacão
+    public ResponseEntity<TemplateMessage> index(@PageableDefault(page = 0, size = 20) Pageable pageable) {
+        Page<Origin> origins = originService.findAll(pageable);
         return TemplateMessageSupport.begin()
                 .message(cashControlSupport.getPropertie("cashcontrol.messages.operation.list.generic"))
                 .messageType(MessageTypeEnum.SUCCESS)

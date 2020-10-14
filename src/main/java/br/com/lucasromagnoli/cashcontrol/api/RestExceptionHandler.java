@@ -1,8 +1,8 @@
-package br.com.lucasromagnoli.cashcontrol.api.rest;
+package br.com.lucasromagnoli.cashcontrol.api;
 
-import br.com.lucasromagnoli.cashcontrol.api.templatemessage.MessageTypeEnum;
-import br.com.lucasromagnoli.cashcontrol.api.templatemessage.TemplateMessage;
-import br.com.lucasromagnoli.cashcontrol.api.templatemessage.TemplateMessageSupport;
+import br.com.lucasromagnoli.cashcontrol.api.MessageTypeEnum;
+import br.com.lucasromagnoli.cashcontrol.api.TemplateMessage;
+import br.com.lucasromagnoli.cashcontrol.api.TemplateMessageSupport;
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlSupport;
 import br.com.lucasromagnoli.cashcontrol.exception.CashControlRuntimeException;
 import br.com.lucasromagnoli.cashcontrol.validator.ValidationException;
