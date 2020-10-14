@@ -8,14 +8,14 @@ public class ReflectionSupport {
     private ReflectionSupport() {
     }
 
-    public static <T> T getMethod(String field, Object target, Class<T> clazz) {
+    public static <T> Object getMethod(String field, Object target, Class<T> clazz) {
         // TODO: 10/9/20 - Criar metodo responsável por advinhar o sufixo do método mesmo sem saber se é booleano
         String prefix = clazz.getName()
                 .equalsIgnoreCase("Boolean") ? "is" : "get";
         String methodName = prefix + StringSupport.firstLetterToUpperCase(field);
         try {
             Method method = target.getClass().getMethod(methodName);
-            return clazz.cast(method.invoke(target));
+            return method.getReturnType().cast((method.invoke(target)));
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }

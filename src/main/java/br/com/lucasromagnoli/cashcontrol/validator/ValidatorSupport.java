@@ -3,6 +3,7 @@ package br.com.lucasromagnoli.cashcontrol.validator;
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlStaticContextAcessor;
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlSupport;
 import br.com.lucasromagnoli.cashcontrol.support.ReflectionSupport;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
@@ -16,6 +17,7 @@ public class ValidatorSupport<T> {
     private String message;
     private Predicate<T> predicate;
     private ValidatorOperation operation;
+    private CheckRequired checkRequired;
 
     private ValidatorSupport() {
     }
@@ -35,6 +37,20 @@ public class ValidatorSupport<T> {
                                             .getPropertie("cashcontrol.validation.input.required.field"));
                         }
                     }
+                }
+            }
+        }
+    }
+
+    public void requiredField(Object fieldValue) throws NoSuchFieldException {
+        if (ReflectionSupport.hasAnnotation(target, field, Required.class)) {
+            Required annotation = target.getClass().getDeclaredField(field).getAnnotation(Required.class);
+            ValidatorOperation[] annotationValue = annotation.operations();
+            if (ArrayUtils.contains(annotationValue, operation)) {
+                if (Objects.isNull(fieldValue)) {
+                    throw new InputValidationException(field,
+                            CashControlStaticContextAcessor.getBean(CashControlSupport.class)
+                                    .getPropertie("cashcontrol.validation.input.required.field"));
                 }
             }
         }
@@ -71,20 +87,21 @@ public class ValidatorSupport<T> {
         return this;
     }
 
-    public void validate() throws NoSuchFieldException {
-        T fieldValue = ReflectionSupport.getMethod(field, target, fieldType);
+    public ValidatorSupport<T> checkRequired(CheckRequired checkRequired) {
+        this.checkRequired = checkRequired;
+        return this;
+    }
 
-        if (!Objects.isNull(operation)) {
+    public ValidatorSupport<T> validate() throws NoSuchFieldException {
+        Object fieldValue = ReflectionSupport.getMethod(field, target, fieldType);
+
+        if (CheckRequired.SINGLE.equals(checkRequired)) {
+            requiredField(fieldValue);
+        } else if (CheckRequired.ALL.equals(checkRequired)) {
             requiredFields(target, operation);
-        } else {
-            if (Objects.isNull(fieldValue)) {
-                throw new InputValidationException(field,
-                        CashControlStaticContextAcessor.getBean(CashControlSupport.class)
-                                .getPropertie("cashcontrol.validation.input.nullsafe"));
-            }
         }
 
-        if (!predicate.test(fieldValue)) {
+        if (!Objects.isNull(fieldValue) && !Objects.isNull(predicate) && !predicate.test(fieldType.cast(fieldValue))) {
             String messageException = message;
             if (Objects.isNull(message) && ReflectionSupport.hasAnnotation(target, field, Required.class)) {
                 String annotationMessage
@@ -95,5 +112,14 @@ public class ValidatorSupport<T> {
             }
             throw new InputValidationException(field, messageException);
         }
+
+        clearToNextValidation();
+        return this;
+    }
+
+    private void clearToNextValidation() {
+        field = null;
+        message = null;
+        predicate = null;
     }
 }

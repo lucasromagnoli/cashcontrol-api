@@ -2,6 +2,8 @@ package br.com.lucasromagnoli.cashcontrol.category;
 
 import br.com.lucasromagnoli.cashcontrol.transaction.TransactionTypeEnum;
 import br.com.lucasromagnoli.cashcontrol.subcategory.Subcategory;
+import br.com.lucasromagnoli.cashcontrol.validator.Required;
+import br.com.lucasromagnoli.cashcontrol.validator.ValidatorOperation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,9 +21,11 @@ public class Category {
     @EqualsAndHashCode.Include
     @Column(name = "id_category")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Required(operations = {ValidatorOperation.UPDATE, ValidatorOperation.DELETE})
     private Integer id;
 
     @Column(name = "name")
+    @Required(operations = {ValidatorOperation.CREATE, ValidatorOperation.UPDATE})
     private String name;
 
     @Column(name = "description")
@@ -29,8 +33,9 @@ public class Category {
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
+    @Required(operations = {ValidatorOperation.CREATE})
     private TransactionTypeEnum type;
-    
+
     @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Subcategory> subcategoryList;
