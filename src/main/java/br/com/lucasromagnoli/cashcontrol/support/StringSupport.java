@@ -8,6 +8,7 @@ public class StringSupport {
         return target
                 .replaceAll("([A-Z]+)([A-Z][a-z])", "$1_$2")
                 .replaceAll("([a-z])([A-Z])", "$1_$2")
+                .replace(".", "_")
                 .toLowerCase();
     }
 

@@ -24,7 +24,7 @@ public class SubcategoryInputValidator {
                     .predicate(PredicatesValidator.stringLengthBetween(1, 200))
                     .message("A descricão precisa estrar entre 1 a 200 caracteres")
                     .validate()
-                    .field("category")
+                    .field("category.id")
                     .validate();
 
         } catch (NoSuchFieldException e) {

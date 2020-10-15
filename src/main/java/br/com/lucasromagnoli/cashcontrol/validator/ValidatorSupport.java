@@ -3,6 +3,7 @@ package br.com.lucasromagnoli.cashcontrol.validator;
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlStaticContextAcessor;
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlSupport;
 import br.com.lucasromagnoli.cashcontrol.support.ReflectionSupport;
+import br.com.lucasromagnoli.cashcontrol.support.StringSupport;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -43,12 +44,13 @@ public class ValidatorSupport<T> {
     }
 
     public void requiredField(Object fieldValue) throws NoSuchFieldException {
-        if (ReflectionSupport.hasAnnotation(target, field, Required.class)) {
-            Required annotation = target.getClass().getDeclaredField(field).getAnnotation(Required.class);
+        String tmpFieldName = getFieldName();
+        if (ReflectionSupport.hasAnnotation(target, tmpFieldName, Required.class)) {
+            Required annotation = target.getClass().getDeclaredField(tmpFieldName).getAnnotation(Required.class);
             ValidatorOperation[] annotationValue = annotation.operations();
             if (ArrayUtils.contains(annotationValue, operation)) {
                 if (Objects.isNull(fieldValue)) {
-                    throw new InputValidationException(field,
+                    throw new InputValidationException(StringSupport.camelToSnake(field),
                             CashControlStaticContextAcessor.getBean(CashControlSupport.class)
                                     .getPropertie("cashcontrol.validation.input.required.field"));
                 }
@@ -92,8 +94,32 @@ public class ValidatorSupport<T> {
         return this;
     }
 
+    private Object getFieldValue() {
+        if (!field.contains(".")) {
+            return ReflectionSupport.getMethod(field, target, fieldType);
+        } else {
+            String[] fields = StringUtils.split(field, ".");
+            if (fields.length == 2) {
+                Object entity = ReflectionSupport.getMethod(fields[0], target);
+                if (!Objects.isNull(entity)) {
+                    return ReflectionSupport.getMethod(fields[1], entity);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private String getFieldName() {
+        if (!field.contains(".")) {
+            return field;
+        } else {
+            return StringUtils.split(field, ".")[0];
+        }
+    }
+
     public ValidatorSupport<T> validate() throws NoSuchFieldException {
-        Object fieldValue = ReflectionSupport.getMethod(field, target, fieldType);
+        Object fieldValue = getFieldValue();
 
         if (CheckRequired.SINGLE.equals(checkRequired)) {
             requiredField(fieldValue);
