@@ -10,5 +10,6 @@ import java.util.List;
 interface SubcategoryRepository extends JpaRepository<Subcategory, Integer> {
     
     List<Subcategory> findAllByCategoryType(TransactionTypeEnum transactionTypeEnum);
-    boolean existsByNameAndCategoryType(String id, TransactionTypeEnum transactionTypeEnum);
+    boolean existsByNameAndCategoryId(String name, Integer id);
+    boolean existsByCategoryId(Integer id);
 }

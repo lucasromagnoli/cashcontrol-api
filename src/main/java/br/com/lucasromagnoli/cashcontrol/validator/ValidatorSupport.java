@@ -94,30 +94,6 @@ public class ValidatorSupport<T> {
         return this;
     }
 
-    private Object getFieldValue() {
-        if (!field.contains(".")) {
-            return ReflectionSupport.getMethod(field, target, fieldType);
-        } else {
-            String[] fields = StringUtils.split(field, ".");
-            if (fields.length == 2) {
-                Object entity = ReflectionSupport.getMethod(fields[0], target);
-                if (!Objects.isNull(entity)) {
-                    return ReflectionSupport.getMethod(fields[1], entity);
-                }
-            }
-        }
-
-        return null;
-    }
-
-    private String getFieldName() {
-        if (!field.contains(".")) {
-            return field;
-        } else {
-            return StringUtils.split(field, ".")[0];
-        }
-    }
-
     public ValidatorSupport<T> validate() throws NoSuchFieldException {
         Object fieldValue = getFieldValue();
 
@@ -147,5 +123,29 @@ public class ValidatorSupport<T> {
         field = null;
         message = null;
         predicate = null;
+    }
+
+    private Object getFieldValue() {
+        if (!field.contains(".")) {
+            return ReflectionSupport.getMethod(field, target, fieldType);
+        } else {
+            String[] fields = StringUtils.split(field, ".");
+            if (fields.length == 2) {
+                Object entity = ReflectionSupport.getMethod(fields[0], target);
+                if (!Objects.isNull(entity)) {
+                    return ReflectionSupport.getMethod(fields[1], entity);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private String getFieldName() {
+        if (!field.contains(".")) {
+            return field;
+        } else {
+            return StringUtils.split(field, ".")[0];
+        }
     }
 }

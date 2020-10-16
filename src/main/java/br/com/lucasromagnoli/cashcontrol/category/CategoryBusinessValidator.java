@@ -1,6 +1,7 @@
 package br.com.lucasromagnoli.cashcontrol.category;
 
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlSupport;
+import br.com.lucasromagnoli.cashcontrol.subcategory.SubcategoryService;
 import br.com.lucasromagnoli.cashcontrol.validator.BusinessValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Component;
 public class CategoryBusinessValidator {
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private SubcategoryService subcategoryService;
 
     @Autowired
     private CashControlSupport cashControlSupport;
@@ -28,7 +32,12 @@ public class CategoryBusinessValidator {
 
     public void validateDelete(Category category) {
         validateExists(category);
-        // TODO: 10/12/20 - Validar se existe alguma subcategoria cadastrada com essa categoria.
+        if (subcategoryService.existsWithCategoryId(category.getId())) {
+            throw new BusinessValidationException("subcategory",
+                    cashControlSupport.getPropertie(
+                            "cashcontrol.validation.business.delete.childreen.exists.detailed",
+                            "subcategorias"));
+        }
     }
 
     private void validateExists(Category category) {

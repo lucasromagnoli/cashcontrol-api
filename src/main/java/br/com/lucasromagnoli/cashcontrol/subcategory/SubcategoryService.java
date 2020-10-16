@@ -1,6 +1,5 @@
 package br.com.lucasromagnoli.cashcontrol.subcategory;
 
-import br.com.lucasromagnoli.cashcontrol.transaction.TransactionTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,25 +13,30 @@ public class SubcategoryService {
     @Autowired
     private SubcategoryRepository subcategoryRepository;
 
+    @Autowired
+    private SubcategoryBusinessValidator subcategoryBusinessValidator;
+
+    @Transactional(readOnly = true)
     public Page<Subcategory> findAll(Pageable pageable) {
         return subcategoryRepository.findAll(pageable);
     }
 
     @Transactional(readOnly = false)
     public Subcategory save(Subcategory subcategory) {
+        subcategoryBusinessValidator.validateSave(subcategory);
         return subcategoryRepository.save(subcategory);
     }
 
     @Transactional(readOnly = false)
     public Subcategory update(Subcategory subcategory) {
-//        categoryBusinessValidator.validateUpdate(category);
+        subcategoryBusinessValidator.validateUpdate(subcategory);
         // TODO: 10/13/20 - Carregar os campos que não obrigatórios
         return subcategoryRepository.save(subcategory);
     }
 
     @Transactional(readOnly = false)
     public void delete(Subcategory subcategory) {
-//        categoryBusinessValidator.validateDelete(category);
+        subcategoryBusinessValidator.validateDelete(subcategory);
         subcategoryRepository.delete(subcategory);
     }
 
@@ -41,7 +45,13 @@ public class SubcategoryService {
         return subcategoryRepository.existsById(id);
     }
 
-    public boolean existsWithNameAndTransactionType(String name, TransactionTypeEnum transactionTypeEnum) {
-        return subcategoryRepository.existsByNameAndCategoryType(name, transactionTypeEnum);
+    @Transactional(readOnly = true)
+    public boolean existsWithNameAndCategoryId(String name, Integer categoryId) {
+        return subcategoryRepository.existsByNameAndCategoryId(name, categoryId);
+    }
+
+    @Transactional(readOnly = true)
+    public boolean existsWithCategoryId(Integer id) {
+        return subcategoryRepository.existsByCategoryId(id);
     }
 }
