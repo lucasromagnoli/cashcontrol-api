@@ -32,7 +32,7 @@ public class OriginBusinessValidator {
         // TODO: 10/12/20 - Validar se existe alguma receita/despesa cadastrada com essa origem.
     }
 
-    private void validateExists(Origin origin) {
+    public void validateExists(Origin origin) {
         if (!originService.existsWithId(origin.getId())) {
             throw new BusinessValidationException("id",
                     cashControlSupport.getPropertie(

@@ -21,7 +21,7 @@ public enum TransactionTypeEnum {
                 return type;
             }
         }
-        
+
         return null;
     }
 }

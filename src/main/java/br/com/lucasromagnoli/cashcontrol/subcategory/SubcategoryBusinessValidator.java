@@ -2,6 +2,7 @@ package br.com.lucasromagnoli.cashcontrol.subcategory;
 
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlSupport;
 import br.com.lucasromagnoli.cashcontrol.category.CategoryService;
+import br.com.lucasromagnoli.cashcontrol.transaction.TransactionTypeEnum;
 import br.com.lucasromagnoli.cashcontrol.validator.BusinessValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -44,12 +45,21 @@ public class SubcategoryBusinessValidator {
         // TODO: 14/12/20 - Validar se existe alguma despesa/receita cadastrada com essa subcategoria.
     }
 
-    private void validateExists(Subcategory subcategory) {
+    public void validateExists(Subcategory subcategory) {
         if (!subcategoryService.existsWithId(subcategory.getId())) {
             throw new BusinessValidationException("id",
                     cashControlSupport.getPropertie(
                             "cashcontrol.validation.business.not.found.object.with.id.detailed",
                             subcategory.getId()));
+        }
+    }
+
+    public void validateTransactionType(Subcategory subcategory, TransactionTypeEnum transactionTypeEnum) {
+        if (!transactionTypeEnum.equals(subcategoryService.findTransactionType(subcategory.getId()))) {
+            throw new BusinessValidationException("subcategory_id",
+                    cashControlSupport.getPropertie(
+                            "cashcontrol.validation.business.transaction.type.invalid.detailed",
+                            transactionTypeEnum.name()));
         }
     }
 }

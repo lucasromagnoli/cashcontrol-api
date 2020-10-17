@@ -1,4 +1,4 @@
-package br.com.lucasromagnoli.cashcontrol.income;
+package br.com.lucasromagnoli.cashcontrol.expense;
 
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlSupport;
 import br.com.lucasromagnoli.cashcontrol.origin.OriginBusinessValidator;
@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IncomeBusinessValidator {
+public class ExpenseBusinessValidator {
     @Autowired
-    private IncomeService incomeService;
+    private ExpenseService expenseService;
 
     @Autowired
     private OriginBusinessValidator originBusinessValidator;
@@ -22,19 +22,18 @@ public class IncomeBusinessValidator {
     @Autowired
     private CashControlSupport cashControlSupport;
 
-    public void validateSave(Income income) {
-        originBusinessValidator.validateExists(income.getOrigin());
-        subcategoryBusinessValidator.validateExists(income.getSubcategory());
-        subcategoryBusinessValidator.validateTransactionType(income.getSubcategory(), TransactionTypeEnum.INCOME);
+    public void validateSave(Expense expense) {
+        originBusinessValidator.validateExists(expense.getOrigin());
+        subcategoryBusinessValidator.validateExists(expense.getSubcategory());
+        subcategoryBusinessValidator.validateTransactionType(expense.getSubcategory(), TransactionTypeEnum.EXPENSE);
     }
 
-    public void validateDelete(Income income) {
-        if (!incomeService.existsWithId(income.getId())) {
+    public void validateDelete(Expense expense) {
+        if (!expenseService.existsWithId(expense.getId())) {
             throw new BusinessValidationException("id",
                     cashControlSupport.getPropertie(
                             "cashcontrol.validation.business.not.found.object.with.id.detailed",
-                            income.getId()));
+                            expense.getId()));
         }
     }
-
 }
