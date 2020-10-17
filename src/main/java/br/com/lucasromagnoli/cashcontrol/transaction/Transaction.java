@@ -27,8 +27,7 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     private TransactionTypeEnum transactionTypeEnum;
 
-    @OneToOne
-    @JoinColumn(name = "income_id")
+    @OneToOne(mappedBy = "transaction")
     private Income income;
 
     @ManyToOne

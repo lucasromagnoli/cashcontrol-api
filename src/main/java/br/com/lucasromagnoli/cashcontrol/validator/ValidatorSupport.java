@@ -94,6 +94,16 @@ public class ValidatorSupport<T> {
         return this;
     }
 
+    public <O> ValidatorSupport<O> field(String field, Class<O> fieldType) {
+        ValidatorSupport<O> validatorSupport = new ValidatorSupport<>();
+        validatorSupport.fieldType = fieldType;
+        validatorSupport.target = this.target;
+        validatorSupport.operation = this.operation;
+        validatorSupport.field = field;
+        validatorSupport.checkRequired = this.checkRequired;
+        return validatorSupport;
+    }
+
     public ValidatorSupport<T> validate() throws NoSuchFieldException {
         Object fieldValue = getFieldValue();
 

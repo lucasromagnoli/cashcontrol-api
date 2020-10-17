@@ -1,13 +1,12 @@
 package br.com.lucasromagnoli.cashcontrol.income;
 
-import br.com.lucasromagnoli.cashcontrol.transaction.Transaction;
-import br.com.lucasromagnoli.cashcontrol.transaction.TransactionTypeEnum;
+import br.com.lucasromagnoli.cashcontrol.support.TransactionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
-import java.util.LinkedList;
-import java.util.List;
 
 @Service
 public class IncomeService {
@@ -15,30 +14,29 @@ public class IncomeService {
     @Autowired
     private IncomeRepository incomeRepository;
 
-    @Transactional
+    @Autowired
+    private IncomeBusinessValidator incomeBusinessValidator;
+
+    @Transactional(readOnly = false)
     public Income save(Income income) {
-        // TODO: 10/7/20 - Realizar a validacã́o de negócios.
-
-        // TODO: 10/7/20 - Criar método responsável por gerar a transacão
-        Transaction transaction = new Transaction();
-        transaction.setDate(income.getDate());
-        transaction.setValue(income.getValue());
-        transaction.setTransactionTypeEnum(TransactionTypeEnum.INCOME);
-        transaction.setIncome(income);
-
-        List<Transaction> transactions = new LinkedList<>();
-        transactions.add(transaction);
-        income.setTransactions(transactions);
+        incomeBusinessValidator.validateSave(income);
+        income.setTransaction(TransactionSupport.generateTransaction(income));
         return incomeRepository.save(income);
     }
 
-    public void delete(Income incomeSaved) {
-        // TODO: 10/7/20 - Realizar as validacões de negócios
-        incomeRepository.delete(incomeSaved);
+    @Transactional(readOnly = true)
+    public void delete(Income income) {
+        incomeBusinessValidator.validateDelete(income);
+        incomeRepository.delete(income);
     }
 
-    public List<Income> findAll() {
-        // TODO: 10/7/20 - Implementar a paginacão
-        return incomeRepository.findAll();
+    @Transactional(readOnly = true)
+    public Page<Income> findAll(Pageable pageable) {
+        return incomeRepository.findAll(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public boolean existsWithId(Integer id) {
+        return incomeRepository.existsById(id);
     }
 }
