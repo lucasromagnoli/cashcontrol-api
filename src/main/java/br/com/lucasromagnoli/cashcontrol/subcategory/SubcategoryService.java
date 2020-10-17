@@ -1,5 +1,6 @@
 package br.com.lucasromagnoli.cashcontrol.subcategory;
 
+import br.com.lucasromagnoli.cashcontrol.transaction.TransactionTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -53,5 +54,10 @@ public class SubcategoryService {
     @Transactional(readOnly = true)
     public boolean existsWithCategoryId(Integer id) {
         return subcategoryRepository.existsByCategoryId(id);
+    }
+
+    @Transactional(readOnly = true)
+    public TransactionTypeEnum findTransactionType(Integer subcategoryId) {
+        return subcategoryRepository.findTransactionTypeSubcategoryId(subcategoryId);
     }
 }
