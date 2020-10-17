@@ -1,5 +1,7 @@
 package br.com.lucasromagnoli.cashcontrol.mapstruct;
 
+import br.com.lucasromagnoli.cashcontrol.expense.FrequencyTypeEnum;
+import br.com.lucasromagnoli.cashcontrol.expense.PaymentTypeEnum;
 import br.com.lucasromagnoli.cashcontrol.support.DateSupport;
 import br.com.lucasromagnoli.cashcontrol.transaction.TransactionTypeEnum;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +20,16 @@ public class MapperQualifiers {
     @StringToTransactionType
     public TransactionTypeEnum stringToTransactionType (String s) {
         return TransactionTypeEnum.parse(s);
+    }
+
+    @StringToPaymentType
+    public PaymentTypeEnum stringToPaymentType (String s) {
+        return PaymentTypeEnum.parse(s);
+    }
+
+    @StringToFrequencyType
+    public FrequencyTypeEnum stringToFrequencyType (String s) {
+        return FrequencyTypeEnum.parse(s);
     }
 
     @StringToBigDecimalAbsolute

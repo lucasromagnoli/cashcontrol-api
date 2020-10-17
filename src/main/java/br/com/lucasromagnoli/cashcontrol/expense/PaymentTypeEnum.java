@@ -1,14 +1,11 @@
 package br.com.lucasromagnoli.cashcontrol.expense;
 
-
-import br.com.lucasromagnoli.cashcontrol.exception.EnumParseException;
-
 import java.util.Arrays;
 
 public enum PaymentTypeEnum {
-    DEBIT_PAYMENT(new String[] { "Debit", "D", "Debito", "Débito" }),
-    INSTALLMENT_PAYMENT(new String[]{ "Parcelamento", "P", "Installment", "I" }),
-    SUBSCRIPTION_PAYMENT(new String[]{ "Assinatura", "A", "Subscription", "S" });
+    DEBIT_PAYMENT(new String[]{"Debit", "D", "Debito", "Débito"}),
+    INSTALLMENT_PAYMENT(new String[]{"Parcelamento", "P", "Installment", "I"}),
+    SUBSCRIPTION_PAYMENT(new String[]{"Assinatura", "A", "Subscription", "S"});
 
     private final String[] labels;
 
@@ -23,6 +20,6 @@ public enum PaymentTypeEnum {
             }
         }
 
-        throw new EnumParseException();
+        return null;
     }
 }

@@ -12,6 +12,10 @@ public class PredicatesValidator {
         return i -> i >= min && i <= max;
     }
 
+    public static Predicate<Integer> integerMinValue(int min) {
+        return i -> i >= min;
+    }
+
     public static Predicate<BigDecimal> bigDecimalFloatMinValue(float min) {
         return b -> b.floatValue() >= min;
     }

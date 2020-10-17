@@ -14,16 +14,6 @@ public interface IncomeMapper {
     IncomeMapper INSTANCE = Mappers.getMapper(IncomeMapper.class);
 
     @Mappings({
-            @Mapping(target = "id", source = "id"),
-            @Mapping(target = "date", source = "date", qualifiedBy = StringToLocalDate.class),
-            @Mapping(target = "value", source = "value", qualifiedBy = StringToBigDecimalAbsolute.class),
-            @Mapping(target = "description", source = "description", qualifiedBy = StringToUpperCase.class),
-            @Mapping(target = "origin.id", source = "originId"),
-            @Mapping(target = "subcategory.id", source = "subcategoryId"),
-    })
-    Income toUpdate(IncomeDto incomeDto);
-
-    @Mappings({
             @Mapping(target = "date", source = "date", qualifiedBy = StringToLocalDate.class),
             @Mapping(target = "value", source = "value", qualifiedBy = StringToBigDecimalAbsolute.class),
             @Mapping(target = "description", source = "description", qualifiedBy = StringToUpperCase.class),
