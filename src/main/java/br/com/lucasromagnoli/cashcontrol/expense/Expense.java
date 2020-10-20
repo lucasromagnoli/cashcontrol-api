@@ -1,8 +1,8 @@
 package br.com.lucasromagnoli.cashcontrol.expense;
 
+import br.com.lucasromagnoli.cashcontrol.origin.Origin;
 import br.com.lucasromagnoli.cashcontrol.subcategory.Subcategory;
 import br.com.lucasromagnoli.cashcontrol.transaction.Transaction;
-import br.com.lucasromagnoli.cashcontrol.origin.Origin;
 import br.com.lucasromagnoli.cashcontrol.validator.Required;
 import br.com.lucasromagnoli.cashcontrol.validator.ValidatorOperation;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
