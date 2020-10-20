@@ -1,6 +1,6 @@
 package br.com.lucasromagnoli.cashcontrol.expense;
 
-import br.com.lucasromagnoli.cashcontrol.support.TransactionSupport;
+import br.com.lucasromagnoli.cashcontrol.transaction.TransactionSupport;
 import br.com.lucasromagnoli.cashcontrol.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

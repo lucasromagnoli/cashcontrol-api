@@ -1,10 +1,8 @@
-package br.com.lucasromagnoli.cashcontrol.support;
+package br.com.lucasromagnoli.cashcontrol.transaction;
 
 import br.com.lucasromagnoli.cashcontrol.expense.Expense;
 import br.com.lucasromagnoli.cashcontrol.expense.PaymentTypeEnum;
 import br.com.lucasromagnoli.cashcontrol.income.Income;
-import br.com.lucasromagnoli.cashcontrol.transaction.Transaction;
-import br.com.lucasromagnoli.cashcontrol.transaction.TransactionTypeEnum;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
