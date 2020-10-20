@@ -6,6 +6,7 @@ import br.com.lucasromagnoli.cashcontrol.income.Income;
 import br.com.lucasromagnoli.cashcontrol.transaction.Transaction;
 import br.com.lucasromagnoli.cashcontrol.transaction.TransactionTypeEnum;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,20 +23,25 @@ public class TransactionSupport {
         return transaction;
     }
 
-    public static List<Transaction> generateTransaction(Expense expense) {
+    public static List<Transaction> generateTransactions(Expense expense) {
         List<Transaction> transactions = new ArrayList<>();
-        Integer qtyTransactions = PaymentTypeEnum.INSTALLMENT_PAYMENT.equals(expense.getPaymentType())
+        int qtyTransactions = PaymentTypeEnum.INSTALLMENT_PAYMENT.equals(expense.getPaymentType())
                 ? expense.getInstallment().getQuantity() : 1;
 
         for (int index = 0; index < qtyTransactions; index++) {
-            Transaction transaction = new Transaction();
-            transaction.setDate(expense.getDate().plusMonths(index));
-            transaction.setValue(expense.getValue());
-            transaction.setTransactionTypeEnum(TransactionTypeEnum.EXPENSE);
-            transaction.setExpense(expense);
-            transactions.add(transaction);
+            genereteTransaction(expense, expense.getDate().plusMonths(index));
         }
 
         return transactions;
+    }
+
+    public static Transaction genereteTransaction(Expense expense, LocalDate date) {
+        Transaction transaction = new Transaction();
+        transaction.setDate(date);
+        transaction.setValue(expense.getValue());
+        transaction.setTransactionTypeEnum(TransactionTypeEnum.EXPENSE);
+        transaction.setExpense(expense);
+
+        return transaction;
     }
 }

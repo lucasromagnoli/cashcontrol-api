@@ -5,6 +5,7 @@ import br.com.lucasromagnoli.cashcontrol.transaction.Transaction;
 import br.com.lucasromagnoli.cashcontrol.origin.Origin;
 import br.com.lucasromagnoli.cashcontrol.validator.Required;
 import br.com.lucasromagnoli.cashcontrol.validator.ValidatorOperation;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,6 +17,16 @@ import java.util.List;
 @Data
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@JsonPropertyOrder({"id",
+        "description",
+        "value",
+        "date",
+        "paymentType",
+        "subcategory",
+        "origin",
+        "installment",
+        "subscription",
+        "transactions"})
 public class Expense {
 
     @Id
@@ -44,14 +55,14 @@ public class Expense {
     @Required(operations = {ValidatorOperation.CREATE})
     private Subcategory subcategory;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
     @JoinColumn(name = "installment_id")
     private Installment installment;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
     @JoinColumn(name = "subscription_id")
     private Subscription subscription;
 
-    @OneToMany(mappedBy = "expense", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "expense", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<Transaction> transactions;
 }
