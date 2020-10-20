@@ -5,6 +5,7 @@ import br.com.lucasromagnoli.cashcontrol.subcategory.Subcategory;
 import br.com.lucasromagnoli.cashcontrol.validator.Required;
 import br.com.lucasromagnoli.cashcontrol.validator.ValidatorOperation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "category")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@JsonIgnoreProperties({"id, name, description", "type"})
 public class Category {
 
     @Id

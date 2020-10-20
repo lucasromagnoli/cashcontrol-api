@@ -2,6 +2,8 @@ package br.com.lucasromagnoli.cashcontrol.transaction;
 
 import br.com.lucasromagnoli.cashcontrol.expense.Expense;
 import br.com.lucasromagnoli.cashcontrol.income.Income;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,6 +13,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
+@JsonPropertyOrder({"id", "value", "transactionTypeEnum", "date"})
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Transaction {
 
@@ -27,10 +30,12 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     private TransactionTypeEnum transactionTypeEnum;
 
-    @OneToOne(mappedBy = "transaction")
+    @JsonIgnore
+    @OneToOne(mappedBy = "transaction", fetch = FetchType.LAZY)
     private Income income;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "expense_id")
     private Expense expense;
 }
