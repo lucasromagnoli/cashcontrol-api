@@ -5,6 +5,10 @@ import br.com.lucasromagnoli.cashcontrol.mapstruct.StringToUpperCase;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Mapper(uses = MapperQualifiers.class)
 public interface SubcategoryMapper {
 

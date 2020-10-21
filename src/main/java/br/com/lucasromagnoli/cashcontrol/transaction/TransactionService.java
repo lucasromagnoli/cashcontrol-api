@@ -3,6 +3,10 @@ package br.com.lucasromagnoli.cashcontrol.transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Service
 public class TransactionService {
     @Autowired

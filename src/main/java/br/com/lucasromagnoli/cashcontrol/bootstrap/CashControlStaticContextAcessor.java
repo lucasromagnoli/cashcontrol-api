@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Component
 public class CashControlStaticContextAcessor {
     private static CashControlStaticContextAcessor cashControlStaticContextAcessor;

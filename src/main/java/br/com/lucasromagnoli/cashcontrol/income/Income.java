@@ -12,6 +12,10 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Data
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)

@@ -8,6 +8,10 @@ import br.com.lucasromagnoli.cashcontrol.validator.BusinessValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Component
 public class ExpenseBusinessValidator {
     @Autowired

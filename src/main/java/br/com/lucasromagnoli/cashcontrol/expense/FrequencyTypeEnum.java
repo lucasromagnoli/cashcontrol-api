@@ -4,6 +4,10 @@ import lombok.Getter;
 
 import java.util.Arrays;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Getter
 public enum FrequencyTypeEnum {
     MONTHLY(new String[] { "Mensal", "M", "Monthly" }, 1),

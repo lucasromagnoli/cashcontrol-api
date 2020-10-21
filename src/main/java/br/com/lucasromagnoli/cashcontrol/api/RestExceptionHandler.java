@@ -1,8 +1,5 @@
 package br.com.lucasromagnoli.cashcontrol.api;
 
-import br.com.lucasromagnoli.cashcontrol.api.MessageTypeEnum;
-import br.com.lucasromagnoli.cashcontrol.api.TemplateMessage;
-import br.com.lucasromagnoli.cashcontrol.api.TemplateMessageSupport;
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlSupport;
 import br.com.lucasromagnoli.cashcontrol.exception.CashControlRuntimeException;
 import br.com.lucasromagnoli.cashcontrol.validator.ValidationException;
@@ -13,6 +10,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 

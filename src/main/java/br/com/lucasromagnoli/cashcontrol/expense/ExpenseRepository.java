@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Repository
 interface ExpenseRepository extends JpaRepository<Expense, Integer> {
     @Query(value = "select s.id from subscription s where s.next_transaction <= ?1 and active = true", nativeQuery = true)

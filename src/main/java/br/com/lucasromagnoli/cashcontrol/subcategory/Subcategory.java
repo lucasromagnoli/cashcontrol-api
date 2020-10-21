@@ -3,13 +3,16 @@ package br.com.lucasromagnoli.cashcontrol.subcategory;
 import br.com.lucasromagnoli.cashcontrol.category.Category;
 import br.com.lucasromagnoli.cashcontrol.validator.Required;
 import br.com.lucasromagnoli.cashcontrol.validator.ValidatorOperation;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Entity
 @Data
 @Table(name = "subcategory")

@@ -1,4 +1,4 @@
-package br.com.lucasromagnoli.cashcontrol.administrator.importation;
+package br.com.lucasromagnoli.cashcontrol.admin;
 
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlSupport;
 import br.com.lucasromagnoli.cashcontrol.category.Category;
@@ -12,20 +12,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Component
-public class ImportationCategoriesExcel {
+public class CategoriesExcelMapper {
     
     @Autowired
     private CashControlSupport cashControlSupport;
     
-    private final Logger logger = LoggerFactory.getLogger(ImportationCategoriesExcel.class);
+    private final Logger logger = LoggerFactory.getLogger(CategoriesExcelMapper.class);
     
-    public List<Category> parse(InputStream inputStream) throws IOException {
+    public List<Category> toCategoryList(InputStream inputStream) throws IOException {
         final String DESPESAS_WORKSHEET_NAME = cashControlSupport
                 .getPropertie("admin.configuration.importation.categories.expenses.worksheet.name");
         final String RECEITAS_WORKSHEET_NAME = cashControlSupport

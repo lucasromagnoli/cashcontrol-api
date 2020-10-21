@@ -6,6 +6,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Component
 @Configuration
 @PropertySource(value = "classpath:cashcontrol-validations.properties", encoding = "UTF-8")

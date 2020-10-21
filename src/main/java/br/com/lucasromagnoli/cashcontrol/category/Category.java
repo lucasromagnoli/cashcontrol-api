@@ -12,6 +12,10 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Data
 @Entity
 @Table(name = "category")

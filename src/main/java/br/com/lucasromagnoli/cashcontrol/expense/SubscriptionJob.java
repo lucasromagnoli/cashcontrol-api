@@ -1,6 +1,6 @@
 package br.com.lucasromagnoli.cashcontrol.expense;
 
-import br.com.lucasromagnoli.cashcontrol.support.TransactionSupport;
+import br.com.lucasromagnoli.cashcontrol.transaction.TransactionSupport;
 import br.com.lucasromagnoli.cashcontrol.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +11,10 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Configuration
 @EnableScheduling
 public class SubscriptionJob {

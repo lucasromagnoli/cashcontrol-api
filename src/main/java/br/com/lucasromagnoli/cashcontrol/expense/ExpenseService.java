@@ -1,7 +1,9 @@
 package br.com.lucasromagnoli.cashcontrol.expense;
 
-import br.com.lucasromagnoli.cashcontrol.support.TransactionSupport;
+import br.com.lucasromagnoli.cashcontrol.transaction.TransactionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +13,10 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Service
 public class ExpenseService {
     @Autowired
@@ -18,6 +24,11 @@ public class ExpenseService {
 
     @Autowired
     private ExpenseBusinessValidator expenseBusinessValidator;
+
+    @Transactional(readOnly = true)
+    public Page<Expense> findAll(Pageable pageable) {
+        return expenseRepository.findAll(pageable);
+    }
 
     @Transactional(readOnly = false)
     public Expense save(Expense expense) {
@@ -58,6 +69,12 @@ public class ExpenseService {
         }
 
         return expenses;
+    }
+
+    @Transactional(readOnly = true)
+    public void delete(Expense expense) {
+        expenseBusinessValidator.validateDelete(expense);
+        expenseRepository.delete(expense);
     }
 
     @Transactional(readOnly = true)

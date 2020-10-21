@@ -10,7 +10,10 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Data
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)

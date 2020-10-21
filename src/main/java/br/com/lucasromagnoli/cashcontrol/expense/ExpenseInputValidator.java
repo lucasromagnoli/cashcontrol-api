@@ -8,6 +8,10 @@ import br.com.lucasromagnoli.cashcontrol.validator.ValidatorSupport;
 
 import java.math.BigDecimal;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 public class ExpenseInputValidator {
     private ExpenseInputValidator() {
     }

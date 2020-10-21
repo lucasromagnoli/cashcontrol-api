@@ -11,6 +11,10 @@ import java.lang.reflect.Field;
 import java.util.Objects;
 import java.util.function.Predicate;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 public class ValidatorSupport<T> {
     private Object target;
     private String field;

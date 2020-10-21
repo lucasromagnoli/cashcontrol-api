@@ -5,6 +5,10 @@ import lombok.Getter;
 
 import java.lang.reflect.Field;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 public abstract class ValidationException extends CashControlRuntimeException {
     @Getter
     private ValidationMessage validationMessage;

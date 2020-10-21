@@ -1,13 +1,16 @@
 package br.com.lucasromagnoli.cashcontrol.income;
 
-import br.com.lucasromagnoli.cashcontrol.support.TransactionSupport;
+import br.com.lucasromagnoli.cashcontrol.transaction.TransactionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Service
 public class IncomeService {
 

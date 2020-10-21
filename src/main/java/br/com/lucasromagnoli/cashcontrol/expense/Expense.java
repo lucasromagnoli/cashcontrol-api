@@ -1,8 +1,8 @@
 package br.com.lucasromagnoli.cashcontrol.expense;
 
+import br.com.lucasromagnoli.cashcontrol.origin.Origin;
 import br.com.lucasromagnoli.cashcontrol.subcategory.Subcategory;
 import br.com.lucasromagnoli.cashcontrol.transaction.Transaction;
-import br.com.lucasromagnoli.cashcontrol.origin.Origin;
 import br.com.lucasromagnoli.cashcontrol.validator.Required;
 import br.com.lucasromagnoli.cashcontrol.validator.ValidatorOperation;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -14,6 +14,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Data
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)

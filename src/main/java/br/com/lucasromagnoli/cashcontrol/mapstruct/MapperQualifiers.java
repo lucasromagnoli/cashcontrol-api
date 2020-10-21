@@ -9,6 +9,10 @@ import org.apache.commons.lang3.StringUtils;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @MapperQualifier
 public class MapperQualifiers {
 

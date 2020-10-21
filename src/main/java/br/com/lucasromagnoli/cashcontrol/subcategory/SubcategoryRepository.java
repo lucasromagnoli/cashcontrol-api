@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Repository
 interface SubcategoryRepository extends JpaRepository<Subcategory, Integer> {
     
