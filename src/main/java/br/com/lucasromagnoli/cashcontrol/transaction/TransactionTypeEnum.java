@@ -4,6 +4,10 @@ import lombok.Getter;
 
 import java.util.Arrays;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Getter
 public enum TransactionTypeEnum {
     INCOME(new String[]{"Receita", "Income", "R", "I"}),

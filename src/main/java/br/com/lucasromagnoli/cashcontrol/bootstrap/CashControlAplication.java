@@ -11,6 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @EntityScan(basePackageClasses = {
         Category.class,
         Subcategory.class,

@@ -3,6 +3,10 @@ package br.com.lucasromagnoli.cashcontrol.support;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 public class DateSupport {
     private DateSupport() {}
 

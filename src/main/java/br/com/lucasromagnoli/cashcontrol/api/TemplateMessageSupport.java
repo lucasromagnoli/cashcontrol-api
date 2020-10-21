@@ -2,6 +2,10 @@ package br.com.lucasromagnoli.cashcontrol.api;
 
 import org.springframework.http.HttpStatus;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 public class TemplateMessageSupport {
     private HttpStatus httpStatus;
     private String message;

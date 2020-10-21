@@ -3,6 +3,10 @@ package br.com.lucasromagnoli.cashcontrol.expense;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Data;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Data
 public class ExpenseDto {
     private String id;

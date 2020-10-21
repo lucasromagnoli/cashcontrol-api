@@ -6,6 +6,10 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Mapper( uses = MapperQualifiers.class)
 public interface ExpenseMapper {
     ExpenseMapper INSTANCE = Mappers.getMapper(ExpenseMapper.class);

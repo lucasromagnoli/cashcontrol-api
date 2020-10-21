@@ -3,6 +3,10 @@ package br.com.lucasromagnoli.cashcontrol.validator;
 import java.math.BigDecimal;
 import java.util.function.Predicate;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 public class PredicatesValidator {
     public static Predicate<String> stringLengthBetween(int min, int max) {
         return s -> s.length() >= min && s.length() <= max;

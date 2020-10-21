@@ -7,6 +7,10 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Data
 @Entity
 @Table(name = "origin")

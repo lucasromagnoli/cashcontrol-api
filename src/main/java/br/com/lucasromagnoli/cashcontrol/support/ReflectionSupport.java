@@ -4,6 +4,10 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 public class ReflectionSupport {
     private ReflectionSupport() {
     }

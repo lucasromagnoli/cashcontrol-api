@@ -1,5 +1,9 @@
 package br.com.lucasromagnoli.cashcontrol.support;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 public class StringSupport {
     private StringSupport() {
     }

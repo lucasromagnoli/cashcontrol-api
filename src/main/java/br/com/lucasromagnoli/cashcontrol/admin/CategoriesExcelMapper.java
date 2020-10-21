@@ -12,11 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Component
 public class CategoriesExcelMapper {
     

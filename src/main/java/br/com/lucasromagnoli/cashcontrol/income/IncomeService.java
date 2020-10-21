@@ -7,7 +7,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Service
 public class IncomeService {
 

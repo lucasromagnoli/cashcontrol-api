@@ -11,6 +11,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @RestController
 @RequestMapping("/expense")
 public class ExpenseRestController {

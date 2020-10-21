@@ -10,6 +10,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Collections;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @EnableWebSecurity
 public class CashControlWebSecurityConfig extends WebSecurityConfigurerAdapter {
 

@@ -2,6 +2,10 @@ package br.com.lucasromagnoli.cashcontrol.support;
 
 import java.util.Objects;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 public class ObjectSupport {
     private ObjectSupport() {}
 

@@ -7,6 +7,10 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Objects;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @JsonPropertyOrder({"httpStatus", "messageType", "message", "payload"})
 public class TemplateMessage {
     private MessageTypeEnum messageType;

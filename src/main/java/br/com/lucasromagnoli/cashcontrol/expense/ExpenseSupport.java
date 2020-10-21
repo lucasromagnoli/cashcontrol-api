@@ -1,5 +1,9 @@
 package br.com.lucasromagnoli.cashcontrol.expense;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 public class ExpenseSupport {
     private ExpenseSupport() {}
 

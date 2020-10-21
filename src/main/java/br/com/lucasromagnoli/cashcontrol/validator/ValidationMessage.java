@@ -2,6 +2,10 @@ package br.com.lucasromagnoli.cashcontrol.validator;
 
 import lombok.Data;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Data
 public class ValidationMessage {
     private String field;

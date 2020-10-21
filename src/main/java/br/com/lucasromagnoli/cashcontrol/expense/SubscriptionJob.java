@@ -11,6 +11,10 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 @Configuration
 @EnableScheduling
 public class SubscriptionJob {

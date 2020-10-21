@@ -6,6 +6,10 @@ import br.com.lucasromagnoli.cashcontrol.validator.PredicatesValidator;
 import br.com.lucasromagnoli.cashcontrol.validator.ValidatorOperation;
 import br.com.lucasromagnoli.cashcontrol.validator.ValidatorSupport;
 
+/**
+ * @author github.com/lucasromagnoli
+ * @since 10/2020
+ */
 public class SubcategoryInputValidator {
     private SubcategoryInputValidator() {}
 
