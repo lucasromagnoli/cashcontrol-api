@@ -18,7 +18,7 @@ Nós utilizamos o padrão [SemVer](http://semver.org/) para o versionamento. Par
 
 ## Organização
 
-Projeto organizado pelas funcionalidadese não pelas layer. [Entenda melhor aqui.](http://www.javapractices.com/topic/TopicAction.do?Id=20)
+Projeto organizado pelas funcionalidadese não pelas layer. [Entenda melhor aqui.](http://www.javapractices.com/topic/TopicAction.do?Id=205)
 
 ## Autores
 
