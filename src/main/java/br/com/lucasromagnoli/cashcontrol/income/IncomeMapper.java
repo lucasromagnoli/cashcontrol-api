@@ -25,7 +25,4 @@ public interface IncomeMapper {
             @Mapping(target = "subcategory.id", source = "subcategoryId"),
     })
     Income toSave(IncomeDto incomeDto);
-
-    @Mapping(target = "id", source = "id")
-    Income toDelete(IncomeDto incomeDto);
 }

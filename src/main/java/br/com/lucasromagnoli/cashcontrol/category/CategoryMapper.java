@@ -30,7 +30,4 @@ public interface CategoryMapper {
             @Mapping(target = "type", source = "type", qualifiedBy = StringToTransactionType.class),
     })
     Category toSave(CategoryDto categoryDto);
-
-    @Mapping(target = "id", source = "id")
-    Category toDelete(CategoryDto categoryDto);
 }

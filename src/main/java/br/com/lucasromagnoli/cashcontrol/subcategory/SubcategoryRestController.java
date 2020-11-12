@@ -65,9 +65,10 @@ public class SubcategoryRestController {
                 .toResponseEntity();
     }
 
-    @DeleteMapping
-    public ResponseEntity<TemplateMessage> delete(@RequestBody SubcategoryDto subcategoryDto) {
-        Subcategory subcategory = SubcategoryMapper.INSTANCE.toDelete(subcategoryDto);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<TemplateMessage> delete(@PathVariable("id") Integer id) {
+        Subcategory subcategory = new Subcategory();
+        subcategory.setId(id);
         SubcategoryInputValidator.validateDelete(subcategory);
         subcategoryService.delete(subcategory);
 

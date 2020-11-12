@@ -49,9 +49,10 @@ public class ExpenseRestController {
                 .toResponseEntity();
     }
 
-    @DeleteMapping
-    public ResponseEntity<TemplateMessage> delete(@RequestBody ExpenseDto expenseDto) {
-        Expense expense = ExpenseMapper.INSTANCE.toDelete(expenseDto);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<TemplateMessage> delete(@PathVariable("id") Integer id) {
+        Expense expense = new Expense();
+        expense.setId(id);
         ExpenseInputValidator.validateDelete(expense);
         expenseService.delete(expense);
 

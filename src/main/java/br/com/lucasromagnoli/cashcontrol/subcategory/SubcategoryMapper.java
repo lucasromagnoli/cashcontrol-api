@@ -28,7 +28,4 @@ public interface SubcategoryMapper {
             @Mapping(target = "category.id", source = "categoryId")
     })
     Subcategory toSave(SubcategoryDto subcategoryDto);
-
-    @Mapping(target = "id", source = "id")
-    Subcategory toDelete(SubcategoryDto subcategoryDto);
 }
