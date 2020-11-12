@@ -27,7 +27,4 @@ public interface ExpenseMapper {
             @Mapping(target = "subcategory.id", source = "subcategoryId"),
     })
     Expense toSave(ExpenseDto expenseDto);
-
-    @Mapping(target = "id", source = "id")
-    Expense toDelete(ExpenseDto expenseDto);
 }

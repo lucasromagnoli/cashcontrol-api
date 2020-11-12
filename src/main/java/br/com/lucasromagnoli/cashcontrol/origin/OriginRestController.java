@@ -66,9 +66,10 @@ public class OriginRestController {
                 .toResponseEntity();
     }
 
-    @DeleteMapping
-    public ResponseEntity<TemplateMessage> delete(@RequestBody OriginDto originDto) {
-        Origin origin = OriginMapper.INSTANCE.toDelete(originDto);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<TemplateMessage> delete(@PathVariable("id") Integer id) {
+        Origin origin = new Origin();
+        origin.setId(id);
         OriginInputValidator.validateDelete(origin);
         originService.delete(origin);
 

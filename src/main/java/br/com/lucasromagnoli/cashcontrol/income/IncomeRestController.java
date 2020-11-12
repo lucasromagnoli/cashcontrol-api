@@ -49,9 +49,10 @@ public class IncomeRestController {
                 .toResponseEntity();
     }
 
-    @DeleteMapping
-    public ResponseEntity<TemplateMessage> delete(@RequestBody IncomeDto incomeDto) {
-        Income income = IncomeMapper.INSTANCE.toDelete(incomeDto);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<TemplateMessage> delete(@PathVariable("id") Integer id) {
+        Income income = new Income();
+        income.setId(id);
         IncomeInputValidator.validateDelete(income);
         incomeService.delete(income);
 

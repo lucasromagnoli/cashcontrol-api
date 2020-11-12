@@ -65,9 +65,11 @@ public class CategoryRestController {
                 .toResponseEntity();
     }
 
-    @DeleteMapping
-    public ResponseEntity<TemplateMessage> delete(@RequestBody CategoryDto categoryDto) {
-        Category category = CategoryMapper.INSTANCE.toDelete(categoryDto);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<TemplateMessage> delete(@PathVariable("id") Integer id) {
+        Category category = new Category();
+        category.setId(id);
+
         CategoryInputValidator.validateDelete(category);
         categoryService.delete(category);
 

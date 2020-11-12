@@ -24,7 +24,4 @@ public interface OriginMapper {
 
     @Mapping(target = "name", source = "name", qualifiedBy = StringToUpperCase.class)
     Origin toSave(OriginDto originDto);
-
-    @Mapping(target = "id", source = "id")
-    Origin toDelete(OriginDto originDto);
 }
