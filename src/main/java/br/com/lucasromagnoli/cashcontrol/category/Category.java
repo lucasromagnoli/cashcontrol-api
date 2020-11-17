@@ -4,8 +4,10 @@ import br.com.lucasromagnoli.cashcontrol.transaction.TransactionTypeEnum;
 import br.com.lucasromagnoli.cashcontrol.subcategory.Subcategory;
 import br.com.lucasromagnoli.cashcontrol.validator.Required;
 import br.com.lucasromagnoli.cashcontrol.validator.ValidatorOperation;
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -20,7 +22,7 @@ import java.util.List;
 @Entity
 @Table(name = "category")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@JsonIgnoreProperties({"id, name, description", "type"})
+@JsonPropertyOrder({"id, name, description", "type"})
 public class Category {
 
     @Id
@@ -37,6 +39,7 @@ public class Category {
     @Column(name = "description")
     private String description;
 
+    @JsonEnumDefaultValue
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     @Required(operations = {ValidatorOperation.CREATE})
