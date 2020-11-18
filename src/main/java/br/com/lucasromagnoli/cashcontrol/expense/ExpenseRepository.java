@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Repository
 interface ExpenseRepository extends JpaRepository<Expense, Integer> {
-    @Query(value = "select s.id from subscription s where s.next_transaction <= ?1 and active = true", nativeQuery = true)
+    @Query(value = "select s.id from Subscription s where s.nextTransaction <= ?1 and s.active = true")
     List<Integer> findAllSubscriptionIdBeforeDate(LocalDate before);
 
     @Query("select e from Expense e where e.subscription.id in :ids")
