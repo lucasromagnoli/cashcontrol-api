@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author github.com/lucasromagnoli
  * @since 10/2020
@@ -23,6 +25,11 @@ public class SubcategoryService {
     @Transactional(readOnly = true)
     public Page<Subcategory> findAll(Pageable pageable) {
         return subcategoryRepository.findAll(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Subcategory> findAllByTransactionType(TransactionTypeEnum transactionTypeEnum) {
+        return subcategoryRepository.findAllByCategoryType(transactionTypeEnum);
     }
 
     @Transactional(readOnly = false)

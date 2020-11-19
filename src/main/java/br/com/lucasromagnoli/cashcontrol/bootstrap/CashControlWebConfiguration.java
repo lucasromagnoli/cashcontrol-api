@@ -1,19 +1,27 @@
 package br.com.lucasromagnoli.cashcontrol.bootstrap;
 
+import br.com.lucasromagnoli.cashcontrol.transaction.StringToTransactionTypeEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author github.com/lucasromagnoli
  * @since 10/2020
  */
 @Configuration
-public class CashControlWebConfiguration {
-    
+public class CashControlWebConfiguration implements WebMvcConfigurer {
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(new StringToTransactionTypeEnum());
+    }
+
     @Bean
     public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
         ObjectMapper objectMapper = new ObjectMapper();

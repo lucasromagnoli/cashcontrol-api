@@ -4,12 +4,15 @@ import br.com.lucasromagnoli.cashcontrol.api.MessageTypeEnum;
 import br.com.lucasromagnoli.cashcontrol.api.TemplateMessage;
 import br.com.lucasromagnoli.cashcontrol.api.TemplateMessageSupport;
 import br.com.lucasromagnoli.cashcontrol.bootstrap.CashControlSupport;
+import br.com.lucasromagnoli.cashcontrol.transaction.TransactionTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author github.com/lucasromagnoli
@@ -27,6 +30,17 @@ public class SubcategoryRestController {
     @GetMapping
     public ResponseEntity<TemplateMessage> index(@PageableDefault(page = 0, size = 20) Pageable pageable) {
         Page<Subcategory> subcategories = subcategoryService.findAll(pageable);
+        return TemplateMessageSupport.begin()
+                .message(cashControlSupport.getPropertie("cashcontrol.messages.operation.list.generic"))
+                .messageType(MessageTypeEnum.SUCCESS)
+                .payload(subcategories)
+                .build()
+                .toResponseEntity();
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<TemplateMessage> findAllByTransaction(@RequestParam(name = "type") TransactionTypeEnum transactionTypeEnum) {
+        List<Subcategory> subcategories = subcategoryService.findAllByTransactionType(transactionTypeEnum);
         return TemplateMessageSupport.begin()
                 .message(cashControlSupport.getPropertie("cashcontrol.messages.operation.list.generic"))
                 .messageType(MessageTypeEnum.SUCCESS)
