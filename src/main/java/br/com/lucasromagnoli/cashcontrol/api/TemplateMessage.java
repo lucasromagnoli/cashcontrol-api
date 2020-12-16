@@ -11,9 +11,10 @@ import java.util.Objects;
  * @author github.com/lucasromagnoli
  * @since 10/2020
  */
-@JsonPropertyOrder({"httpStatus", "messageType", "message", "payload"})
+@JsonPropertyOrder({"httpStatus", "messageType", "message", "contentType", "payload"})
 public class TemplateMessage {
     private MessageTypeEnum messageType;
+    private String contentType;
     private String message;
     private HttpStatus httpStatus;
     private Object payload;
@@ -57,11 +58,24 @@ public class TemplateMessage {
         this.payload = payload;
     }
 
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
     public ResponseEntity<TemplateMessage> toResponseEntity() {
         HttpStatus httpStatus = ObjectSupport.nvl(this.httpStatus, HttpStatus.OK);
         if (Objects.isNull(this.httpStatus)) {
             this.httpStatus = httpStatus;
         }
+
+        if (!Objects.isNull(payload)) {
+            this.contentType = payload.getClass().getSimpleName();
+        }
+
         return ResponseEntity.status(httpStatus).body(this);
     }
 }
