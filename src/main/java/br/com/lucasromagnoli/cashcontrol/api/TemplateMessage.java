@@ -13,11 +13,11 @@ import java.util.Objects;
  */
 @JsonPropertyOrder({"httpStatus", "messageType", "message", "contentType", "payload"})
 public class TemplateMessage {
-    private MessageTypeEnum messageType;
+    private final MessageTypeEnum messageType;
     private String contentType;
-    private String message;
+    private final String message;
     private HttpStatus httpStatus;
-    private Object payload;
+    private final Object payload;
 
     public TemplateMessage(MessageTypeEnum messageType, String message, HttpStatus httpStatus, Object payload) {
         this.messageType = messageType;
@@ -30,40 +30,20 @@ public class TemplateMessage {
         return messageType;
     }
 
-    public void setMessageType(MessageTypeEnum messageType) {
-        this.messageType = messageType;
-    }
-
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public HttpStatus getHttpStatus() {
         return httpStatus;
     }
 
-    public void setHttpStatus(HttpStatus httpStatus) {
-        this.httpStatus = httpStatus;
-    }
-
     public Object getPayload() {
         return payload;
     }
 
-    public void setPayload(Object payload) {
-        this.payload = payload;
-    }
-
     public String getContentType() {
         return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
     }
 
     public ResponseEntity<TemplateMessage> toResponseEntity() {
