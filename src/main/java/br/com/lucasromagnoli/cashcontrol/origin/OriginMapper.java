@@ -22,6 +22,7 @@ public interface OriginMapper {
     })
     Origin toUpdate(OriginDto originDto);
 
+    // TODO: 12/18/20 Id do mesmo se for passado uma string vazia está dando exception. Verificar o input validator
     @Mapping(target = "name", source = "name", qualifiedBy = StringToUpperCase.class)
     Origin toSave(OriginDto originDto);
 }
