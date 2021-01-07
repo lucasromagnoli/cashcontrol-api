@@ -3,6 +3,7 @@ package br.com.lucasromagnoli.cashcontrol.transaction;
 import br.com.lucasromagnoli.cashcontrol.expense.Expense;
 import br.com.lucasromagnoli.cashcontrol.income.Income;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,6 +31,7 @@ public class Transaction {
 
     private BigDecimal value;
 
+    @JsonProperty("type")
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private TransactionTypeEnum transactionTypeEnum;
