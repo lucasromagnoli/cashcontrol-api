@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 import static br.com.lucasromagnoli.cashcontrol.web.controller.configuracao.ControllerMapping.ROOT_ORIGEM;
 
 /**
@@ -28,7 +30,7 @@ public class OrigemRestController implements BaseRestController {
     private final OrigemMapper origemMapper = Mappers.getMapper(OrigemMapper.class);
 
     @PostMapping
-    public ResponseEntity<ModeloMensagem> cadastrar(@RequestBody OrigemCadastrarRequestDTO origemCadastrarRequestDTO) {
+    public ResponseEntity<ModeloMensagem> cadastrar(@Valid @RequestBody OrigemCadastrarRequestDTO origemCadastrarRequestDTO) {
         Origem origem = origemService.salvar(origemMapper.requestParaEntidade(origemCadastrarRequestDTO));
         return construirModeloMensagemSucesso(origemMapper.entidadeParaResponse(origem));
     }
