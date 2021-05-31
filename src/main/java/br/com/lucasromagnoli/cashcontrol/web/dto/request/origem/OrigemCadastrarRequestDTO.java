@@ -1,22 +1,15 @@
-package br.com.lucasromagnoli.cashcontrol.web.dto.request;
+package br.com.lucasromagnoli.cashcontrol.web.dto.request.origem;
 
 import br.com.lucasromagnoli.cashcontrol.web.dto.BaseDTO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * @author github.com/lucasromagnoli
  * @since 05/2021
  */
-public class OrigemRequestDTO extends BaseDTO {
-    private Long id;
+@JsonIgnoreProperties("id")
+public class OrigemCadastrarRequestDTO extends BaseDTO {
     private String nome;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;

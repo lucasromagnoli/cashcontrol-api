@@ -2,8 +2,10 @@ package br.com.lucasromagnoli.cashcontrol.web.controller;
 
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Origem;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.OrigemService;
-import br.com.lucasromagnoli.cashcontrol.web.dto.request.OrigemRequestDTO;
+import br.com.lucasromagnoli.cashcontrol.web.dto.request.origem.OrigemCadastrarRequestDTO;
+import br.com.lucasromagnoli.cashcontrol.web.mapper.OrigemMapper;
 import br.com.lucasromagnoli.cashcontrol.web.modelo.ModeloMensagem;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,11 +25,11 @@ public class OrigemRestController implements BaseRestController {
     @Autowired
     private OrigemService origemService;
 
+    private final OrigemMapper origemMapper = Mappers.getMapper(OrigemMapper.class);
+
     @PostMapping
-    public ResponseEntity<ModeloMensagem> cadastrar(@RequestBody OrigemRequestDTO origemRequestDTO) {
-        Origem origem = new Origem();
-        origem.setNome(origemRequestDTO.getNome());
-        origemService.salvar(origem);
-        return construirModeloMensagemSucesso(origem);
+    public ResponseEntity<ModeloMensagem> cadastrar(@RequestBody OrigemCadastrarRequestDTO origemCadastrarRequestDTO) {
+        Origem origem = origemService.salvar(origemMapper.requestParaEntidade(origemCadastrarRequestDTO));
+        return construirModeloMensagemSucesso(origemMapper.entidadeParaResponse(origem));
     }
 }
