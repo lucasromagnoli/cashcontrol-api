@@ -19,6 +19,13 @@ public class Origem extends TransferObject<Long> {
 
     private String nome;
 
+    public Origem() {
+    }
+
+    public Origem(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

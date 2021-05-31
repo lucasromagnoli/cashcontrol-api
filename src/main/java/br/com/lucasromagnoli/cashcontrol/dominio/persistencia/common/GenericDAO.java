@@ -45,7 +45,7 @@ public abstract class GenericDAO<T extends TransferObject<K>, K extends Serializ
         return getSession().createQuery(criteria).getSingleResult();
     }
 
-    public boolean existe() {
+    public boolean tabelaPossuiRegistros() {
         CriteriaQuery<T> criteria = this.getCriteriaBuilder().createQuery(getPersistentClass());
         Root<T> objeto = criteria.from(getPersistentClass());
         criteria.multiselect(objeto.get("id"));

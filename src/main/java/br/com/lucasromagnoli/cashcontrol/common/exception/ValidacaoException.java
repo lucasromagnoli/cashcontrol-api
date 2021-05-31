@@ -19,6 +19,12 @@ public class ValidacaoException extends CashControlRuntimeException {
         this.tipoMensagem = TipoMensagem.VALIDACAO;
     }
 
+    public ValidacaoException(String descricao) {
+        super(descricao);
+        this.httpStatus = HttpStatus.BAD_REQUEST;
+        this.tipoMensagem = TipoMensagem.VALIDACAO;
+    }
+
     public ValidacaoException(Map<String, String> detalhes) {
         this.detalhes = detalhes;
         this.httpStatus = HttpStatus.BAD_REQUEST;

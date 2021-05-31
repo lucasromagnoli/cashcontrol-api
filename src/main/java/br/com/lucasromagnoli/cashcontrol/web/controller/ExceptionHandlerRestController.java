@@ -1,5 +1,6 @@
 package br.com.lucasromagnoli.cashcontrol.web.controller;
 
+import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroDuplicado;
 import br.com.lucasromagnoli.cashcontrol.common.exception.ValidacaoException;
 import br.com.lucasromagnoli.cashcontrol.common.i18n.Mensagem;
 import br.com.lucasromagnoli.cashcontrol.web.modelo.ModeloMensagem;
@@ -52,7 +53,7 @@ public class ExceptionHandlerRestController implements BaseRestController {
 
     @ExceptionHandler(value = ValidacaoException.class)
     protected ResponseEntity<ModeloMensagem> handleValidacaoException(ValidacaoException ex) {
-        log.error("Tratando exception: handleValidacaoException ->", ex);
+        log.info("Tratando exception: handleValidacaoException -> {}", ex.getDescricao());
         return construirResponse(ex.getTipoMensagem(), ex.getDetalhes(), ex.getHttpStatus(), ex.getDescricao());
     }
 
