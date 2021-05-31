@@ -1,5 +1,7 @@
 package br.com.lucasromagnoli.cashcontrol.web.controller;
 
+import br.com.lucasromagnoli.cashcontrol.common.i18n.Mensagem;
+import br.com.lucasromagnoli.cashcontrol.common.i18n.MensagensConstant;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Receita;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.ReceitaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +28,13 @@ public class ReceitaRestController {
     @Autowired
     private ReceitaService receitaService;
 
+    @Autowired
+    private Mensagem mensagem;
+
     @GetMapping
     public ResponseEntity<List<Receita>> listarReceitas() {
         Receita receita = new Receita();
-        receita.setDescricao("Descricão Aleatória!");
+        receita.setDescricao(mensagem.get(MensagensConstant.Geral.MENSAGEM_TESTE_COM_PARAMETROS, "teste1", "teste2"));
         receitaService.cadastrar(receita);
 
         return ResponseEntity.ok(receitaService.listar());
