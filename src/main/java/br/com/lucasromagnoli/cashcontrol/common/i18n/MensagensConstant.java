@@ -8,6 +8,7 @@ public interface MensagensConstant {
 
     class Validacao {
         public static final String MENSAGEM_VERIFIQUE_CAMPOS = "cashcontrol.mensagens.validacao.descricao.padrao";
+        public static final String MENSAGEM_REGISTRO_NAO_ENCONTRADO = "cashcontrol.mensagens.validacao.entidade.nao.encontrada";
         public static final String MENSAGEM_REGISTRO_DUPLICADO = "cashcontrol.mensagens.validacao.entidade.duplicada";
     }
 

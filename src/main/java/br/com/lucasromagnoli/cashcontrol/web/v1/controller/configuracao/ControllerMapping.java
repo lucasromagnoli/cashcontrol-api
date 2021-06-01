@@ -8,4 +8,7 @@ public interface ControllerMapping {
     // ROOT
     String ROOT_ORIGEM = "/v1/origem";
     String ROOT_RECEITA = "/v1/receita";
+
+    // AÇÕES GENÉRICAS
+    String ACAO_COM_ID = "/{id}";
 }

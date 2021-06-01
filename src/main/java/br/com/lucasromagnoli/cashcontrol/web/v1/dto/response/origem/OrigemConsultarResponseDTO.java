@@ -4,7 +4,7 @@ package br.com.lucasromagnoli.cashcontrol.web.v1.dto.response.origem;
  * @author github.com/lucasromagnoli
  * @since 05/2021
  */
-public class OrigemCadastrarResponseDTO {
+public class OrigemConsultarResponseDTO {
     private Long id;
     private String nome;
 

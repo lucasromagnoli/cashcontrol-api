@@ -25,7 +25,7 @@ public class OrigemValidacaoNegocio {
     public void validarSalvar(Origem origem) {
         if (origemService.existeComMesmoNome(origem)) {
             throw new RegistroDuplicado("nome",
-                    mensagem.get(MENSAGEM_REGISTRO_DUPLICADO, "nome", origem.getNome()),
+                    mensagem.get(MENSAGEM_REGISTRO_DUPLICADO, origem.getNome()),
                     mensagem.get(MENSAGEM_VERIFIQUE_CAMPOS)
             );
         }

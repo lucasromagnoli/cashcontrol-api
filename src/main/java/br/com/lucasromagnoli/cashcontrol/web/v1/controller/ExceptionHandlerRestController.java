@@ -1,5 +1,6 @@
 package br.com.lucasromagnoli.cashcontrol.web.v1.controller;
 
+import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroNaoEncontrado;
 import br.com.lucasromagnoli.cashcontrol.common.exception.ValidacaoException;
 import br.com.lucasromagnoli.cashcontrol.common.i18n.Mensagem;
 import br.com.lucasromagnoli.cashcontrol.web.v1.modelo.ModeloMensagem;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.stream.Collectors;
 
+import static br.com.lucasromagnoli.cashcontrol.common.i18n.MensagensConstant.Validacao.MENSAGEM_REGISTRO_NAO_ENCONTRADO;
 import static br.com.lucasromagnoli.cashcontrol.common.i18n.MensagensConstant.Validacao.MENSAGEM_VERIFIQUE_CAMPOS;
 
 /**
@@ -32,13 +34,9 @@ public class ExceptionHandlerRestController implements BaseRestController {
     private final static Logger log = LoggerFactory.getLogger(ExceptionHandlerRestController.class);
 
     @ExceptionHandler(value = RuntimeException.class)
-    protected ResponseEntity<ModeloMensagem> handleRuntimeException(RuntimeException exception) {
-        log.info("Tratando exception: handleRuntimeException -> {}", exception.getMessage());
-        return ModeloMensagemBuilder.tipo(TipoMensagem.ERRO)
-                .descricao(exception.getMessage())
-                .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-                .payload(exception)
-                .concluir();
+    protected ResponseEntity<ModeloMensagem> handleRuntimeException(RuntimeException ex) {
+        log.info("Tratando exception: handleRuntimeException -> {}", ex.getMessage());
+        return construirResponse(TipoMensagem.ERRO, ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
@@ -48,6 +46,11 @@ public class ExceptionHandlerRestController implements BaseRestController {
                 .stream()
                 .collect(Collectors.toMap(FieldError::getField, DefaultMessageSourceResolvable::getDefaultMessage));
         return handleValidacaoException(new ValidacaoException(detalhes, mensagem.get(MENSAGEM_VERIFIQUE_CAMPOS)));
+    }
+
+    @ExceptionHandler(value = RegistroNaoEncontrado.class)
+    protected ResponseEntity<ModeloMensagem> handleRegistroNaoEncontrado(RegistroNaoEncontrado ex) {
+        return handleValidacaoException(new ValidacaoException(mensagem.get(MENSAGEM_REGISTRO_NAO_ENCONTRADO, ex.getEntidade(), ex.getCampo(), ex.getValor())));
     }
 
     @ExceptionHandler(value = ValidacaoException.class)
