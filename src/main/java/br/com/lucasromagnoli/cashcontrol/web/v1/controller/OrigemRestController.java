@@ -7,6 +7,7 @@ import br.com.lucasromagnoli.cashcontrol.web.v1.mapper.OrigemMapper;
 import br.com.lucasromagnoli.cashcontrol.web.v1.modelo.ModeloMensagem;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +30,7 @@ public class OrigemRestController implements BaseRestController {
 
     private final OrigemMapper origemMapper = Mappers.getMapper(OrigemMapper.class);
 
-    @PostMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ModeloMensagem> cadastrar(@Valid @RequestBody OrigemCadastrarRequestDTO origemCadastrarRequestDTO) {
         Origem origem = origemService.salvar(origemMapper.requestParaEntidade(origemCadastrarRequestDTO));
         return construirModeloMensagemSucesso(origemMapper.entidadeParaResponse(origem));

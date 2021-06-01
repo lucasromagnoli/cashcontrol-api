@@ -15,4 +15,12 @@ public interface MensagensConstant {
         public static final String MENSAGEM_TESTE = "cashcontrol.mensagens.testando.i18n";
         public static final String MENSAGEM_TESTE_COM_PARAMETROS = "cashcontrol.mensagens.testando.i18n.com.variaveis";
     }
+
+    class Documentacao {
+        public static final String DESCRICAO = "cashcontrol.mensagens.validacao.documentacao.descricao";
+        public static final String LICENSA_NOME = "cashcontrol.mensagens.validacao.documentacao.licensa.nome";
+        public static final String LICENSA_URL = "cashcontrol.mensagens.validacao.documentacao.licensa.url";
+        public static final String TITULO = "cashcontrol.mensagens.validacao.documentacao.titulo";
+        public static final String VERSAO = "cashcontrol.mensagens.validacao.documentacao.versao";
+    }
 }
