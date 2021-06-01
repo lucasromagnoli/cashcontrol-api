@@ -1,11 +1,10 @@
-package br.com.lucasromagnoli.cashcontrol.web.controller;
+package br.com.lucasromagnoli.cashcontrol.web.v1.controller;
 
-import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroDuplicado;
 import br.com.lucasromagnoli.cashcontrol.common.exception.ValidacaoException;
 import br.com.lucasromagnoli.cashcontrol.common.i18n.Mensagem;
-import br.com.lucasromagnoli.cashcontrol.web.modelo.ModeloMensagem;
-import br.com.lucasromagnoli.cashcontrol.web.modelo.ModeloMensagemBuilder;
-import br.com.lucasromagnoli.cashcontrol.web.modelo.TipoMensagem;
+import br.com.lucasromagnoli.cashcontrol.web.v1.modelo.ModeloMensagem;
+import br.com.lucasromagnoli.cashcontrol.web.v1.modelo.ModeloMensagemBuilder;
+import br.com.lucasromagnoli.cashcontrol.web.v1.modelo.TipoMensagem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class ExceptionHandlerRestController implements BaseRestController {
 
     @ExceptionHandler(value = RuntimeException.class)
     protected ResponseEntity<ModeloMensagem> handleRuntimeException(RuntimeException exception) {
-        log.error("Tratando exception: handleRuntimeException ->", exception);
+        log.info("Tratando exception: handleRuntimeException -> {}", exception.getMessage());
         return ModeloMensagemBuilder.tipo(TipoMensagem.ERRO)
                 .descricao(exception.getMessage())
                 .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)

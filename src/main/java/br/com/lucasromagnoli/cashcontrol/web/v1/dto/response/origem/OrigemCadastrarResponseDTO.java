@@ -1,4 +1,4 @@
-package br.com.lucasromagnoli.cashcontrol.web.dto.response.origem;
+package br.com.lucasromagnoli.cashcontrol.web.v1.dto.response.origem;
 
 /**
  * @author github.com/lucasromagnoli

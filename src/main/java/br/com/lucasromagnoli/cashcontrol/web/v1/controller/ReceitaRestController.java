@@ -1,4 +1,4 @@
-package br.com.lucasromagnoli.cashcontrol.web.controller;
+package br.com.lucasromagnoli.cashcontrol.web.v1.controller;
 
 import br.com.lucasromagnoli.cashcontrol.common.i18n.Mensagem;
 import br.com.lucasromagnoli.cashcontrol.common.i18n.MensagensConstant;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static br.com.lucasromagnoli.cashcontrol.web.controller.configuracao.ControllerMapping.ROOT_RECEITA;
+import static br.com.lucasromagnoli.cashcontrol.web.v1.controller.configuracao.ControllerMapping.ROOT_RECEITA;
 
 /**
  * @author github.com/lucasromagnoli

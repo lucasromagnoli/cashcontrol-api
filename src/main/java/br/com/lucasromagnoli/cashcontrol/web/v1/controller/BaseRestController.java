@@ -1,8 +1,8 @@
-package br.com.lucasromagnoli.cashcontrol.web.controller;
+package br.com.lucasromagnoli.cashcontrol.web.v1.controller;
 
-import br.com.lucasromagnoli.cashcontrol.web.modelo.ModeloMensagem;
-import br.com.lucasromagnoli.cashcontrol.web.modelo.ModeloMensagemBuilder;
-import br.com.lucasromagnoli.cashcontrol.web.modelo.TipoMensagem;
+import br.com.lucasromagnoli.cashcontrol.web.v1.modelo.ModeloMensagem;
+import br.com.lucasromagnoli.cashcontrol.web.v1.modelo.ModeloMensagemBuilder;
+import br.com.lucasromagnoli.cashcontrol.web.v1.modelo.TipoMensagem;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

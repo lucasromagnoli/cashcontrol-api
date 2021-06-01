@@ -1,4 +1,4 @@
-package br.com.lucasromagnoli.cashcontrol.web.modelo;
+package br.com.lucasromagnoli.cashcontrol.web.v1.modelo;
 
 /**
  * @author github.com/lucasromagnoli

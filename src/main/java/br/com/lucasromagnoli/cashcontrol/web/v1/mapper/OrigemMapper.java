@@ -1,8 +1,8 @@
-package br.com.lucasromagnoli.cashcontrol.web.mapper;
+package br.com.lucasromagnoli.cashcontrol.web.v1.mapper;
 
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Origem;
-import br.com.lucasromagnoli.cashcontrol.web.dto.request.origem.OrigemCadastrarRequestDTO;
-import br.com.lucasromagnoli.cashcontrol.web.dto.response.origem.OrigemCadastrarResponseDTO;
+import br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.origem.OrigemCadastrarRequestDTO;
+import br.com.lucasromagnoli.cashcontrol.web.v1.dto.response.origem.OrigemCadastrarResponseDTO;
 import org.mapstruct.Mapper;
 
 /**

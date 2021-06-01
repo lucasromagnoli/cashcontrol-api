@@ -1,4 +1,4 @@
-package br.com.lucasromagnoli.cashcontrol.web.dto.request.origem;
+package br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.origem;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;

@@ -1,10 +1,10 @@
-package br.com.lucasromagnoli.cashcontrol.web.controller;
+package br.com.lucasromagnoli.cashcontrol.web.v1.controller;
 
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Origem;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.OrigemService;
-import br.com.lucasromagnoli.cashcontrol.web.dto.request.origem.OrigemCadastrarRequestDTO;
-import br.com.lucasromagnoli.cashcontrol.web.mapper.OrigemMapper;
-import br.com.lucasromagnoli.cashcontrol.web.modelo.ModeloMensagem;
+import br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.origem.OrigemCadastrarRequestDTO;
+import br.com.lucasromagnoli.cashcontrol.web.v1.mapper.OrigemMapper;
+import br.com.lucasromagnoli.cashcontrol.web.v1.modelo.ModeloMensagem;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-import static br.com.lucasromagnoli.cashcontrol.web.controller.configuracao.ControllerMapping.ROOT_ORIGEM;
+import static br.com.lucasromagnoli.cashcontrol.web.v1.controller.configuracao.ControllerMapping.ROOT_ORIGEM;
 
 /**
  * @author github.com/lucasromagnoli

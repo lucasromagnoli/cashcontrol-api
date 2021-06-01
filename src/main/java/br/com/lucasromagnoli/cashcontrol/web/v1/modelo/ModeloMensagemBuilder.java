@@ -1,4 +1,4 @@
-package br.com.lucasromagnoli.cashcontrol.web.modelo;
+package br.com.lucasromagnoli.cashcontrol.web.v1.modelo;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package br.com.lucasromagnoli.cashcontrol.common.exception;
 
-import br.com.lucasromagnoli.cashcontrol.web.modelo.TipoMensagem;
+import br.com.lucasromagnoli.cashcontrol.web.v1.modelo.TipoMensagem;
 import org.springframework.http.HttpStatus;
 
 import java.util.Map;
