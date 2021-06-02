@@ -35,6 +35,12 @@ public class OrigemRepository extends GenericDAO<Origem, Long> {
         return new PageImpl<>(origens.getResults(), pageable, origens.getTotal());
     }
 
+    public void remover(Origem origemRemover) {
+        delete(origem)
+            .where(origem.id.eq(origemRemover.getId()))
+            .execute();
+    }
+
     public boolean existeByNome(Origem origemConsulta) {
         return newQuery()
                 .select(Projections.fields(Origem.class, origem.id))

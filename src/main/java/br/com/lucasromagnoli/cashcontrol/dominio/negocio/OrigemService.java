@@ -34,6 +34,13 @@ public class OrigemService {
     }
 
     @Transactional(readOnly = false)
+    public void remover(Long id) {
+        Origem origem = new Origem(id);
+        origemValidacaoNegocio.validarRemover(origem);
+        origemRepository.remover(origem);
+    }
+
+    @Transactional(readOnly = false)
     public Origem salvar(Origem origem) {
         origemValidacaoNegocio.validarSalvar(origem);
         origemRepository.save(origem);

@@ -1,6 +1,7 @@
 package br.com.lucasromagnoli.cashcontrol.dominio.negocio.validador;
 
 import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroDuplicado;
+import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroNaoEncontrado;
 import br.com.lucasromagnoli.cashcontrol.common.i18n.Mensagem;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Origem;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.OrigemService;
@@ -28,6 +29,12 @@ public class OrigemValidacaoNegocio {
                     mensagem.get(MENSAGEM_REGISTRO_DUPLICADO, origem.getNome()),
                     mensagem.get(MENSAGEM_VERIFIQUE_CAMPOS)
             );
+        }
+    }
+
+    public void validarRemover(Origem origem) {
+        if (!origemService.existeById(origem)) {
+            throw new RegistroNaoEncontrado(Origem.class, "id", origem.getId());
         }
     }
 }

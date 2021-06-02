@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,5 +64,13 @@ public class OrigemRestController implements BaseRestController {
     public ResponseEntity<ModeloMensagem> cadastrar(@Valid @RequestBody final OrigemCadastrarRequestDTO origemCadastrarRequestDTO) {
         Origem origem = origemService.salvar(origemMapper.requestParaEntidade(origemCadastrarRequestDTO));
         return construirModeloMensagemSucesso(origemMapper.entidadeParaResponse(origem));
+    }
+
+    @Operation(summary = "Remover uma origem especifica")
+    @DeleteMapping(ACAO_COM_ID)
+    public ResponseEntity<ModeloMensagem> remover(@PathVariable(required = true) final Long id) {
+        log.info("Removendo a Origem de id: [{}]", id);
+        origemService.remover(id);
+        return construirModeloMensagemSucesso();
     }
 }
