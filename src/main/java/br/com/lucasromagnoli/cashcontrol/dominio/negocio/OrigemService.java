@@ -5,6 +5,8 @@ import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Origem;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.validador.OrigemValidacaoNegocio;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.OrigemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +24,10 @@ public class OrigemService {
 
     @Autowired
     private OrigemValidacaoNegocio origemValidacaoNegocio;
+
+    public Page<Origem> listar(Pageable pageable) {
+        return origemRepository.listar(pageable);
+    }
 
     public Origem consultarPeloId(Long id) {
         return Optional.ofNullable(origemRepository.pesquisaPorId(id)).orElseThrow(() -> new RegistroNaoEncontrado(Origem.class,"id", id));

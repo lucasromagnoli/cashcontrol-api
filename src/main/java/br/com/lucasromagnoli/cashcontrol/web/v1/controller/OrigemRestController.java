@@ -6,11 +6,16 @@ import br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.origem.OrigemCadastr
 import br.com.lucasromagnoli.cashcontrol.web.v1.mapper.OrigemMapper;
 import br.com.lucasromagnoli.cashcontrol.web.v1.modelo.ModeloMensagem;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +42,14 @@ public class OrigemRestController implements BaseRestController {
 
     private final Logger log = LoggerFactory.getLogger(OrigemRestController.class);
     private final OrigemMapper origemMapper = Mappers.getMapper(OrigemMapper.class);
+
+    @Operation(summary = "Listagem paginada e ordenada das origens")
+    @GetMapping
+    public ResponseEntity<ModeloMensagem> listar(@PageableDefault Pageable pageable) {
+        log.info("Listagem das Origens conforme a paginação: [{}]", pageable);
+        Page<Origem> origens = origemService.listar(pageable);
+        return construirModeloMensagemSucesso(origens.stream().map(origemMapper::entidadeParaResponse));
+    }
 
     @Operation(summary = "Consultar uma origem especifica")
     @GetMapping(ACAO_COM_ID)
