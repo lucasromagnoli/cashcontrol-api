@@ -2,6 +2,7 @@ package br.com.lucasromagnoli.cashcontrol.dominio.persistencia;
 
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Origem;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common.GenericDAO;
+import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common.QueryUtil;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;
@@ -35,6 +36,13 @@ public class OrigemRepository extends GenericDAO<Origem, Long> {
         return new PageImpl<>(origens.getResults(), pageable, origens.getTotal());
     }
 
+    public void atualizar(Origem origemAtualizar) {
+        update(origem)
+                .set(origem.nome, origemAtualizar.getNome())
+                .where(origem.id.eq(origemAtualizar.getId()))
+                .execute();
+    }
+
     public void remover(Origem origemRemover) {
         delete(origem)
             .where(origem.id.eq(origemRemover.getId()))
@@ -42,11 +50,10 @@ public class OrigemRepository extends GenericDAO<Origem, Long> {
     }
 
     public boolean existeByNome(Origem origemConsulta) {
-        return newQuery()
-                .select(Projections.fields(Origem.class, origem.id))
-                .from(origem)
-                .where(origem.nome.equalsIgnoreCase(origemConsulta.getNome()))
-                .fetchFirst() != null;
+        JPQLQuery<Origem> query = queryOrigem(Projections.fields(Origem.class, origem.id));
+        QueryUtil.adicionarNe(query, origem.id, origemConsulta.getId());
+        query.where(origem.nome.equalsIgnoreCase(origemConsulta.getNome()));
+        return query.fetchFirst() != null;
     }
 
     public boolean existe(Origem origemConsulta) {

@@ -47,6 +47,13 @@ public class OrigemService {
         return origem;
     }
 
+    @Transactional(readOnly = false)
+    public Origem atualizar(Origem origem) {
+        origemValidacaoNegocio.validarAtualizar(origem);
+        origemRepository.atualizar(origem);
+        return origem;
+    }
+
     public boolean existeComMesmoNome(Origem origem) {
         return origemRepository.existeByNome(origem);
     }

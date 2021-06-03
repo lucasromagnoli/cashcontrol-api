@@ -10,10 +10,10 @@ import static br.com.lucasromagnoli.cashcontrol.configuracao.Constantes.PADRAO_N
  * @since 05/2021
  */
 public class OrigemCadastrarRequestDTO {
-    private String nome;
-
     @NotEmpty
     @Size(max = PADRAO_NOME_LENGTH)
+    private String nome;
+
     public String getNome() {
         return nome;
     }

@@ -32,6 +32,14 @@ public class OrigemValidacaoNegocio {
         }
     }
 
+    public void validarAtualizar(Origem origem) {
+        if (!origemService.existeById(origem)) {
+            throw new RegistroNaoEncontrado(Origem.class, "id", origem.getId());
+        }
+
+        validarSalvar(origem);
+    }
+
     public void validarRemover(Origem origem) {
         if (!origemService.existeById(origem)) {
             throw new RegistroNaoEncontrado(Origem.class, "id", origem.getId());

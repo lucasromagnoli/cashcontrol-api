@@ -2,12 +2,11 @@ package br.com.lucasromagnoli.cashcontrol.web.v1.controller;
 
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Origem;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.OrigemService;
+import br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.origem.OrigemAtualizarRequestDTO;
 import br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.origem.OrigemCadastrarRequestDTO;
 import br.com.lucasromagnoli.cashcontrol.web.v1.mapper.OrigemMapper;
 import br.com.lucasromagnoli.cashcontrol.web.v1.modelo.ModeloMensagem;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,6 +63,13 @@ public class OrigemRestController implements BaseRestController {
     @PostMapping
     public ResponseEntity<ModeloMensagem> cadastrar(@Valid @RequestBody final OrigemCadastrarRequestDTO origemCadastrarRequestDTO) {
         Origem origem = origemService.salvar(origemMapper.requestParaEntidade(origemCadastrarRequestDTO));
+        return construirModeloMensagemSucesso(origemMapper.entidadeParaResponse(origem));
+    }
+
+    @Operation(summary = "Atualizar uma origem")
+    @PutMapping
+    public ResponseEntity<ModeloMensagem> atualizar(@Valid @RequestBody final OrigemAtualizarRequestDTO origemAtualizarRequestDTO) {
+        Origem origem = origemService.atualizar(origemMapper.requestParaEntidade(origemAtualizarRequestDTO));
         return construirModeloMensagemSucesso(origemMapper.entidadeParaResponse(origem));
     }
 

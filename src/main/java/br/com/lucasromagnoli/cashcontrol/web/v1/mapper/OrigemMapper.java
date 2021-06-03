@@ -1,6 +1,7 @@
 package br.com.lucasromagnoli.cashcontrol.web.v1.mapper;
 
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Origem;
+import br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.origem.OrigemAtualizarRequestDTO;
 import br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.origem.OrigemCadastrarRequestDTO;
 import br.com.lucasromagnoli.cashcontrol.web.v1.dto.response.origem.OrigemConsultarResponseDTO;
 import org.mapstruct.Mapper;
@@ -13,4 +14,5 @@ import org.mapstruct.Mapper;
 public interface OrigemMapper {
     OrigemConsultarResponseDTO entidadeParaResponse(Origem origem);
     Origem requestParaEntidade(OrigemCadastrarRequestDTO origemCadastrarRequestDTO);
+    Origem requestParaEntidade(OrigemAtualizarRequestDTO origemAtualizarRequestDTO);
 }
