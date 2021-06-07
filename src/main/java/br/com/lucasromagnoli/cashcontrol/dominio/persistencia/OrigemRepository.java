@@ -26,7 +26,6 @@ public class OrigemRepository extends GenericDAO<Origem, Long> {
         return Projections.fields(Origem.class,
                 origem.id,
                 origem.nome);
-
     }
 
     public Page<Origem> listar(Pageable pageable) {
