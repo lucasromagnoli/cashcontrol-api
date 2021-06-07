@@ -19,8 +19,17 @@ public class Grupo extends TransferObject<Long> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String nome;
+
     @Enumerated(EnumType.ORDINAL)
     private TipoMovimentacaoEnum tipoMovimentacao;
+
+    public Grupo() {
+    }
+
+    public Grupo(Long id) {
+        this.id = id;
+    }
 
     @Override
     public Long getKey() {
@@ -33,6 +42,14 @@ public class Grupo extends TransferObject<Long> {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public TipoMovimentacaoEnum getTipoMovimentacao() {
