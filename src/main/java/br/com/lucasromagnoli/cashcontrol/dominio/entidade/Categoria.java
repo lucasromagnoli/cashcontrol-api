@@ -3,36 +3,29 @@ package br.com.lucasromagnoli.cashcontrol.dominio.entidade;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common.TransferObject;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.List;
+import javax.persistence.ManyToOne;
 
 /**
  * @author github.com/lucasromagnoli
  * @since 06/2021
  */
 @Entity
-public class Grupo extends TransferObject<Long> {
+public class Categoria extends TransferObject<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String nome;
+    private String descricao;
+    @ManyToOne
+    private Grupo grupo;
 
-    @Enumerated(EnumType.ORDINAL)
-    private TipoMovimentacaoEnum tipoMovimentacao;
-
-    @OneToMany(mappedBy = "grupo")
-    private List<Categoria> categorias;
-
-    public Grupo() {
+    public Categoria() {
     }
 
-    public Grupo(Long id) {
+    public Categoria(Long id) {
         this.id = id;
     }
 
@@ -57,11 +50,19 @@ public class Grupo extends TransferObject<Long> {
         this.nome = nome;
     }
 
-    public TipoMovimentacaoEnum getTipoMovimentacao() {
-        return tipoMovimentacao;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setTipoMovimentacao(TipoMovimentacaoEnum tipoMovimentacao) {
-        this.tipoMovimentacao = tipoMovimentacao;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 }
