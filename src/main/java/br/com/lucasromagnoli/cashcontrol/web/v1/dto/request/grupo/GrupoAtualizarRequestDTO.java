@@ -1,4 +1,4 @@
-package br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.origem;
+package br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.grupo;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
  * @author github.com/lucasromagnoli
  * @since 06/2021
  */
-public class OrigemAtualizarRequestDTO extends OrigemCadastrarRequestDTO {
+public class GrupoAtualizarRequestDTO extends GrupoCadastrarRequestDTO {
     @NotNull
     @Min(1)
     private Long id;

@@ -44,37 +44,39 @@ public class OrigemRestController implements BaseRestController {
     private final Logger log = LoggerFactory.getLogger(OrigemRestController.class);
     private final OrigemMapper origemMapper = Mappers.getMapper(OrigemMapper.class);
 
-    @Operation(summary = "Listagem paginada e ordenada das origens")
     @GetMapping
+    @Operation(summary = "Listagem paginada e ordenada das origens")
     public ResponseEntity<ModeloMensagem> listar(@PageableDefault Pageable pageable) {
         log.info("Listagem das Origens conforme a paginação: [{}]", pageable);
         Page<Origem> origens = origemService.listar(pageable);
         return construirModeloMensagemSucesso(origens.stream().map(origemMapper::entidadeParaResponse));
     }
 
-    @Operation(summary = "Consultar uma origem especifica")
     @GetMapping(ACAO_COM_ID)
+    @Operation(summary = "Consultar uma origem especifica")
     public ResponseEntity<ModeloMensagem> consultar(@PathVariable(required = true) final Long id) {
         log.info("Consultando a Origem de id: [{}]", id);
         return construirModeloMensagemSucesso(origemMapper.entidadeParaResponse(origemService.consultarPeloId(id)));
     }
 
-    @Operation(summary = "Cadastrar uma origem")
     @PostMapping
+    @Operation(summary = "Cadastrar uma origem")
     public ResponseEntity<ModeloMensagem> cadastrar(@Valid @RequestBody final OrigemCadastrarRequestDTO origemCadastrarRequestDTO) {
+        log.info("Cadastrando a origem: [{}], ", origemCadastrarRequestDTO);
         Origem origem = origemService.salvar(origemMapper.requestParaEntidade(origemCadastrarRequestDTO));
         return construirModeloMensagemSucesso(origemMapper.entidadeParaResponse(origem));
     }
 
-    @Operation(summary = "Atualizar uma origem")
     @PutMapping
+    @Operation(summary = "Atualizar uma origem")
     public ResponseEntity<ModeloMensagem> atualizar(@Valid @RequestBody final OrigemAtualizarRequestDTO origemAtualizarRequestDTO) {
+        log.info("Cadastrando a origem: [{}], ", origemAtualizarRequestDTO);
         Origem origem = origemService.atualizar(origemMapper.requestParaEntidade(origemAtualizarRequestDTO));
         return construirModeloMensagemSucesso(origemMapper.entidadeParaResponse(origem));
     }
 
-    @Operation(summary = "Remover uma origem especifica")
     @DeleteMapping(ACAO_COM_ID)
+    @Operation(summary = "Remover uma origem especifica")
     public ResponseEntity<ModeloMensagem> remover(@PathVariable(required = true) final Long id) {
         log.info("Removendo a Origem de id: [{}]", id);
         origemService.remover(id);
