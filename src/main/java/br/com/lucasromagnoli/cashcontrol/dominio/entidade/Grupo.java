@@ -2,6 +2,7 @@ package br.com.lucasromagnoli.cashcontrol.dominio.entidade;
 
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common.TransferObject;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -21,8 +22,10 @@ public class Grupo extends TransferObject<Long> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
     private TipoMovimentacaoEnum tipoMovimentacao;
 

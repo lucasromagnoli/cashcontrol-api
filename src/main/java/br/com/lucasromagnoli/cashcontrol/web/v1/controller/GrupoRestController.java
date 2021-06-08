@@ -34,7 +34,7 @@ import static br.com.lucasromagnoli.cashcontrol.web.v1.controller.configuracao.C
  */
 @RestController
 @RequestMapping(ROOT_GRUPO)
-public class GrupoRestController implements BaseRestController{
+public class GrupoRestController implements BaseRestController {
 
     @Autowired
     private GrupoService grupoService;
@@ -43,7 +43,7 @@ public class GrupoRestController implements BaseRestController{
 
     @GetMapping
     @Operation(summary = "Listagem paginada e ordenada dos grupos")
-    public ResponseEntity<ModeloMensagem> listar (Pageable pageable) {
+    public ResponseEntity<ModeloMensagem> listar(Pageable pageable) {
         log.info("Listagem dos Grupos conforme a paginação: [{}]", pageable);
         Page<Grupo> grupos = grupoService.listar(pageable);
         return construirModeloMensagemSucesso(grupos.stream().map(grupoMapper::entidadeParaResponse));

@@ -15,7 +15,9 @@ import org.mapstruct.Mapping;
 public interface CategoriaMapper {
     @Mapping(target = "grupo.id", source = "grupoId")
     Categoria requestParaEntidade(CategoriaCadastrarRequestDTO categoriaCadastrarRequestDTO);
+
     @Mapping(target = "grupo.id", source = "grupoId")
     Categoria requestParaEntidade(CategoriaAtualizarRequestDTO categoriaCadastrarRequestDTO);
+
     CategoriaConsultarResponseDTO entidadeParaResponse(Categoria categoria);
 }

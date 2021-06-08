@@ -30,7 +30,7 @@ public class OrigemService {
     }
 
     public Origem consultarPeloId(Long id) {
-        return Optional.ofNullable(origemRepository.pesquisaPorId(id)).orElseThrow(() -> new RegistroNaoEncontrado(Origem.class,"id", id));
+        return Optional.ofNullable(origemRepository.pesquisaPorId(id)).orElseThrow(() -> new RegistroNaoEncontrado(Origem.class, "id", id));
     }
 
     @Transactional(readOnly = false)

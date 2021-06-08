@@ -2,16 +2,13 @@ package br.com.lucasromagnoli.cashcontrol.dominio.negocio.validador;
 
 import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroDuplicado;
 import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroNaoEncontrado;
-import br.com.lucasromagnoli.cashcontrol.common.i18n.Mensagem;
+import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroRelacionamentoAtivo;
+import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Categoria;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Grupo;
-import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Origem;
+import br.com.lucasromagnoli.cashcontrol.dominio.negocio.CategoriaService;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.GrupoService;
-import br.com.lucasromagnoli.cashcontrol.dominio.negocio.OrigemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import static br.com.lucasromagnoli.cashcontrol.common.i18n.MensagensConstant.Validacao.MENSAGEM_REGISTRO_DUPLICADO;
-import static br.com.lucasromagnoli.cashcontrol.common.i18n.MensagensConstant.Validacao.MENSAGEM_VERIFIQUE_CAMPOS;
 
 /**
  * @author github.com/lucasromagnoli
@@ -23,14 +20,11 @@ public class GrupoValidacaoNegocio {
     private GrupoService grupoService;
 
     @Autowired
-    private Mensagem mensagem;
+    private CategoriaService categoriaService;
 
     public void validarSalvar(Grupo grupo) {
         if (grupoService.existeComMesmoNome(grupo)) {
-            throw new RegistroDuplicado("nome",
-                    mensagem.get(MENSAGEM_REGISTRO_DUPLICADO, grupo.getNome()),
-                    mensagem.get(MENSAGEM_VERIFIQUE_CAMPOS)
-            );
+            throw new RegistroDuplicado(Grupo.class, "nome", grupo.getNome());
         }
     }
 
@@ -45,6 +39,10 @@ public class GrupoValidacaoNegocio {
     public void validarRemover(Grupo grupo) {
         if (!grupoService.existeById(grupo)) {
             throw new RegistroNaoEncontrado(Grupo.class, "id", grupo.getId());
+        }
+
+        if (categoriaService.existeByGrupo(grupo)) {
+            throw new RegistroRelacionamentoAtivo(Categoria.class, Grupo.class);
         }
     }
 }

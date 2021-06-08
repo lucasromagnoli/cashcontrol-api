@@ -1,11 +1,5 @@
 package br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common;
 
-import java.util.Collection;
-import java.util.List;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
 import com.querydsl.core.FetchableQuery;
 import com.querydsl.core.types.Expression;
@@ -20,6 +14,11 @@ import com.querydsl.core.types.dsl.SimpleExpression;
 import com.querydsl.core.types.dsl.StringExpression;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.hibernate.HibernateUpdateClause;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Collection;
+import java.util.List;
 
 
 /**

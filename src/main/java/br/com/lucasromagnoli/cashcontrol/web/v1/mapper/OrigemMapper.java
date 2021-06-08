@@ -13,6 +13,8 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface OrigemMapper {
     OrigemConsultarResponseDTO entidadeParaResponse(Origem origem);
+
     Origem requestParaEntidade(OrigemCadastrarRequestDTO origemCadastrarRequestDTO);
+
     Origem requestParaEntidade(OrigemAtualizarRequestDTO origemAtualizarRequestDTO);
 }

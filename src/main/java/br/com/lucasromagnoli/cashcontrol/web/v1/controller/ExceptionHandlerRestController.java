@@ -1,6 +1,8 @@
 package br.com.lucasromagnoli.cashcontrol.web.v1.controller;
 
+import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroDuplicado;
 import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroNaoEncontrado;
+import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroRelacionamentoAtivo;
 import br.com.lucasromagnoli.cashcontrol.common.exception.ValidacaoException;
 import br.com.lucasromagnoli.cashcontrol.common.i18n.Mensagem;
 import br.com.lucasromagnoli.cashcontrol.web.v1.modelo.ModeloMensagem;
@@ -17,9 +19,12 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
+import static br.com.lucasromagnoli.cashcontrol.common.i18n.MensagensConstant.Validacao.MENSAGEM_REGISTRO_DUPLICADO;
 import static br.com.lucasromagnoli.cashcontrol.common.i18n.MensagensConstant.Validacao.MENSAGEM_REGISTRO_NAO_ENCONTRADO;
+import static br.com.lucasromagnoli.cashcontrol.common.i18n.MensagensConstant.Validacao.MENSAGEM_REGISTRO_RELACIONAMENTO_ATIVO;
 import static br.com.lucasromagnoli.cashcontrol.common.i18n.MensagensConstant.Validacao.MENSAGEM_VERIFIQUE_CAMPOS;
 
 /**
@@ -50,7 +55,21 @@ public class ExceptionHandlerRestController implements BaseRestController {
 
     @ExceptionHandler(value = RegistroNaoEncontrado.class)
     protected ResponseEntity<ModeloMensagem> handleRegistroNaoEncontrado(RegistroNaoEncontrado ex) {
-        return handleValidacaoException(new ValidacaoException(mensagem.get(MENSAGEM_REGISTRO_NAO_ENCONTRADO, ex.getEntidade(), ex.getCampo(), ex.getValor())));
+        ex.setDescricao(mensagem.get(MENSAGEM_REGISTRO_NAO_ENCONTRADO, ex.getEntidade(), ex.getCampo(), ex.getValor()));
+        return handleValidacaoException(ex);
+    }
+
+    @ExceptionHandler(value = RegistroDuplicado.class)
+    protected ResponseEntity<ModeloMensagem> handleRegistroDuplicado(RegistroDuplicado ex) {
+        ex.setDescricao(mensagem.get(MENSAGEM_VERIFIQUE_CAMPOS));
+        ex.setDetalhes(Map.of(ex.getCampo(), mensagem.get(MENSAGEM_REGISTRO_DUPLICADO, ex.getValor())));
+        return handleValidacaoException(ex);
+    }
+
+    @ExceptionHandler(value = RegistroRelacionamentoAtivo.class)
+    protected ResponseEntity<ModeloMensagem> handleRegistroRelacionamentoAtivo(RegistroRelacionamentoAtivo ex) {
+        ex.setDescricao(mensagem.get(MENSAGEM_REGISTRO_RELACIONAMENTO_ATIVO, ex.getEntidade(), ex.getValor()));
+        return handleValidacaoException(ex);
     }
 
     @ExceptionHandler(value = ValidacaoException.class)

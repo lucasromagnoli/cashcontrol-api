@@ -4,7 +4,7 @@ package br.com.lucasromagnoli.cashcontrol.common.exception;
  * @author github.com/lucasromagnoli
  * @since 05/2021
  */
-public class CashControlRuntimeException extends RuntimeException{
+public class CashControlRuntimeException extends RuntimeException {
     private String descricao;
 
     public CashControlRuntimeException() {
