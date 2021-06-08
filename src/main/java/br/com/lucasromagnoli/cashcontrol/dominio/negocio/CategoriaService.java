@@ -2,6 +2,7 @@ package br.com.lucasromagnoli.cashcontrol.dominio.negocio;
 
 import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroNaoEncontrado;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Categoria;
+import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Grupo;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.validador.CategoriaValidacaoNegocio;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,9 @@ public class CategoriaService {
 
     public boolean existeById(Categoria categoria) {
         return categoriaRepository.existe(categoria);
+    }
+
+    public boolean existeByGrupo(Grupo grupo) {
+        return categoriaRepository.existeByGrupoId(grupo);
     }
 }

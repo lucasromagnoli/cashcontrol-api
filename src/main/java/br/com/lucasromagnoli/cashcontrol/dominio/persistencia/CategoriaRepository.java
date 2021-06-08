@@ -7,7 +7,6 @@ import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common.QueryUtil;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.QBean;
 import com.querydsl.jpa.JPQLQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -15,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import static br.com.lucasromagnoli.cashcontrol.dominio.entidade.QCategoria.categoria;
-import static br.com.lucasromagnoli.cashcontrol.dominio.entidade.QGrupo.grupo;
 
 /**
  * @author github.com/lucasromagnoli
@@ -74,6 +72,12 @@ public class CategoriaRepository extends GenericDAO<Categoria, Long> {
                 .select(Projections.fields(Categoria.class, categoria.id))
                 .from(categoria)
                 .where(categoria.id.eq(categoriaConsulta.getId()))
+                .fetchFirst() != null;
+    }
+
+    public boolean existeByGrupoId(Grupo grupo) {
+        return queryCategoria(Projections.fields(Categoria.class, categoria.id))
+                .where(categoria.grupo.id.eq(grupo.getId()))
                 .fetchFirst() != null;
     }
 }

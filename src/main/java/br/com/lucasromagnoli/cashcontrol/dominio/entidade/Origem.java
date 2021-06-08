@@ -2,6 +2,7 @@ package br.com.lucasromagnoli.cashcontrol.dominio.entidade;
 
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common.TransferObject;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,7 @@ public class Origem extends TransferObject<Long> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
 
     public Origem() {

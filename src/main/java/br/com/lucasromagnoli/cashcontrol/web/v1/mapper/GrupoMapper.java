@@ -13,6 +13,8 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface GrupoMapper {
     Grupo requestParaEntidade(GrupoCadastrarRequestDTO grupoCadastrarRequestDTO);
+
     Grupo requestParaEntidade(GrupoAtualizarRequestDTO grupoAtualizarRequestDTO);
+
     GrupoConsultarResponseDTO entidadeParaResponse(Grupo grupo);
 }

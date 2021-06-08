@@ -1,17 +1,5 @@
 package br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common;
 
-import java.io.Serializable;
-import java.util.function.Consumer;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-
-import org.hibernate.Session;
-import org.hibernate.exception.ConstraintViolationException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.querydsl.core.types.EntityPath;
 import com.querydsl.core.types.dsl.EntityPathBase;
 import com.querydsl.jpa.JPQLQuery;
@@ -19,6 +7,16 @@ import com.querydsl.jpa.hibernate.HibernateDeleteClause;
 import com.querydsl.jpa.hibernate.HibernateQuery;
 import com.querydsl.jpa.hibernate.HibernateQueryFactory;
 import com.querydsl.jpa.hibernate.HibernateUpdateClause;
+import org.hibernate.Session;
+import org.hibernate.exception.ConstraintViolationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.io.Serializable;
+import java.util.function.Consumer;
 
 /**
  * @author github.com/lucasromagnoli

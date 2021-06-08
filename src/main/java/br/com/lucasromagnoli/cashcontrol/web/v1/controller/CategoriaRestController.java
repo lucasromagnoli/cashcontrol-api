@@ -34,7 +34,7 @@ import static br.com.lucasromagnoli.cashcontrol.web.v1.controller.configuracao.C
  */
 @RestController
 @RequestMapping(ROOT_CATEGORIA)
-public class CategoriaRestController implements BaseRestController{
+public class CategoriaRestController implements BaseRestController {
     @Autowired
     private CategoriaService categoriaService;
     private final CategoriaMapper categoriaMapper = Mappers.getMapper(CategoriaMapper.class);
@@ -42,10 +42,17 @@ public class CategoriaRestController implements BaseRestController{
 
     @GetMapping
     @Operation(summary = "Listagem paginada e ordenada das categorias")
-    public ResponseEntity<ModeloMensagem> listar (Pageable pageable) {
+    public ResponseEntity<ModeloMensagem> listar(Pageable pageable) {
         log.info("Listagem das categorias conforme a paginação: [{}]", pageable);
         Page<Categoria> categorias = categoriaService.listar(pageable);
         return construirModeloMensagemSucesso(categorias.stream().map(categoriaMapper::entidadeParaResponse));
+    }
+
+    @GetMapping(ACAO_COM_ID)
+    @Operation(summary = "Consulta de uma categoria específica")
+    public ResponseEntity<ModeloMensagem> consultar(@PathVariable(required = true) final Long id) {
+        log.info("Consultando a categoria de id: [{}]", id);
+        return construirModeloMensagemSucesso(categoriaMapper.entidadeParaResponse(categoriaService.consultarPeloId(id)));
     }
 
     @PostMapping
@@ -65,7 +72,7 @@ public class CategoriaRestController implements BaseRestController{
     }
 
     @DeleteMapping(ACAO_COM_ID)
-    @Operation(summary = "Remover uma categoria especifico")
+    @Operation(summary = "Remover uma categoria especifica")
     public ResponseEntity<ModeloMensagem> remover(@PathVariable(required = true) final Long id) {
         log.info("Removendo a categoria de id: [{}]", id);
         categoriaService.remover(id);

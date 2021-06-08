@@ -10,8 +10,8 @@ import java.util.Objects;
  * @since 05/2021
  */
 public class ModeloMensagemBuilder {
-    private String             descricao;
-    private Object             payload;
+    private String descricao;
+    private Object payload;
     private final TipoMensagem tipoMensagem;
     private HttpStatus httpStatus;
 

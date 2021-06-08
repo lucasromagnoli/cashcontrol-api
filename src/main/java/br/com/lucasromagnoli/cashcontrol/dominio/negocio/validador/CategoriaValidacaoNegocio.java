@@ -2,15 +2,12 @@ package br.com.lucasromagnoli.cashcontrol.dominio.negocio.validador;
 
 import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroDuplicado;
 import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroNaoEncontrado;
-import br.com.lucasromagnoli.cashcontrol.common.i18n.Mensagem;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Categoria;
+import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Grupo;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.CategoriaService;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.GrupoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import static br.com.lucasromagnoli.cashcontrol.common.i18n.MensagensConstant.Validacao.MENSAGEM_REGISTRO_DUPLICADO;
-import static br.com.lucasromagnoli.cashcontrol.common.i18n.MensagensConstant.Validacao.MENSAGEM_VERIFIQUE_CAMPOS;
 
 /**
  * @author github.com/lucasromagnoli
@@ -24,19 +21,13 @@ public class CategoriaValidacaoNegocio {
     @Autowired
     private GrupoService grupoService;
 
-    @Autowired
-    private Mensagem mensagem;
-
     public void validarSalvar(Categoria categoria) {
         if (categoriaService.existeComMesmoNome(categoria)) {
-            throw new RegistroDuplicado("nome",
-                    mensagem.get(MENSAGEM_REGISTRO_DUPLICADO, categoria.getNome()),
-                    mensagem.get(MENSAGEM_VERIFIQUE_CAMPOS)
-            );
+            throw new RegistroDuplicado(Categoria.class, "nome", categoria.getNome());
         }
 
         if (!grupoService.existeById(categoria.getGrupo())) {
-            throw new RegistroNaoEncontrado(Categoria.class, "grupo.id", categoria.getGrupo().getId());
+            throw new RegistroNaoEncontrado(Grupo.class, "id", categoria.getGrupo().getId());
         }
     }
 

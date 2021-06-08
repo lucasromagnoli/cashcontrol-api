@@ -11,7 +11,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+
 import static br.com.lucasromagnoli.cashcontrol.dominio.entidade.QOrigem.origem;
+
 /**
  * @author github.com/lucasromagnoli
  * @since 05/2021
@@ -44,8 +46,8 @@ public class OrigemRepository extends GenericDAO<Origem, Long> {
 
     public void remover(Origem origemRemover) {
         delete(origem)
-            .where(origem.id.eq(origemRemover.getId()))
-            .execute();
+                .where(origem.id.eq(origemRemover.getId()))
+                .execute();
     }
 
     public boolean existeByNome(Origem origemConsulta) {
