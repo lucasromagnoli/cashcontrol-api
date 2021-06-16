@@ -2,6 +2,7 @@ package br.com.lucasromagnoli.cashcontrol.dominio.persistencia;
 
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Movimentacao;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common.GenericDAO;
+import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common.QueryUtil;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;
@@ -28,8 +29,13 @@ public class MovimentacaoRepository extends GenericDAO<Movimentacao, Long> {
                 movimentacao.id,
                 movimentacao.tipoMovimentacao,
                 movimentacao.data,
-                movimentacao.valor
-                );
+                movimentacao.valor,
+                QueryUtil.bean(movimentacao.categoria,
+                        movimentacao.categoria.id,
+                        movimentacao.categoria.nome),
+                QueryUtil.bean(movimentacao.origem,
+                        movimentacao.origem.id,
+                        movimentacao.origem.nome));
     }
 
     public Page<Movimentacao> listar(Pageable pageable) {
@@ -37,5 +43,21 @@ public class MovimentacaoRepository extends GenericDAO<Movimentacao, Long> {
         applyPagination(query, pageable, movimentacao);
         QueryResults<Movimentacao> movimentacoes = query.fetchResults();
         return new PageImpl<>(movimentacoes.getResults(), pageable, movimentacoes.getTotal());
+    }
+
+    public void atualizar(Movimentacao movimentacaoAtualizar) {
+        var query = update(movimentacao);
+        QueryUtil.adicionarSet(query, movimentacao.valor, movimentacaoAtualizar.getValor());
+        QueryUtil.adicionarSet(query, movimentacao.data, movimentacaoAtualizar.getData());
+        QueryUtil.adicionarSet(query, movimentacao.categoria, movimentacaoAtualizar.getCategoria());
+        QueryUtil.adicionarSet(query, movimentacao.origem, movimentacaoAtualizar.getOrigem());
+        query.where(movimentacao.id.eq(movimentacaoAtualizar.getId()))
+                .execute();
+    }
+
+    public void remover(Movimentacao movimentacaoRemover) {
+        delete(movimentacao)
+                .where(movimentacao.id.eq(movimentacaoRemover.getId()))
+                .execute();
     }
 }

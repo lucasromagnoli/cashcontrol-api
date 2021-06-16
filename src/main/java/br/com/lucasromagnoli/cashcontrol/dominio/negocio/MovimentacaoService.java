@@ -35,4 +35,18 @@ public class MovimentacaoService {
         movimentacaoRepository.save(movimentacao);
         return movimentacao;
     }
+
+    @Transactional(readOnly = false)
+    public Movimentacao atualizar(Movimentacao movimentacao) {
+        // Validar atualizar
+        movimentacaoRepository.atualizar(movimentacao);
+        return movimentacao;
+    }
+
+    @Transactional(readOnly = false)
+    public void remover(Long id) {
+        Movimentacao movimentacao = new Movimentacao(id);
+        // Validar remover
+        movimentacaoRepository.remover(movimentacao);
+    }
 }

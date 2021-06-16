@@ -39,6 +39,13 @@ public class Movimentacao extends TransferObject<Long>  {
     @ManyToOne(optional = false)
     private Categoria categoria;
 
+    public Movimentacao() {
+    }
+
+    public Movimentacao(Long id) {
+        this.id = id;
+    }
+
     @Override
     public Long getKey() {
         return id;

@@ -1,5 +1,6 @@
 package br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common;
 
+import br.com.lucasromagnoli.cashcontrol.dominio.entidade.QMovimentacao;
 import com.google.common.collect.Lists;
 import com.querydsl.core.FetchableQuery;
 import com.querydsl.core.types.Expression;
@@ -19,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
 import java.util.List;
-
+import java.util.Objects;
 
 /**
  * @author github.com/lucasromagnoli
@@ -84,5 +85,11 @@ public class QueryUtil {
     public static <T extends TransferObject<?>> Expression<T> bean(Path<T> entityPath, Expression<?>... exprs) {
         QBean<T> qBean = Projections.fields(entityPath.getType(), exprs);
         return as(qBean.skipNulls(), entityPath);
+    }
+
+    public static <T> void adicionarSet(HibernateUpdateClause updateClause, Path<T> path, T valor) {
+        if (Objects.nonNull(valor)) {
+            updateClause.set(path, valor);
+        }
     }
 }

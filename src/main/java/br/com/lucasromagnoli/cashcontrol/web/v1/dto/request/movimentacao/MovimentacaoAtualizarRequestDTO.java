@@ -1,21 +1,29 @@
 package br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.movimentacao;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
  * @author github.com/lucasromagnoli
  * @since 06/2021
  */
-public class MovimentacaoCadastrarRequestDTO {
-    @NotEmpty
+public class MovimentacaoAtualizarRequestDTO {
+    @NotNull
+    @Min(1)
+    private Long id;
+
     private String data;
-    @NotEmpty
     private String valor;
-    @NotNull
     private Long origemId;
-    @NotNull
     private Long categoriaId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getData() {
         return data;
