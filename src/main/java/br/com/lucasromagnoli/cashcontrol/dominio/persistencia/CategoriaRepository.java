@@ -2,6 +2,7 @@ package br.com.lucasromagnoli.cashcontrol.dominio.persistencia;
 
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Categoria;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Grupo;
+import br.com.lucasromagnoli.cashcontrol.dominio.entidade.TipoMovimentacaoEnum;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common.GenericDAO;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common.QueryUtil;
 import com.querydsl.core.QueryResults;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+
+import java.util.Objects;
 
 import static br.com.lucasromagnoli.cashcontrol.dominio.entidade.QCategoria.categoria;
 
@@ -79,5 +82,11 @@ public class CategoriaRepository extends GenericDAO<Categoria, Long> {
         return queryCategoria(Projections.fields(Categoria.class, categoria.id))
                 .where(categoria.grupo.id.eq(grupo.getId()))
                 .fetchFirst() != null;
+    }
+
+    public boolean pertenceAoGrupoComTipoDeMovimentacao(Categoria categoriaConsulta, TipoMovimentacaoEnum tipoMovimentacao) {
+        return Objects.nonNull(queryCategoria(Projections.fields(Categoria.class, categoria.id))
+                .where(categoria.grupo.tipoMovimentacao.eq(tipoMovimentacao))
+                .fetchFirst());
     }
 }

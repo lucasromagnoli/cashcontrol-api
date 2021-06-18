@@ -11,6 +11,10 @@ public interface MensagensConstant {
         public static final String MENSAGEM_REGISTRO_NAO_ENCONTRADO = "cashcontrol.mensagens.validacao.entidade.nao.encontrada";
         public static final String MENSAGEM_REGISTRO_DUPLICADO = "cashcontrol.mensagens.validacao.entidade.duplicada";
         public static final String MENSAGEM_REGISTRO_RELACIONAMENTO_ATIVO = "cashcontrol.mensagens.validacao.entidade.com.relacionamento";
+
+        public static class Movimentacao {
+            public static final String MENSAGEM_MOVIMENTACAO_TIPO_DIFERENTE = "cashcontrol.mensagens.validacao.movimentacao.tipo.categoria.diferente";
+        }
     }
 
     class Geral {

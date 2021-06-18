@@ -1,6 +1,8 @@
 package br.com.lucasromagnoli.cashcontrol.dominio.negocio.validador;
 
 import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroNaoEncontrado;
+import br.com.lucasromagnoli.cashcontrol.common.exception.ValidacaoException;
+import br.com.lucasromagnoli.cashcontrol.common.i18n.Mensagem;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Categoria;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Movimentacao;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Origem;
@@ -11,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
+
+import static br.com.lucasromagnoli.cashcontrol.common.i18n.MensagensConstant.Validacao.Movimentacao.MENSAGEM_MOVIMENTACAO_TIPO_DIFERENTE;
 
 /**
  * @author github.com/lucasromagnoli
@@ -27,6 +31,9 @@ public class MovimentacaoValidacaoNegocio {
     @Autowired
     private CategoriaService categoriaService;
 
+    @Autowired
+    private Mensagem mensagem;
+
     public void validarCadastrar(Movimentacao movimentacao) {
         if (!categoriaService.existeById(movimentacao.getCategoria())) {
             throw new RegistroNaoEncontrado(Categoria.class, "id", movimentacao.getCategoria().getId());
@@ -34,6 +41,10 @@ public class MovimentacaoValidacaoNegocio {
 
         if (!origemService.existeById(movimentacao.getOrigem())) {
             throw new RegistroNaoEncontrado(Origem.class, "id", movimentacao.getOrigem().getId());
+        }
+
+        if (!categoriaService.pertenceAoGrupoComTipoDeMovimentacao(movimentacao.getCategoria(), movimentacao.getTipoMovimentacao())) {
+            throw new ValidacaoException(mensagem.get(MENSAGEM_MOVIMENTACAO_TIPO_DIFERENTE));
         }
     }
 
