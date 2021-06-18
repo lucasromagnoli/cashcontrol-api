@@ -9,33 +9,40 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.List;
+import javax.persistence.ManyToOne;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 /**
  * @author github.com/lucasromagnoli
  * @since 06/2021
  */
 @Entity
-public class Grupo extends TransferObject<Long> {
+public class Movimentacao extends TransferObject<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
-    private String nome;
-
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoMovimentacaoEnum tipoMovimentacao;
 
-    @OneToMany(mappedBy = "grupo")
-    private List<Categoria> categorias;
+    @Column(nullable = false)
+    private LocalDate data;
 
-    public Grupo() {
+    @Column(nullable = false)
+    private BigDecimal valor;
+
+    @ManyToOne(optional = false)
+    private Origem origem;
+
+    @ManyToOne(optional = false)
+    private Categoria categoria;
+
+    public Movimentacao() {
     }
 
-    public Grupo(Long id) {
+    public Movimentacao(Long id) {
         this.id = id;
     }
 
@@ -52,19 +59,43 @@ public class Grupo extends TransferObject<Long> {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public TipoMovimentacaoEnum getTipoMovimentacao() {
         return tipoMovimentacao;
     }
 
     public void setTipoMovimentacao(TipoMovimentacaoEnum tipoMovimentacao) {
         this.tipoMovimentacao = tipoMovimentacao;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
+    public Origem getOrigem() {
+        return origem;
+    }
+
+    public void setOrigem(Origem origem) {
+        this.origem = origem;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }
