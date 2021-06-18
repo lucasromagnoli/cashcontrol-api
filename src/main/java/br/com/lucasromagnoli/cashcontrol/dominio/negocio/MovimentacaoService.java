@@ -2,6 +2,7 @@ package br.com.lucasromagnoli.cashcontrol.dominio.negocio;
 
 import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroNaoEncontrado;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Movimentacao;
+import br.com.lucasromagnoli.cashcontrol.dominio.negocio.validador.MovimentacaoValidacaoNegocio;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.MovimentacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,9 @@ public class MovimentacaoService {
     @Autowired
     private MovimentacaoRepository movimentacaoRepository;
 
+    @Autowired
+    private MovimentacaoValidacaoNegocio movimentacaoValidacaoNegocio;
+
     public Page<Movimentacao> listar(Pageable pageable) {
         return movimentacaoRepository.listar(pageable);
     }
@@ -31,14 +35,14 @@ public class MovimentacaoService {
 
     @Transactional(readOnly = false)
     public Movimentacao salvar(Movimentacao movimentacao) {
-        // Validar salvar
+        movimentacaoValidacaoNegocio.validarCadastrar(movimentacao);
         movimentacaoRepository.save(movimentacao);
         return movimentacao;
     }
 
     @Transactional(readOnly = false)
     public Movimentacao atualizar(Movimentacao movimentacao) {
-        // Validar atualizar
+        movimentacaoValidacaoNegocio.validarAtualizar(movimentacao);
         movimentacaoRepository.atualizar(movimentacao);
         return movimentacao;
     }
@@ -46,7 +50,11 @@ public class MovimentacaoService {
     @Transactional(readOnly = false)
     public void remover(Long id) {
         Movimentacao movimentacao = new Movimentacao(id);
-        // Validar remover
+        movimentacaoValidacaoNegocio.validarRemover(movimentacao);
         movimentacaoRepository.remover(movimentacao);
+    }
+
+    public boolean existeById(Movimentacao movimentacao) {
+        return movimentacaoRepository.existe(movimentacao);
     }
 }

@@ -12,6 +12,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.Objects;
+
 import static br.com.lucasromagnoli.cashcontrol.dominio.entidade.QMovimentacao.movimentacao;
 
 /**
@@ -59,5 +61,13 @@ public class MovimentacaoRepository extends GenericDAO<Movimentacao, Long> {
         delete(movimentacao)
                 .where(movimentacao.id.eq(movimentacaoRemover.getId()))
                 .execute();
+    }
+
+    public boolean existe(Movimentacao movimentacaoConsulta) {
+        return Objects.nonNull(newQuery()
+                .select(Projections.fields(Movimentacao.class, movimentacao.id))
+                .from(movimentacao)
+                .where(movimentacao.id.eq(movimentacaoConsulta.getId()))
+                .fetchFirst());
     }
 }

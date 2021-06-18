@@ -77,7 +77,7 @@ public class MovimentacaoRestController implements BaseRestController {
         return construirModeloMensagemSucesso(movimentacaoMapper.entidadeParaResponse(movimentacaoService.atualizar(movimentacao)));
     }
 
-    @DeleteMapping(MOVIMENTACAO_RECEITA+ACAO_COM_ID)
+    @DeleteMapping(MOVIMENTACAO_RECEITA + ACAO_COM_ID)
     @Operation(summary = "Remover uma movimentação")
     public ResponseEntity<ModeloMensagem> remover(@PathVariable(required = true) final Long id) {
         log.info("Removendo a movimentação de id: [{}], ", id);

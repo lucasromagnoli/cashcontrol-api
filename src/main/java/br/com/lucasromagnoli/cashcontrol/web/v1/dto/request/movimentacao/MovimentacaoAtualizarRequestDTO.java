@@ -2,6 +2,7 @@ package br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.movimentacao;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 /**
  * @author github.com/lucasromagnoli
@@ -13,7 +14,9 @@ public class MovimentacaoAtualizarRequestDTO {
     private Long id;
 
     private String data;
-    private String valor;
+    @NotNull
+    @Min(0)
+    private BigDecimal valor;
     private Long origemId;
     private Long categoriaId;
 
@@ -33,11 +36,11 @@ public class MovimentacaoAtualizarRequestDTO {
         this.data = data;
     }
 
-    public String getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 

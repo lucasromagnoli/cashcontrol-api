@@ -18,7 +18,7 @@ import java.time.LocalDate;
  * @since 06/2021
  */
 @Entity
-public class Movimentacao extends TransferObject<Long>  {
+public class Movimentacao extends TransferObject<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

@@ -1,7 +1,9 @@
 package br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.movimentacao;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 /**
  * @author github.com/lucasromagnoli
@@ -10,8 +12,9 @@ import javax.validation.constraints.NotNull;
 public class MovimentacaoCadastrarRequestDTO {
     @NotEmpty
     private String data;
-    @NotEmpty
-    private String valor;
+    @NotNull
+    @Min(0)
+    private BigDecimal valor;
     @NotNull
     private Long origemId;
     @NotNull
@@ -25,11 +28,11 @@ public class MovimentacaoCadastrarRequestDTO {
         this.data = data;
     }
 
-    public String getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 

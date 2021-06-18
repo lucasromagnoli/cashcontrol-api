@@ -1,6 +1,5 @@
 package br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common;
 
-import br.com.lucasromagnoli.cashcontrol.dominio.entidade.QMovimentacao;
 import com.google.common.collect.Lists;
 import com.querydsl.core.FetchableQuery;
 import com.querydsl.core.types.Expression;
