@@ -39,6 +39,9 @@ public class Movimentacao extends TransferObject<Long> {
     @ManyToOne(optional = false)
     private Categoria categoria;
 
+    @ManyToOne
+    private Parcelamento parcelamento;
+
     public Movimentacao() {
     }
 
@@ -97,5 +100,13 @@ public class Movimentacao extends TransferObject<Long> {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public Parcelamento getParcelamento() {
+        return parcelamento;
+    }
+
+    public void setParcelamento(Parcelamento parcelamento) {
+        this.parcelamento = parcelamento;
     }
 }

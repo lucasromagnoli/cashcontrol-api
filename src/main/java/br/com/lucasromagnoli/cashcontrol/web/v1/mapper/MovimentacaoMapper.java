@@ -17,6 +17,7 @@ import static br.com.lucasromagnoli.cashcontrol.configuracao.Constantes.DATE_FOR
  */
 @Mapper
 public abstract class MovimentacaoMapper {
+    @Mapping(target = "data", dateFormat = DATE_FORMAT)
     public abstract MovimentacaoConsultarResponseDTO entidadeParaResponse(Movimentacao movimentacao);
 
     @Mapping(target = "origem.id", source = "origemId")
