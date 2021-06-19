@@ -1,6 +1,7 @@
 package br.com.lucasromagnoli.cashcontrol.dominio.persistencia;
 
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Movimentacao;
+import br.com.lucasromagnoli.cashcontrol.dominio.entidade.TipoMovimentacaoEnum;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common.GenericDAO;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common.QueryUtil;
 import com.querydsl.core.QueryResults;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import static br.com.lucasromagnoli.cashcontrol.dominio.entidade.QMovimentacao.movimentacao;
 
@@ -69,5 +71,15 @@ public class MovimentacaoRepository extends GenericDAO<Movimentacao, Long> {
                 .from(movimentacao)
                 .where(movimentacao.id.eq(movimentacaoConsulta.getId()))
                 .fetchFirst());
+    }
+
+    public TipoMovimentacaoEnum selectTipoMovimentacao(Movimentacao movimentacaoConsulta) {
+        Movimentacao queryRetorno = newQuery()
+                .select(Projections.fields(Movimentacao.class, movimentacao.tipoMovimentacao))
+                .from(movimentacao)
+                .where(movimentacao.id.eq(movimentacaoConsulta.getId()))
+                .fetchFirst();
+
+        return Optional.ofNullable(queryRetorno.getTipoMovimentacao()).orElse(null);
     }
 }

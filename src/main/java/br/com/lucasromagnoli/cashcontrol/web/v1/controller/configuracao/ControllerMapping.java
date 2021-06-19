@@ -11,9 +11,6 @@ public interface ControllerMapping {
     String ROOT_CATEGORIA = "/v1/categoria";
     String ROOT_MOVIMENTACAO = "/v1/movimentacao";
 
-    // MOVIMENTACÕES
-    String MOVIMENTACAO_RECEITA = "/receita";
-
     // AÇÕES GENÉRICAS
     String ACAO_COM_ID = "/{id}";
 }

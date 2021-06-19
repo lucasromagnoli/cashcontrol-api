@@ -2,6 +2,7 @@ package br.com.lucasromagnoli.cashcontrol.dominio.negocio;
 
 import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroNaoEncontrado;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Movimentacao;
+import br.com.lucasromagnoli.cashcontrol.dominio.entidade.TipoMovimentacaoEnum;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.validador.MovimentacaoValidacaoNegocio;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.MovimentacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,9 @@ public class MovimentacaoService {
 
     public boolean existeById(Movimentacao movimentacao) {
         return movimentacaoRepository.existe(movimentacao);
+    }
+
+    public TipoMovimentacaoEnum getTipoMovimentacao(Movimentacao movimentacao) {
+        return movimentacaoRepository.selectTipoMovimentacao(movimentacao);
     }
 }

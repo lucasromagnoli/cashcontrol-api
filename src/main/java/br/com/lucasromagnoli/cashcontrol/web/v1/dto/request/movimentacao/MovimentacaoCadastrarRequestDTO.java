@@ -1,5 +1,7 @@
 package br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.movimentacao;
 
+import br.com.lucasromagnoli.cashcontrol.dominio.entidade.TipoMovimentacaoEnum;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -15,6 +17,8 @@ public class MovimentacaoCadastrarRequestDTO {
     @NotNull
     @Min(0)
     private BigDecimal valor;
+    @NotNull
+    private TipoMovimentacaoEnum tipoMovimentacao;
     @NotNull
     private Long origemId;
     @NotNull
@@ -34,6 +38,14 @@ public class MovimentacaoCadastrarRequestDTO {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    public TipoMovimentacaoEnum getTipoMovimentacao() {
+        return tipoMovimentacao;
+    }
+
+    public void setTipoMovimentacao(TipoMovimentacaoEnum tipoMovimentacao) {
+        this.tipoMovimentacao = tipoMovimentacao;
     }
 
     public Long getOrigemId() {

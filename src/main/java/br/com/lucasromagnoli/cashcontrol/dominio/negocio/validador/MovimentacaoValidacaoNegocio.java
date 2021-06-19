@@ -53,6 +53,15 @@ public class MovimentacaoValidacaoNegocio {
             throw new RegistroNaoEncontrado(Movimentacao.class, "id", movimentacao.getId());
         }
 
+        if (Objects.nonNull(movimentacao.getCategoria())) {
+            if (!categoriaService.existeById(movimentacao.getCategoria())) {
+                throw new RegistroNaoEncontrado(Categoria.class, "id", movimentacao.getCategoria().getId());
+            }
+            if (!categoriaService.pertenceAoGrupoComTipoDeMovimentacao(movimentacao.getCategoria(), movimentacaoService.getTipoMovimentacao(movimentacao))) {
+                throw new ValidacaoException(mensagem.get(MENSAGEM_MOVIMENTACAO_TIPO_DIFERENTE));
+            }
+        }
+
         if (Objects.nonNull(movimentacao.getCategoria()) && !categoriaService.existeById(movimentacao.getCategoria())) {
             throw new RegistroNaoEncontrado(Categoria.class, "id", movimentacao.getCategoria().getId());
         }

@@ -1,7 +1,6 @@
 package br.com.lucasromagnoli.cashcontrol.web.v1.controller;
 
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Movimentacao;
-import br.com.lucasromagnoli.cashcontrol.dominio.entidade.TipoMovimentacaoEnum;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.MovimentacaoService;
 import br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.movimentacao.MovimentacaoAtualizarRequestDTO;
 import br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.movimentacao.MovimentacaoCadastrarRequestDTO;
@@ -28,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 import static br.com.lucasromagnoli.cashcontrol.web.v1.controller.configuracao.ControllerMapping.ACAO_COM_ID;
-import static br.com.lucasromagnoli.cashcontrol.web.v1.controller.configuracao.ControllerMapping.MOVIMENTACAO_RECEITA;
 import static br.com.lucasromagnoli.cashcontrol.web.v1.controller.configuracao.ControllerMapping.ROOT_MOVIMENTACAO;
 
 /**
@@ -59,29 +57,29 @@ public class MovimentacaoRestController implements BaseRestController {
         return construirModeloMensagemSucesso(movimentacaoMapper.entidadeParaResponse(movimentacaoService.consultarPeloId(id)));
     }
 
-    @PostMapping(MOVIMENTACAO_RECEITA)
+    @PostMapping
     @Operation(summary = "Cadastrar uma movimentação")
-    public ResponseEntity<ModeloMensagem> cadastrar(@Valid @RequestBody final MovimentacaoCadastrarRequestDTO movimentacaoCadastrarRequestDTO) {
+    public ResponseEntity<ModeloMensagem> cadastrarReceita(@Valid @RequestBody final MovimentacaoCadastrarRequestDTO movimentacaoCadastrarRequestDTO) {
         log.info("Cadastrando a movimentação: [{}], ", movimentacaoCadastrarRequestDTO);
-        Movimentacao movimentacao = movimentacaoMapper.requestParaEntidade(movimentacaoCadastrarRequestDTO);
-        movimentacao.setTipoMovimentacao(TipoMovimentacaoEnum.RECEITA);
-        return construirModeloMensagemSucesso(movimentacaoMapper.entidadeParaResponse(movimentacaoService.salvar(movimentacao)));
+        Movimentacao movimentacao = movimentacaoService.salvar(movimentacaoMapper.requestParaEntidade(movimentacaoCadastrarRequestDTO));
+        return construirModeloMensagemSucesso(movimentacao);
     }
 
-    @PutMapping(MOVIMENTACAO_RECEITA)
+    @PutMapping
     @Operation(summary = "Cadastrar uma movimentação")
-    public ResponseEntity<ModeloMensagem> atualizar(@Valid @RequestBody final MovimentacaoAtualizarRequestDTO movimentacaoAtualizarRequestDTO) {
+    public ResponseEntity<ModeloMensagem> atualizarReceita(@Valid @RequestBody final MovimentacaoAtualizarRequestDTO movimentacaoAtualizarRequestDTO) {
         log.info("Atualizando a movimentação: [{}], ", movimentacaoAtualizarRequestDTO);
 
         Movimentacao movimentacao = movimentacaoMapper.requestParaEntidade(movimentacaoAtualizarRequestDTO);
         return construirModeloMensagemSucesso(movimentacaoMapper.entidadeParaResponse(movimentacaoService.atualizar(movimentacao)));
     }
 
-    @DeleteMapping(MOVIMENTACAO_RECEITA + ACAO_COM_ID)
+    @DeleteMapping(ACAO_COM_ID)
     @Operation(summary = "Remover uma movimentação")
     public ResponseEntity<ModeloMensagem> remover(@PathVariable(required = true) final Long id) {
         log.info("Removendo a movimentação de id: [{}], ", id);
         movimentacaoService.remover(id);
         return construirModeloMensagemSucesso();
     }
+
 }

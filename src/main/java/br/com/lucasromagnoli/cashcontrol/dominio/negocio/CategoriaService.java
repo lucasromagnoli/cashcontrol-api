@@ -3,7 +3,6 @@ package br.com.lucasromagnoli.cashcontrol.dominio.negocio;
 import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroNaoEncontrado;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Categoria;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Grupo;
-import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Movimentacao;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.TipoMovimentacaoEnum;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.validador.CategoriaValidacaoNegocio;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.CategoriaRepository;
