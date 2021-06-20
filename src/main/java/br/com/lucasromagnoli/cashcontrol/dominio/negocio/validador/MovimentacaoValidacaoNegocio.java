@@ -1,11 +1,13 @@
 package br.com.lucasromagnoli.cashcontrol.dominio.negocio.validador;
 
 import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroNaoEncontrado;
+import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroRelacionamentoAtivo;
 import br.com.lucasromagnoli.cashcontrol.common.exception.ValidacaoException;
 import br.com.lucasromagnoli.cashcontrol.common.i18n.Mensagem;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Categoria;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Movimentacao;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Origem;
+import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Parcelamento;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.CategoriaService;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.MovimentacaoService;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.OrigemService;
@@ -53,6 +55,15 @@ public class MovimentacaoValidacaoNegocio {
             throw new RegistroNaoEncontrado(Movimentacao.class, "id", movimentacao.getId());
         }
 
+        if (Objects.nonNull(movimentacao.getCategoria())) {
+            if (!categoriaService.existeById(movimentacao.getCategoria())) {
+                throw new RegistroNaoEncontrado(Categoria.class, "id", movimentacao.getCategoria().getId());
+            }
+            if (!categoriaService.pertenceAoGrupoComTipoDeMovimentacao(movimentacao.getCategoria(), movimentacaoService.getTipoMovimentacao(movimentacao))) {
+                throw new ValidacaoException(mensagem.get(MENSAGEM_MOVIMENTACAO_TIPO_DIFERENTE));
+            }
+        }
+
         if (Objects.nonNull(movimentacao.getCategoria()) && !categoriaService.existeById(movimentacao.getCategoria())) {
             throw new RegistroNaoEncontrado(Categoria.class, "id", movimentacao.getCategoria().getId());
         }
@@ -65,6 +76,10 @@ public class MovimentacaoValidacaoNegocio {
     public void validarRemover(Movimentacao movimentacao) {
         if (!movimentacaoService.existeById(movimentacao)) {
             throw new RegistroNaoEncontrado(Movimentacao.class, "id", movimentacao.getId());
+        }
+
+        if (movimentacaoService.existeParcelamento(movimentacao)) {
+            throw new RegistroRelacionamentoAtivo(Parcelamento.class, Movimentacao.class);
         }
     }
 }

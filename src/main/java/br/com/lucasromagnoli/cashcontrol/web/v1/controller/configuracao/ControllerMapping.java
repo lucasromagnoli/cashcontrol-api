@@ -10,9 +10,9 @@ public interface ControllerMapping {
     String ROOT_GRUPO = "/v1/grupo";
     String ROOT_CATEGORIA = "/v1/categoria";
     String ROOT_MOVIMENTACAO = "/v1/movimentacao";
+    String ROOT_DESPESA = "/v1/despesa";
 
-    // MOVIMENTACÕES
-    String MOVIMENTACAO_RECEITA = "/receita";
+    String DESPESA_PARCELAMENTO = "parcelamento";
 
     // AÇÕES GENÉRICAS
     String ACAO_COM_ID = "/{id}";
