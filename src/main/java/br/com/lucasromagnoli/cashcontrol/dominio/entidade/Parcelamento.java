@@ -51,6 +51,13 @@ public class Parcelamento extends TransferObject<Long> {
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "parcelamento")
     private List<Movimentacao> movimentacoes;
 
+    public Parcelamento() {
+    }
+
+    public Parcelamento(Long id) {
+        this.id = id;
+    }
+
     @Override
     public Long getKey() {
         return id;

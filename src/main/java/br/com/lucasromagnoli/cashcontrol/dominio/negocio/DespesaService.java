@@ -4,6 +4,7 @@ import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Movimentacao;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Parcelamento;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.PeriodicidadeEnum;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.TipoMovimentacaoEnum;
+import br.com.lucasromagnoli.cashcontrol.dominio.negocio.validador.DespesaValidacaoNegocio;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.ParcelamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,9 +24,15 @@ public class DespesaService {
     @Autowired
     private ParcelamentoRepository parcelamentoRepository;
 
+    @Autowired
+    private DespesaValidacaoNegocio despesaValidacaoNegocio;
+
+    @Autowired
+    private MovimentacaoService movimentacaoService;
+
     @Transactional(readOnly = false)
     public Parcelamento cadastrar(Parcelamento parcelamento) {
-        // Validacões
+        despesaValidacaoNegocio.validarCadastrar(parcelamento);
         parcelamento.setMovimentacoes(gerarMovimentacoes(parcelamento));
         parcelamento.setValorTotal(parcelamento.getMovimentacoes()
                 .stream()
@@ -33,6 +40,18 @@ public class DespesaService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
         parcelamentoRepository.save(parcelamento);
         return parcelamento;
+    }
+
+    @Transactional(readOnly = false)
+    public void remover(Long parcelamentoId) {
+        Parcelamento parcelamento = new Parcelamento(parcelamentoId);
+        despesaValidacaoNegocio.validarRemover(parcelamento);
+        movimentacaoService.remover(parcelamento);
+        parcelamentoRepository.remover(parcelamento);
+    }
+
+    public boolean existe(Parcelamento parcelamento) {
+        return parcelamentoRepository.existe(parcelamento);
     }
 
     private List<Movimentacao> gerarMovimentacoes(Parcelamento parcelamento) {

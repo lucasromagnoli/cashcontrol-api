@@ -1,6 +1,7 @@
 package br.com.lucasromagnoli.cashcontrol.dominio.persistencia;
 
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Movimentacao;
+import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Parcelamento;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.TipoMovimentacaoEnum;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common.GenericDAO;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.common.QueryUtil;
@@ -65,10 +66,25 @@ public class MovimentacaoRepository extends GenericDAO<Movimentacao, Long> {
                 .execute();
     }
 
+    public void removerByParcelamento(Parcelamento parcelamento) {
+        delete(movimentacao)
+                .where(movimentacao.parcelamento.id.eq(parcelamento.getId()))
+                .execute();
+    }
+
     public boolean existe(Movimentacao movimentacaoConsulta) {
         return Objects.nonNull(newQuery()
                 .select(Projections.fields(Movimentacao.class, movimentacao.id))
                 .from(movimentacao)
+                .where(movimentacao.id.eq(movimentacaoConsulta.getId()))
+                .fetchFirst());
+    }
+
+    public boolean existeParcelamento(Movimentacao movimentacaoConsulta) {
+        return Objects.nonNull(newQuery()
+                .select(Projections.fields(Movimentacao.class, movimentacao.id))
+                .from(movimentacao)
+                .innerJoin(movimentacao.parcelamento)
                 .where(movimentacao.id.eq(movimentacaoConsulta.getId()))
                 .fetchFirst());
     }

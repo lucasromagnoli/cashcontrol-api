@@ -2,6 +2,7 @@ package br.com.lucasromagnoli.cashcontrol.dominio.negocio;
 
 import br.com.lucasromagnoli.cashcontrol.common.exception.RegistroNaoEncontrado;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Movimentacao;
+import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Parcelamento;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.TipoMovimentacaoEnum;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.validador.MovimentacaoValidacaoNegocio;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.MovimentacaoRepository;
@@ -55,8 +56,17 @@ public class MovimentacaoService {
         movimentacaoRepository.remover(movimentacao);
     }
 
+    @Transactional(readOnly = false)
+    public void remover(Parcelamento parcelamento) {
+        movimentacaoRepository.removerByParcelamento(parcelamento);
+    }
+
     public boolean existeById(Movimentacao movimentacao) {
         return movimentacaoRepository.existe(movimentacao);
+    }
+
+    public boolean existeParcelamento(Movimentacao movimentacao) {
+        return movimentacaoRepository.existeParcelamento(movimentacao);
     }
 
     public TipoMovimentacaoEnum getTipoMovimentacao(Movimentacao movimentacao) {
