@@ -1,10 +1,12 @@
 package br.com.lucasromagnoli.cashcontrol.dominio.negocio;
 
+import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Assinatura;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Movimentacao;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Parcelamento;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.PeriodicidadeEnum;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.TipoMovimentacaoEnum;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.validador.DespesaValidacaoNegocio;
+import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.AssinaturaRepository;
 import br.com.lucasromagnoli.cashcontrol.dominio.persistencia.ParcelamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +27,20 @@ public class DespesaService {
     private ParcelamentoRepository parcelamentoRepository;
 
     @Autowired
+    private AssinaturaRepository assinaturaRepository;
+
+    @Autowired
     private DespesaValidacaoNegocio despesaValidacaoNegocio;
 
     @Autowired
     private MovimentacaoService movimentacaoService;
+
+    @Transactional(readOnly = false)
+    public Assinatura cadastrar(Assinatura assinatura) {
+        // Validar cadastrar
+        assinaturaRepository.save(assinatura);
+        return assinatura;
+    }
 
     @Transactional(readOnly = false)
     public Parcelamento cadastrar(Parcelamento parcelamento) {

@@ -42,6 +42,9 @@ public class Movimentacao extends TransferObject<Long> {
     @ManyToOne
     private Parcelamento parcelamento;
 
+    @ManyToOne
+    private Assinatura assinatura;
+
     public Movimentacao() {
     }
 
@@ -108,5 +111,13 @@ public class Movimentacao extends TransferObject<Long> {
 
     public void setParcelamento(Parcelamento parcelamento) {
         this.parcelamento = parcelamento;
+    }
+
+    public Assinatura getAssinatura() {
+        return assinatura;
+    }
+
+    public void setAssinatura(Assinatura assinatura) {
+        this.assinatura = assinatura;
     }
 }

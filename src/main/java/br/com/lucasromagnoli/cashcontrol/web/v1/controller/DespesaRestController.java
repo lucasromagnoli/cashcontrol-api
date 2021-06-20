@@ -1,7 +1,9 @@
 package br.com.lucasromagnoli.cashcontrol.web.v1.controller;
 
+import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Assinatura;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Parcelamento;
 import br.com.lucasromagnoli.cashcontrol.dominio.negocio.DespesaService;
+import br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.AssinaturaCadastrarRequestDTO;
 import br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.ParcelamentoCadastrarRequestDTO;
 import br.com.lucasromagnoli.cashcontrol.web.v1.mapper.DespesaMapper;
 import br.com.lucasromagnoli.cashcontrol.web.v1.modelo.ModeloMensagem;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 import static br.com.lucasromagnoli.cashcontrol.web.v1.controller.configuracao.ControllerMapping.ACAO_COM_ID;
+import static br.com.lucasromagnoli.cashcontrol.web.v1.controller.configuracao.ControllerMapping.DESPESA_ASSINATURA;
 import static br.com.lucasromagnoli.cashcontrol.web.v1.controller.configuracao.ControllerMapping.DESPESA_PARCELAMENTO;
 import static br.com.lucasromagnoli.cashcontrol.web.v1.controller.configuracao.ControllerMapping.ROOT_DESPESA;
 
@@ -36,6 +39,14 @@ public class DespesaRestController implements BaseRestController {
 
     private final DespesaMapper despesaMapper = Mappers.getMapper(DespesaMapper.class);
     private final Logger log = LoggerFactory.getLogger(DespesaRestController.class);
+
+    @PostMapping(DESPESA_ASSINATURA)
+    @Operation(summary = "Cadastrar uma assinatura")
+    public ResponseEntity<ModeloMensagem> cadastrar(@Valid @RequestBody final AssinaturaCadastrarRequestDTO assinaturaCadastrarRequestDTO) {
+        log.info("Cadastrando a assinatura: [{}], ", assinaturaCadastrarRequestDTO);
+        Assinatura assinatura = despesaService.cadastrar(despesaMapper.requestParaEntidade(assinaturaCadastrarRequestDTO));
+        return construirModeloMensagemSucesso(despesaMapper.entidadeParaResponse(assinatura));
+    }
 
     @PostMapping(DESPESA_PARCELAMENTO)
     @Operation(summary = "Cadastrar um parcelamento")

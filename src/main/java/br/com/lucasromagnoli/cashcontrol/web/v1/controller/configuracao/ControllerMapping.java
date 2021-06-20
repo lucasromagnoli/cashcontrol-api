@@ -13,6 +13,7 @@ public interface ControllerMapping {
     String ROOT_DESPESA = "/v1/despesa";
 
     String DESPESA_PARCELAMENTO = "parcelamento";
+    String DESPESA_ASSINATURA = "assinatura";
 
     // AÇÕES GENÉRICAS
     String ACAO_COM_ID = "/{id}";

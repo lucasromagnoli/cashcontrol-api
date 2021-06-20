@@ -1,6 +1,8 @@
 package br.com.lucasromagnoli.cashcontrol.web.v1.mapper;
 
+import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Assinatura;
 import br.com.lucasromagnoli.cashcontrol.dominio.entidade.Parcelamento;
+import br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.AssinaturaCadastrarRequestDTO;
 import br.com.lucasromagnoli.cashcontrol.web.v1.dto.request.ParcelamentoCadastrarRequestDTO;
 import br.com.lucasromagnoli.cashcontrol.web.v1.dto.response.ParcelamentoConsultarResponseDTO;
 import org.mapstruct.AfterMapping;
@@ -16,6 +18,9 @@ import static br.com.lucasromagnoli.cashcontrol.configuracao.Constantes.DATE_FOR
  */
 @Mapper
 public abstract class DespesaMapper {
+    public abstract Assinatura requestParaEntidade(AssinaturaCadastrarRequestDTO assinaturaCadastrarRequestDTO);
+
+    public abstract AssinaturaCadastrarRequestDTO entidadeParaResponse(Assinatura parcelamento);
 
     @Mapping(target = "origem.id", source = "origemId")
     @Mapping(target = "dataPrimeiraParcela", dateFormat = DATE_FORMAT)
